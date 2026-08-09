@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Verde Kitchen — Sample restaurant website | Pace Digital Works</title>
+<meta name="description" content="A sample restaurant and cafe website built by Pace Digital Works. Menu, photos, opening hours and a table booking form. Casa Verde Kitchen is a fictional business.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#7A2E1E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../demo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%237A2E1E'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='700' fill='%23F3E4CE' text-anchor='middle'%3ECV%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --d-bg: #FFFDF8; --d-alt: #F6EFE4; --d-surface: #FFFFFF;
+    --d-ink: #241C15; --d-body: #6A5A4C; --d-line: #E7DCC9;
+    --d-brand: #7A2E1E; --d-on-brand: #FCF3E6;
+    --d-accent: #C9962C; --d-accent-ink: #92661A;
+    --d-display: 'Cormorant Garamond', Georgia, serif;
+    --d-sans: 'Jost', system-ui, sans-serif;
+    --d-r: 10px; --d-r-lg: 18px;
+  }
+  h1, h2, h3 { font-weight: 600; }
+  .d-h1 { font-size: clamp(2.8rem, 7vw, 4.8rem); }
+  .cv-open { display: flex; gap: 26px; flex-wrap: wrap; }
+  .cv-open div { min-width: 150px; }
+  .cv-open b { display: block; font-family: var(--d-display); font-size: 1.15rem; }
+  .cv-open span { font-size: 14.5px; color: var(--d-body); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.5L12 17.5l-5.8 3.05 1.1-6.5-4.7-4.6 6.5-.95Z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10.2c0 5.8-8 11.8-8 11.8s-8-6-8-11.8a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M21.5 16.9v2.8a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6 2 2 0 0 1 2-2.2h2.8a2 2 0 0 1 2 1.7c.13 1 .36 1.9.7 2.8a2 2 0 0 1-.46 2.1L7.7 9.7a16 16 0 0 0 6 6l1.2-1.15a2 2 0 0 1 2.1-.45c.9.33 1.83.57 2.8.7a2 2 0 0 1 1.7 2.1Z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 1.9"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.9L3 20.5l1.6-4.8A8.3 8.3 0 0 1 3.5 11 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13c0-5.5 5.5-9.5 16-9.5 0 10.5-4 16-9.5 16Z"/><path d="M4 20c4-6 8.5-8.5 12-9.5"/></symbol>
+<symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 21a6 6 0 0 0 6-6c0-4-3-5.5-3-9 0 0-3 1.5-3 5 0-2-1.5-3-1.5-3S6 10 6 15a6 6 0 0 0 6 6Z"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 20.5v-1.8a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4v1.8"/><circle cx="9.2" cy="7.5" r="3.6"/><path d="M21.5 20.5v-1.8a4 4 0 0 0-3-3.8M16 4a3.6 3.6 0 0 1 0 7"/></symbol>
+</defs></svg>
+
+<!-- Pace Digital Works ribbon -->
+<div class="pd-bar">
+  <div class="pd-bar__in">
+    <span class="pd-bar__tag">Sample website</span>
+    <span><strong>Casa Verde Kitchen</strong> is a fictional business, built to show what your restaurant website could look like.</span>
+    <a href="../../index.html">Build mine <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+  </div>
+</div>
+
+<header class="d-nav">
+  <div class="d-wrap d-nav__in">
+    <a class="d-logo" href="#top">Casa Verde<small>Kitchen &amp; Cafe</small></a>
+    <nav class="d-menu" data-menu aria-label="Main">
+      <a href="#story">Our story</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit us</a>
+      <a class="d-btn d-btn--1 d-btn--sm" href="#book">Book a table</a>
+    </nav>
+    <a class="d-btn d-btn--1 d-btn--sm" href="#book">Book a table</a>
+    <button class="d-burger" data-burger type="button" aria-label="Open the menu" aria-expanded="false">
+      <svg class="d-ico" aria-hidden="true"><use href="#i-menu"></use></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="d-hero">
+  <div class="d-hero__bg">
+    <img src="../../assets/img/demo/restaurant-2.webp" width="1200" height="800" alt="The dining room at Casa Verde Kitchen, laid for dinner." fetchpriority="high">
+  </div>
+  <div class="d-wrap d-hero__in">
+    <span class="d-eyebrow">Farm kitchen &amp; coffee house</span>
+    <h1 class="d-h1">Slow food, honest prices, right on the corner.</h1>
+    <p>Everything is cooked the same morning it is served, from produce grown less than an hour away.
+       Open for breakfast, lunch and long dinners.</p>
+    <div class="d-btns">
+      <a class="d-btn d-btn--2" href="#book">Book a table</a>
+      <a class="d-btn d-btn--o" href="#menu">See the menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick facts -->
+<section class="d-sec d-sec--tight">
+  <div class="d-wrap">
+    <div class="cv-open">
+      <div><b>Mon – Thu</b><span>7:00am – 9:00pm</span></div>
+      <div><b>Fri – Sat</b><span>7:00am – 11:00pm</span></div>
+      <div><b>Sunday</b><span>8:00am – 4:00pm</span></div>
+      <div><b>Walk-ins</b><span>Always welcome</span></div>
+      <div><b>Call us</b><span>+63 32 555 0148</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Story -->
+<section class="d-sec d-sec--alt" id="story">
+  <div class="d-wrap d-split d-split--wide">
+    <div class="d-rv">
+      <span class="d-eyebrow">Our story</span>
+      <h2 class="d-h2">A small kitchen with a very short shopping list</h2>
+      <p class="d-lede" style="margin-bottom:20px">We buy from six farms and two fishermen. If something is
+        not good that week, it comes off the menu — which is why the menu changes and why we will never
+        have forty things on it.</p>
+      <p style="color:var(--d-body);margin-bottom:24px">Chef Marisa opened Casa Verde in 2016 after fifteen
+        years cooking in other people's kitchens. The room seats forty-two people, there is a long table
+        for anyone eating alone, and the coffee is roasted three streets away.</p>
+      <div class="d-grid d-grid--3" style="gap:18px">
+        <div><svg class="d-ico d-ico--lg" style="color:var(--d-brand);margin-bottom:8px" aria-hidden="true"><use href="#i-leaf"></use></svg>
+          <b style="display:block;font-family:var(--d-display);font-size:1.05rem">Local produce</b>
+          <span style="font-size:14px;color:var(--d-body)">Six farms, all within an hour</span></div>
+        <div><svg class="d-ico d-ico--lg" style="color:var(--d-brand);margin-bottom:8px" aria-hidden="true"><use href="#i-fire"></use></svg>
+          <b style="display:block;font-family:var(--d-display);font-size:1.05rem">Cooked to order</b>
+          <span style="font-size:14px;color:var(--d-body)">Nothing sits under a lamp</span></div>
+        <div><svg class="d-ico d-ico--lg" style="color:var(--d-brand);margin-bottom:8px" aria-hidden="true"><use href="#i-users"></use></svg>
+          <b style="display:block;font-family:var(--d-display);font-size:1.05rem">Groups welcome</b>
+          <span style="font-size:14px;color:var(--d-body)">Up to 20 with notice</span></div>
+      </div>
+    </div>
+    <div class="d-media d-rv">
+      <img src="../../assets/img/demo/restaurant-3.webp" width="1600" height="1000" loading="lazy" alt="A table laid with plates and glasses in the Casa Verde dining room.">
+    </div>
+  </div>
+</section>
+
+<!-- Menu -->
+<section class="d-sec" id="menu">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">The menu</span>
+      <h2 class="d-h2">What people order twice</h2>
+      <p class="d-lede" style="margin-inline:auto">A short list that changes with the season. Everything can be
+        made without meat — ask and we will sort it.</p>
+    </div>
+
+    <div class="d-grid d-grid--3" style="margin-bottom:clamp(40px,5vw,60px)">
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/restaurant-food-1.webp" width="1200" height="900" loading="lazy" alt="Fresh hand-made ravioli on a tray."></div>
+        <div class="d-card__b">
+          <h3>Hand-rolled ravioli</h3>
+          <p>Ricotta and roasted squash, brown butter, toasted hazelnut. Made fresh every morning.</p>
+          <div class="d-card__meta"><span class="d-card__price">₱480</span><span style="color:var(--d-body)">Most ordered</span></div>
+        </div>
+      </article>
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/restaurant-food-3.webp" width="1200" height="900" loading="lazy" alt="Grilled salmon with salad and vegetables."></div>
+        <div class="d-card__b">
+          <h3>Line-caught salmon</h3>
+          <p>Charcoal grilled, green herb sauce, whatever vegetables came in that morning.</p>
+          <div class="d-card__meta"><span class="d-card__price">₱620</span><span style="color:var(--d-body)">Gluten free</span></div>
+        </div>
+      </article>
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/restaurant-food-4.webp" width="1200" height="800" loading="lazy" alt="A forkful of fresh pasta."></div>
+        <div class="d-card__b">
+          <h3>Cacio e pepe</h3>
+          <p>Three ingredients and no hiding place. The plate people finish with bread.</p>
+          <div class="d-card__meta"><span class="d-card__price">₱390</span><span style="color:var(--d-body)">Vegetarian</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="d-split">
+      <div>
+        <h3 class="d-h3">All day breakfast</h3>
+        <div class="d-list">
+          <div class="d-row"><span class="d-row__t"><b>Farm eggs on sourdough</b><span>Two eggs, herb butter, tomato</span></span><span class="d-row__dots"></span><span class="d-row__p">₱240</span></div>
+          <div class="d-row"><span class="d-row__t"><b>Coconut oats</b><span>Toasted seeds, mango, honey</span></span><span class="d-row__dots"></span><span class="d-row__p">₱210</span></div>
+          <div class="d-row"><span class="d-row__t"><b>Longganisa plate</b><span>Garlic rice, fried egg, vinegar</span></span><span class="d-row__dots"></span><span class="d-row__p">₱280</span></div>
+          <div class="d-row"><span class="d-row__t"><b>Corner sandwich</b><span>Slow pork, pickles, mustard</span></span><span class="d-row__dots"></span><span class="d-row__p">₱320</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="d-h3">Coffee &amp; drinks</h3>
+        <div class="d-list">
+          <div class="d-row"><span class="d-row__t"><b>Espresso / Long black</b><span>Roasted three streets away</span></span><span class="d-row__dots"></span><span class="d-row__p">₱110</span></div>
+          <div class="d-row"><span class="d-row__t"><b>Flat white</b><span>Fresh or oat milk</span></span><span class="d-row__dots"></span><span class="d-row__p">₱150</span></div>
+          <div class="d-row"><span class="d-row__t"><b>Calamansi soda</b><span>Made in house, not too sweet</span></span><span class="d-row__dots"></span><span class="d-row__p">₱120</span></div>
+          <div class="d-row"><span class="d-row__t"><b>House red / white</b><span>By the glass</span></span><span class="d-row__dots"></span><span class="d-row__p">₱260</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="d-sec d-sec--alt" id="gallery">
+  <div class="d-wrap">
+    <div class="d-head">
+      <span class="d-eyebrow">Gallery</span>
+      <h2 class="d-h2">The room, the food, the mornings</h2>
+    </div>
+    <div class="d-gal">
+      <figure style="margin:0"><img src="../../assets/img/demo/restaurant-1.webp" width="1600" height="1000" loading="lazy" alt="Inside the cafe in daylight."></figure>
+      <figure style="margin:0"><img src="../../assets/img/demo/restaurant-food-2.webp" width="1200" height="800" loading="lazy" alt="A plated main course being finished."></figure>
+      <figure style="margin:0"><img src="../../assets/img/demo/restaurant-food-3.webp" width="1200" height="800" loading="lazy" alt="Salmon with a green salad."></figure>
+      <figure style="margin:0"><img src="../../assets/img/demo/restaurant-3.webp" width="1600" height="1000" loading="lazy" alt="A table set for two."></figure>
+      <figure style="margin:0"><img src="../../assets/img/demo/restaurant-food-1.webp" width="1200" height="900" loading="lazy" alt="Fresh pasta before cooking."></figure>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="d-sec" id="reviews">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Reviews</span>
+      <h2 class="d-h2">4.8 out of 5, from 316 diners</h2>
+    </div>
+    <div class="d-quotes">
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five">
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg>
+        </div>
+        <p>"We came for coffee and stayed for lunch. The ravioli is the best I have had outside Italy,
+           and the staff did not rush us once."</p>
+        <b>Marites D.</b><small>Visited in March</small>
+      </article>
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five">
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg>
+        </div>
+        <p>"Booked online at 11am and had a table by 7pm. Small menu, which I now realise is a good sign,
+           not a bad one."</p>
+        <b>Jonathan R.</b><small>Visited in April</small>
+      </article>
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five">
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg>
+        </div>
+        <p>"Took my mother for her birthday. They remembered the cake without me having to remind them.
+           That is why we keep going back."</p>
+        <b>Angela P.</b><small>Visited in February</small>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Booking + visit -->
+<section class="d-sec d-sec--alt" id="book">
+  <div class="d-wrap d-split">
+    <div>
+      <span class="d-eyebrow">Book a table</span>
+      <h2 class="d-h2">Reserve in under a minute</h2>
+      <p class="d-lede" style="margin-bottom:26px">Tell us when and how many. We reply by message within
+        the hour during opening times.</p>
+
+      <form class="d-form" data-demo-form novalidate>
+        <div class="d-form__row">
+          <div class="d-field"><label for="cv-name">Your name</label><input id="cv-name" name="name" type="text" required autocomplete="name"></div>
+          <div class="d-field"><label for="cv-phone">Mobile number</label><input id="cv-phone" name="phone" type="tel" required autocomplete="tel"></div>
+        </div>
+        <div class="d-form__row">
+          <div class="d-field"><label for="cv-date">Date</label><input id="cv-date" name="date" type="date" required></div>
+          <div class="d-field"><label for="cv-time">Time</label>
+            <select id="cv-time" name="time" required>
+              <option value="">Choose a time</option>
+              <option>Breakfast — 7:00am to 10:30am</option>
+              <option>Lunch — 11:30am to 2:30pm</option>
+              <option>Dinner — 5:30pm to 9:00pm</option>
+            </select></div>
+        </div>
+        <div class="d-form__row">
+          <div class="d-field"><label for="cv-people">How many people</label>
+            <select id="cv-people" name="people" required>
+              <option value="">Choose</option><option>1 – 2</option><option>3 – 4</option>
+              <option>5 – 8</option><option>More than 8</option>
+            </select></div>
+          <div class="d-field"><label for="cv-email">Email (optional)</label><input id="cv-email" name="email" type="email" autocomplete="email"></div>
+        </div>
+        <div class="d-field"><label for="cv-note">Anything we should know?</label>
+          <textarea id="cv-note" name="note" placeholder="Allergies, a birthday, a high chair…"></textarea></div>
+
+        <div class="d-sent">
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>
+          <span><strong>Thank you — your request was received.</strong><br>
+          On a real website this arrives in the restaurant's inbox and on their phone straight away.
+          This is a sample site, so nothing was actually sent.</span>
+        </div>
+
+        <button class="d-btn d-btn--1" type="submit">Request this table
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+        <p class="d-form__note">Booking a table costs nothing and holds it for 15 minutes after your time.</p>
+      </form>
+    </div>
+
+    <div id="visit">
+      <span class="d-eyebrow">Visit us</span>
+      <h2 class="d-h2">Find the corner</h2>
+      <div class="d-contact" style="margin-bottom:22px">
+        <div><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+          <span><b>112 Mango Avenue, Cebu City</b><span>Corner of Mango and Escario, opposite the park</span></span></div>
+        <a href="tel:+63325550148"><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+          <span><b>+63 32 555 0148</b><span>Call us during opening hours</span></span></a>
+        <a href="mailto:hello@casaverdekitchen.example"><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-mail"></use></svg></span>
+          <span><b>hello@casaverdekitchen.example</b><span>Groups, private hire and press</span></span></a>
+        <div><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-clock"></use></svg></span>
+          <span><b>Open seven days</b><span>Mon–Thu 7am–9pm · Fri–Sat 7am–11pm · Sun 8am–4pm</span></span></div>
+      </div>
+      <div class="d-media d-media--wide">
+        <img src="../../assets/img/demo/restaurant-1.webp" width="1600" height="900" loading="lazy" alt="The front of the cafe seen from the street.">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="d-band">
+  <div class="d-wrap">
+    <h2 class="d-h2">Hungry now?</h2>
+    <p>Walk in and we will find you a seat. Or send a message and we will hold one.</p>
+    <div class="d-btns">
+      <a class="d-btn d-btn--2" href="#book">Book a table</a>
+      <a class="d-btn d-btn--o" href="tel:+63325550148">Call the kitchen</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="d-foot">
+  <div class="d-wrap">
+    <div class="d-foot__in">
+      <div>
+        <span class="d-logo">Casa Verde<small>Kitchen &amp; Cafe</small></span>
+        <p>A small farm kitchen and coffee house on Mango Avenue. Open seven days for breakfast,
+           lunch and dinner.</p>
+      </div>
+      <div><h4>Explore</h4>
+        <ul><li><a href="#story">Our story</a></li><li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li><li><a href="#reviews">Reviews</a></li>
+        <li><a href="#book">Book a table</a></li></ul></div>
+      <div><h4>Find us</h4>
+        <ul><li>112 Mango Avenue, Cebu City</li><li><a href="tel:+63325550148">+63 32 555 0148</a></li>
+        <li><a href="mailto:hello@casaverdekitchen.example">hello@casaverdekitchen.example</a></li>
+        <li>Facebook · Instagram</li></ul></div>
+    </div>
+    <div class="d-foot__base">
+      <span>&copy; <span data-year>2026</span> Casa Verde Kitchen — a fictional business.</span>
+      <span>Sample website by <a href="../../index.html">Pace Digital Works</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="d-chat" href="../../index.html#start">
+  <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-chat"></use></svg><span>Chat with us</span>
+</a>
+
+<script src="../demo.js" defer></script>
+</body>
+</html>

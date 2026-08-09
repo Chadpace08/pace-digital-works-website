@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cornerstone Builders — Sample construction website | Pace Digital Works</title>
+<meta name="description" content="A sample construction and building website by Pace Digital Works. Finished projects, services and a quote request form. Cornerstone Builders is a fictional business.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#14181C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../demo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314181C'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='700' fill='%23F2A71B' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --d-bg: #FFFFFF; --d-alt: #F3F4F2; --d-surface: #FFFFFF;
+    --d-ink: #14181C; --d-body: #5A6169; --d-line: #E0E2DF;
+    --d-brand: #14181C; --d-on-brand: #FFFFFF;
+    --d-accent: #F2A71B; --d-accent-ink: #A06E06;
+    --d-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --d-sans: 'Barlow', system-ui, sans-serif;
+    --d-r: 4px; --d-r-lg: 8px;
+  }
+  h1, h2, h3 { font-weight: 700; text-transform: uppercase; letter-spacing: -.005em; }
+  .d-h1 { font-size: clamp(2.9rem, 7.6vw, 5.4rem); line-height: .95; }
+  .d-eyebrow { color: var(--d-accent-ink); }
+  .cs-step { display: flex; gap: 18px; padding: 22px 0; border-top: 2px solid var(--d-line); }
+  .cs-step b.num { font-family: var(--d-display); font-size: 2.4rem; line-height: 1; color: var(--d-accent); flex: none; width: 56px; }
+  .cs-step h3 { font-size: 1.15rem; margin-bottom: 5px; }
+  .cs-step p { font-size: 14.9px; color: var(--d-body); margin: 0; }
+  /* Bright timber in the hero photo washes the paragraph out, so darken the veil. */
+  .d-hero__bg::after {
+    background: linear-gradient(100deg, rgba(10, 13, 16, .84) 0%, rgba(10, 13, 16, .62) 52%, rgba(10, 13, 16, .3) 100%);
+  }
+  .cs-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+  .cs-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1.5px solid var(--d-line); border-radius: 4px; padding: 9px 15px;
+    font-size: 13.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+  }
+  .cs-badge svg { color: var(--d-accent-ink); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.5L12 17.5l-5.8 3.05 1.1-6.5-4.7-4.6 6.5-.95Z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10.2c0 5.8-8 11.8-8 11.8s-8-6-8-11.8a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M21.5 16.9v2.8a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6 2 2 0 0 1 2-2.2h2.8a2 2 0 0 1 2 1.7c.13 1 .36 1.9.7 2.8a2 2 0 0 1-.46 2.1L7.7 9.7a16 16 0 0 0 6 6l1.2-1.15a2 2 0 0 1 2.1-.45c.9.33 1.83.57 2.8.7a2 2 0 0 1 1.7 2.1Z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.9L3 20.5l1.6-4.8A8.3 8.3 0 0 1 3.5 11 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/></symbol>
+<symbol id="i-hardhat" viewBox="0 0 24 24"><path d="M2.5 19h19"/><path d="M4.5 19v-3.5a7.5 7.5 0 0 1 15 0V19"/><path d="M9.5 8.5V5.8a2.3 2.3 0 0 1 4.6 0v2.7"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 21.5s7.5-3.5 7.5-9.5V5.5L12 2.5 4.5 5.5V12c0 6 7.5 9.5 7.5 9.5Z"/><path d="m9.2 11.8 2 2 3.6-3.6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 1.9"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v9.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9.2 21.5v-8h5.6v8"/></symbol>
+<symbol id="i-ruler" viewBox="0 0 24 24"><path d="m3 16.5 13.5-13.5 4.5 4.5L7.5 21Z"/><path d="m7.5 8 2 2M11 4.5l2 2M11.5 12l2 2M8 15.5l2 2"/></symbol>
+</defs></svg>
+
+<div class="pd-bar">
+  <div class="pd-bar__in">
+    <span class="pd-bar__tag">Sample website</span>
+    <span><strong>Cornerstone Builders</strong> is a fictional company, built to show what your building website could look like.</span>
+    <a href="../../index.html">Build mine <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+  </div>
+</div>
+
+<header class="d-nav">
+  <div class="d-wrap d-nav__in">
+    <a class="d-logo" href="#top">
+      <span class="d-logo__mark" style="background:var(--d-accent);color:#14181C"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-hardhat"></use></svg></span>
+      Cornerstone<small>Builders since 1998</small></a>
+    <nav class="d-menu" data-menu aria-label="Main">
+      <a href="#work">Our work</a>
+      <a href="#services">Services</a>
+      <a href="#how">How we work</a>
+      <a href="#trust">Why us</a>
+      <a href="#quote">Get a quote</a>
+      <a class="d-btn d-btn--2 d-btn--sm" href="#quote">Get a free quote</a>
+    </nav>
+    <a class="d-btn d-btn--2 d-btn--sm" href="#quote">Get a free quote</a>
+    <button class="d-burger" data-burger type="button" aria-label="Open the menu" aria-expanded="false">
+      <svg class="d-ico" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="d-hero">
+  <div class="d-hero__bg">
+    <img src="../../assets/img/demo/construction-1.webp" width="1400" height="928" alt="A house under construction with the timber frame going up." fetchpriority="high">
+  </div>
+  <div class="d-wrap d-hero__in">
+    <span class="d-eyebrow">Houses · extensions · commercial</span>
+    <h1 class="d-h1">Built once.<br>Built properly.</h1>
+    <p>Twenty-seven years, four hundred and ten finished projects, and a fixed price before we start.
+       No surprise invoices at the end and no crew that disappears for three weeks.</p>
+    <div class="d-btns">
+      <a class="d-btn d-btn--2" href="#quote">Get a free quote</a>
+      <a class="d-btn d-btn--o" href="#work">See finished work</a>
+    </div>
+  </div>
+</section>
+
+<section class="d-sec d-sec--tight d-sec--alt">
+  <div class="d-wrap cs-badges">
+    <span class="cs-badge"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-shield"></use></svg> Licensed &amp; insured</span>
+    <span class="cs-badge"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> 10-year workmanship guarantee</span>
+    <span class="cs-badge"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-clock"></use></svg> Fixed price, fixed dates</span>
+    <span class="cs-badge"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-hardhat"></use></svg> Own crew, no subcontractor chains</span>
+  </div>
+</section>
+
+<!-- Work -->
+<section class="d-sec" id="work">
+  <div class="d-wrap">
+    <div class="d-head">
+      <span class="d-eyebrow">Recent work</span>
+      <h2 class="d-h2">Proof first. Sales talk later.</h2>
+      <p class="d-lede">Every project below was finished on the agreed date. You are welcome to speak to
+        any of these owners before you decide anything.</p>
+    </div>
+    <div class="d-grid d-grid--3">
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/construction-work-2.webp" width="1600" height="1247" loading="lazy" alt="A builder working on a timber structure."></div>
+        <div class="d-card__b"><h3>Two-storey family home</h3>
+          <p>A 240 square metre new build in Parkgate. Slab to handover in eleven months.</p>
+          <div class="d-card__meta"><span style="color:var(--d-body)">New build · Parkgate</span>
+            <span class="d-card__price">₱9.4M</span></div></div>
+      </article>
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/construction-work-1.webp" width="1600" height="1067" loading="lazy" alt="Machinery and workers on a building site."></div>
+        <div class="d-card__b"><h3>Warehouse &amp; office fit-out</h3>
+          <p>A 900 square metre steel frame warehouse with a two-floor office at the front.</p>
+          <div class="d-card__meta"><span style="color:var(--d-body)">Commercial · Riverside</span>
+            <span class="d-card__price">₱22M</span></div></div>
+      </article>
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/construction-2.webp" width="1600" height="1070" loading="lazy" alt="Cranes over a large construction site."></div>
+        <div class="d-card__b"><h3>Six-unit townhouse row</h3>
+          <p>Six three-bedroom townhouses on one block. All six sold before completion.</p>
+          <div class="d-card__meta"><span style="color:var(--d-body)">Development · Old Town</span>
+            <span class="d-card__price">₱34M</span></div></div>
+      </article>
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/construction-work-3.webp" width="1600" height="1067" loading="lazy" alt="A carpenter working with timber and tools."></div>
+        <div class="d-card__b"><h3>Kitchen &amp; rear extension</h3>
+          <p>Knocked through, extended four metres, and the family stayed in the house throughout.</p>
+          <div class="d-card__meta"><span style="color:var(--d-body)">Extension · Northview</span>
+            <span class="d-card__price">₱2.1M</span></div></div>
+      </article>
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/construction-4.webp" width="1600" height="1067" loading="lazy" alt="An excavator working on a site."></div>
+        <div class="d-card__b"><h3>Site clearing &amp; groundwork</h3>
+          <p>Levelling, drainage and foundations for a hillside block that three builders turned down.</p>
+          <div class="d-card__meta"><span style="color:var(--d-body)">Groundwork · Ridge Lane</span>
+            <span class="d-card__price">₱3.8M</span></div></div>
+      </article>
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/construction-3.webp" width="1600" height="1067" loading="lazy" alt="Plans and a model house on a table."></div>
+        <div class="d-card__b"><h3>Design &amp; build package</h3>
+          <p>Architect, engineer and builder under one contract, so nobody can blame anybody else.</p>
+          <div class="d-card__meta"><span style="color:var(--d-body)">Design &amp; build</span>
+            <span class="d-card__price">From ₱6M</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="d-sec d-sec--alt" id="services">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Services</span>
+      <h2 class="d-h2">What we take on</h2>
+    </div>
+    <div class="d-grid d-grid--4">
+      <article class="d-feat d-rv"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-home"></use></svg></div>
+        <h3>New homes</h3><p>From an empty block to keys in your hand, with one point of contact throughout.</p></article>
+      <article class="d-feat d-rv"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-ruler"></use></svg></div>
+        <h3>Extensions</h3><p>Extra room, second floor, or opening the back of the house up to the garden.</p></article>
+      <article class="d-feat d-rv"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-hardhat"></use></svg></div>
+        <h3>Commercial</h3><p>Warehouses, offices and fit-outs, scheduled around your trading hours.</p></article>
+      <article class="d-feat d-rv"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-shield"></use></svg></div>
+        <h3>Renovation &amp; repair</h3><p>Older buildings brought up to standard, including the parts nobody can see.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- How -->
+<section class="d-sec" id="how">
+  <div class="d-wrap d-split">
+    <div>
+      <span class="d-eyebrow">How we work</span>
+      <h2 class="d-h2">Five steps, and you always know which one you are on</h2>
+      <div style="margin-top:26px">
+        <div class="cs-step"><b class="num">01</b><div><h3>Site visit</h3>
+          <p>We come out, look at the job properly, and tell you honestly whether it is worth doing.</p></div></div>
+        <div class="cs-step"><b class="num">02</b><div><h3>Fixed written quote</h3>
+          <p>Itemised, with what is included and what is not. Free, and yours to keep either way.</p></div></div>
+        <div class="cs-step"><b class="num">03</b><div><h3>Dates agreed in writing</h3>
+          <p>A start date and a finish date, plus what happens if we miss them.</p></div></div>
+        <div class="cs-step"><b class="num">04</b><div><h3>We build</h3>
+          <p>Photos every Friday, so you can see progress even if you never visit the site.</p></div></div>
+        <div class="cs-step"><b class="num">05</b><div><h3>Handover &amp; guarantee</h3>
+          <p>We walk through it with you, fix the small things, then guarantee the work for ten years.</p></div></div>
+      </div>
+    </div>
+    <div class="d-media d-media--tall">
+      <img src="../../assets/img/demo/construction-3.webp" width="1600" height="1067" loading="lazy" alt="Building plans and a scale model on a desk.">
+    </div>
+  </div>
+</section>
+
+<!-- Trust -->
+<section class="d-sec d-sec--brand" id="trust">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Why us</span>
+      <h2 class="d-h2">Twenty-seven years without a court case</h2>
+      <p class="d-lede" style="margin-inline:auto">That is not luck. It is a written quote, a written
+        schedule, and a crew that has worked together for years.</p>
+    </div>
+    <div class="d-stats" style="margin-bottom:clamp(36px,4vw,52px)">
+      <div class="d-stat"><b>410</b><span>Projects finished</span></div>
+      <div class="d-stat"><b>27</b><span>Years in business</span></div>
+      <div class="d-stat"><b>10</b><span>Year guarantee</span></div>
+      <div class="d-stat"><b>96%</b><span>Finished on the agreed date</span></div>
+    </div>
+    <div class="d-quotes">
+      <article class="d-quote d-rv" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p style="color:rgba(255,255,255,.8)">"Three builders quoted. Cornerstone was not the cheapest.
+           They were the only ones who put the finish date in writing, and they hit it."</p>
+        <b style="color:#fff">Ramon &amp; Elsa T.</b><small style="color:rgba(255,255,255,.6)">New build, Parkgate</small>
+      </article>
+      <article class="d-quote d-rv" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p style="color:rgba(255,255,255,.8)">"We lived in the house through the whole extension.
+           They sealed the dust off properly and cleaned every single day."</p>
+        <b style="color:#fff">Grace M.</b><small style="color:rgba(255,255,255,.6)">Kitchen extension, Northview</small>
+      </article>
+      <article class="d-quote d-rv" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p style="color:rgba(255,255,255,.8)">"The Friday photos meant I never had to chase anyone for
+           an update. I wish every trade did that."</p>
+        <b style="color:#fff">Victor L.</b><small style="color:rgba(255,255,255,.6)">Warehouse, Riverside</small>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Quote -->
+<section class="d-sec d-sec--alt" id="quote">
+  <div class="d-wrap d-split">
+    <div>
+      <span class="d-eyebrow">Get a quote</span>
+      <h2 class="d-h2">Free, written, and no obligation</h2>
+      <p class="d-lede" style="margin-bottom:26px">Tell us roughly what you have in mind. We will call you
+        within one working day to arrange a site visit.</p>
+
+      <form class="d-form" data-demo-form novalidate>
+        <div class="d-form__row">
+          <div class="d-field"><label for="cs-name">Your name</label><input id="cs-name" type="text" required autocomplete="name"></div>
+          <div class="d-field"><label for="cs-phone">Mobile number</label><input id="cs-phone" type="tel" required autocomplete="tel"></div>
+        </div>
+        <div class="d-field"><label for="cs-email">Email address</label><input id="cs-email" type="email" required autocomplete="email"></div>
+        <div class="d-form__row">
+          <div class="d-field"><label for="cs-type">Type of work</label>
+            <select id="cs-type" required><option value="">Choose one</option><option>New home</option>
+            <option>Extension</option><option>Renovation or repair</option><option>Commercial</option>
+            <option>Groundwork only</option><option>Not sure yet</option></select></div>
+          <div class="d-field"><label for="cs-budget">Rough budget</label>
+            <select id="cs-budget"><option>Prefer not to say</option><option>Under ₱1M</option>
+            <option>₱1M – ₱5M</option><option>₱5M – ₱15M</option><option>Over ₱15M</option></select></div>
+        </div>
+        <div class="d-field"><label for="cs-site">Where is the site?</label><input id="cs-site" type="text" placeholder="Street and suburb is enough"></div>
+        <div class="d-field"><label for="cs-msg">Tell us about the job</label>
+          <textarea id="cs-msg" placeholder="What you want done, and when you would like to start."></textarea></div>
+
+        <div class="d-sent">
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>
+          <span><strong>Thank you — we have your enquiry.</strong><br>
+          On a real website this reaches the office inbox and the owner's phone straight away, and is
+          added to the quote list. This is a sample site, so nothing was sent.</span>
+        </div>
+
+        <button class="d-btn d-btn--2" type="submit">Request my free quote
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+        <p class="d-form__note">We quote across the whole northern region. If we are not the right builder for your job, we will say so.</p>
+      </form>
+    </div>
+
+    <div>
+      <span class="d-eyebrow">Contact</span>
+      <h2 class="d-h2">Talk to a person</h2>
+      <div class="d-contact" style="margin-bottom:20px">
+        <a href="tel:+63325550122"><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+          <span><b>+63 32 555 0122</b><span>Office, Monday to Saturday 7am – 5pm</span></span></a>
+        <a href="mailto:office@cornerstonebuilders.example"><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-mail"></use></svg></span>
+          <span><b>office@cornerstonebuilders.example</b><span>Plans, tenders and account queries</span></span></a>
+        <div><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+          <span><b>17 Foundry Road, Riverside</b><span>Yard and office — visitors welcome</span></span></div>
+      </div>
+      <div class="d-media d-media--wide"><img src="../../assets/img/demo/construction-work-1.webp" width="1600" height="1067" loading="lazy" alt="The Cornerstone Builders crew on site."></div>
+    </div>
+  </div>
+</section>
+
+<section class="d-band">
+  <div class="d-wrap">
+    <h2 class="d-h2">Not sure it is worth doing?</h2>
+    <p>Send us a photo and a sentence. We will tell you whether to build it, fix it, or leave it —
+       even when the answer means we get no work.</p>
+    <div class="d-btns">
+      <a class="d-btn d-btn--2" href="#quote">Ask us first</a>
+      <a class="d-btn d-btn--o" href="tel:+63325550122">Call the office</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="d-foot">
+  <div class="d-wrap">
+    <div class="d-foot__in">
+      <div>
+        <span class="d-logo">Cornerstone<small>Builders since 1998</small></span>
+        <p>A family building company working across the northern region. Licensed, insured, and
+           guaranteed for ten years.</p>
+      </div>
+      <div><h4>Explore</h4>
+        <ul><li><a href="#work">Our work</a></li><li><a href="#services">Services</a></li>
+        <li><a href="#how">How we work</a></li><li><a href="#quote">Get a quote</a></li></ul></div>
+      <div><h4>Contact</h4>
+        <ul><li>17 Foundry Road, Riverside</li><li><a href="tel:+63325550122">+63 32 555 0122</a></li>
+        <li><a href="mailto:office@cornerstonebuilders.example">office@cornerstonebuilders.example</a></li>
+        <li>Facebook</li></ul></div>
+    </div>
+    <div class="d-foot__base">
+      <span>&copy; <span data-year>2026</span> Cornerstone Builders — a fictional business.</span>
+      <span>Sample website by <a href="../../index.html">Pace Digital Works</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="d-chat" href="../../index.html#start">
+  <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-chat"></use></svg><span>Chat with us</span></a>
+
+<script src="../demo.js" defer></script>
+</body>
+</html>

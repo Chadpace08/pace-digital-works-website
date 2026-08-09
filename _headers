@@ -1,0 +1,20 @@
+# Pictures and video never change once uploaded, so browsers may keep them for
+# a year. The stylesheet and script DO change, so browsers must ask first --
+# otherwise a visitor stays stuck on an old layout long after you update it.
+
+/assets/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/video/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/css/*
+  Cache-Control: no-cache
+
+/assets/js/*
+  Cache-Control: no-cache
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN

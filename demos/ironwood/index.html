@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ironwood Fitness — Sample gym website | Pace Digital Works</title>
+<meta name="description" content="A sample gym and fitness website built by Pace Digital Works. Membership prices, class timetable and a free trial sign-up. Ironwood Fitness is a fictional business.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#14171A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../demo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314171A'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='700' fill='%23E4572E' text-anchor='middle'%3EIW%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --d-bg: #FFFFFF; --d-alt: #F2F3F5; --d-surface: #FFFFFF;
+    --d-ink: #14171A; --d-body: #5C646C; --d-line: #E1E4E7;
+    --d-brand: #14171A; --d-on-brand: #FFFFFF;
+    --d-accent: #E4572E; --d-accent-ink: #C0421D;
+    --d-display: 'Oswald', 'Arial Narrow', sans-serif;
+    --d-sans: 'Inter', system-ui, sans-serif;
+    --d-r: 6px; --d-r-lg: 10px;
+  }
+  h1, h2, h3 { font-weight: 600; text-transform: uppercase; letter-spacing: .005em; }
+  .d-h1 { font-size: clamp(2.7rem, 7vw, 5rem); line-height: .98; }
+  .d-eyebrow { color: var(--d-accent); }
+  .iw-plan { background: #fff; border: 2px solid var(--d-line); border-radius: var(--d-r-lg);
+    padding: 30px 28px 32px; display: flex; flex-direction: column; }
+  .iw-plan--best { border-color: var(--d-accent); position: relative; }
+  .iw-plan--best::before {
+    content: "Most popular"; position: absolute; top: -13px; left: 28px;
+    background: var(--d-accent); color: #fff; border-radius: 999px; padding: 4px 14px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    font-family: var(--d-sans);
+  }
+  .iw-plan__p { font-family: var(--d-display); font-size: 3rem; line-height: 1; margin: 6px 0 4px; }
+  .iw-plan__p small { font-family: var(--d-sans); font-size: 15px; font-weight: 500; color: var(--d-body); text-transform: none; }
+  .iw-plan ul { list-style: none; margin: 20px 0 26px; padding: 0; display: grid; gap: 10px; }
+  .iw-plan li { display: flex; gap: 10px; font-size: 14.8px; color: var(--d-body); }
+  .iw-plan li svg { color: var(--d-accent); flex: none; margin-top: 3px; }
+  .iw-plan .d-btn { margin-top: auto; }
+  .iw-tt { width: 100%; border-collapse: collapse; font-size: 14.8px; }
+  .iw-tt th, .iw-tt td { text-align: left; padding: 13px 14px; border-bottom: 1px solid var(--d-line); }
+  .iw-tt th { font-family: var(--d-display); text-transform: uppercase; font-size: 13.5px;
+    letter-spacing: .05em; color: var(--d-ink); background: var(--d-alt); }
+  .iw-tt td:first-child { font-weight: 600; color: var(--d-ink); white-space: nowrap; }
+  .iw-tt tr:hover td { background: #FBF6F4; }
+  .iw-wrapx { overflow-x: auto; border: 1px solid var(--d-line); border-radius: var(--d-r-lg); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.5L12 17.5l-5.8 3.05 1.1-6.5-4.7-4.6 6.5-.95Z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10.2c0 5.8-8 11.8-8 11.8s-8-6-8-11.8a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M21.5 16.9v2.8a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6 2 2 0 0 1 2-2.2h2.8a2 2 0 0 1 2 1.7c.13 1 .36 1.9.7 2.8a2 2 0 0 1-.46 2.1L7.7 9.7a16 16 0 0 0 6 6l1.2-1.15a2 2 0 0 1 2.1-.45c.9.33 1.83.57 2.8.7a2 2 0 0 1 1.7 2.1Z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 1.9"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.9L3 20.5l1.6-4.8A8.3 8.3 0 0 1 3.5 11 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/></symbol>
+<symbol id="i-dumbbell" viewBox="0 0 24 24"><path d="M6.5 5.5v13M3 8.5v7M17.5 5.5v13M21 8.5v7M6.5 12h11"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 20.5v-1.8a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4v1.8"/><circle cx="9.2" cy="7.5" r="3.6"/><path d="M21.5 20.5v-1.8a4 4 0 0 0-3-3.8M16 4a3.6 3.6 0 0 1 0 7"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5s-8-5-8-10.3A4.8 4.8 0 0 1 12 6.8a4.8 4.8 0 0 1 8 3.4c0 5.3-8 10.3-8 10.3Z"/></symbol>
+</defs></svg>
+
+<div class="pd-bar">
+  <div class="pd-bar__in">
+    <span class="pd-bar__tag">Sample website</span>
+    <span><strong>Ironwood Fitness</strong> is a fictional gym, built to show what your fitness website could look like.</span>
+    <a href="../../index.html">Build mine <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+  </div>
+</div>
+
+<header class="d-nav">
+  <div class="d-wrap d-nav__in">
+    <a class="d-logo" href="#top">
+      <span class="d-logo__mark" style="background:var(--d-accent)"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-dumbbell"></use></svg></span>
+      Ironwood<small>Strength &amp; Conditioning</small></a>
+    <nav class="d-menu" data-menu aria-label="Main">
+      <a href="#gym">The gym</a>
+      <a href="#classes">Classes</a>
+      <a href="#prices">Memberships</a>
+      <a href="#coaches">Coaches</a>
+      <a href="#trial">Free trial</a>
+      <a class="d-btn d-btn--2 d-btn--sm" href="#trial">Start free trial</a>
+    </nav>
+    <a class="d-btn d-btn--2 d-btn--sm" href="#trial">Start free trial</a>
+    <button class="d-burger" data-burger type="button" aria-label="Open the menu" aria-expanded="false">
+      <svg class="d-ico" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="d-hero">
+  <div class="d-hero__bg">
+    <img src="../../assets/img/demo/gym-1.webp" width="1600" height="1063" alt="The main floor at Ironwood Fitness." fetchpriority="high">
+  </div>
+  <div class="d-wrap d-hero__in">
+    <span class="d-eyebrow">Open 5am – 11pm, seven days</span>
+    <h1 class="d-h1">Turn up three times a week.<br>We handle the rest.</h1>
+    <p>A proper gym with real coaching, not a room full of machines and nobody to ask.
+       Your first seven days cost nothing and there is no contract to sign.</p>
+    <div class="d-btns">
+      <a class="d-btn d-btn--2" href="#trial">Start your free week</a>
+      <a class="d-btn d-btn--o" href="#prices">See membership prices</a>
+    </div>
+  </div>
+</section>
+
+<section class="d-sec d-sec--brand d-sec--tight">
+  <div class="d-wrap d-stats">
+    <div class="d-stat"><b>7</b><span>Free trial days</span></div>
+    <div class="d-stat"><b>42</b><span>Classes every week</span></div>
+    <div class="d-stat"><b>9</b><span>Qualified coaches</span></div>
+    <div class="d-stat"><b>0</b><span>Joining fees or contracts</span></div>
+  </div>
+</section>
+
+<!-- The gym -->
+<section class="d-sec" id="gym">
+  <div class="d-wrap d-split d-split--wide">
+    <div>
+      <span class="d-eyebrow">The gym</span>
+      <h2 class="d-h2">Everything you need and nothing you will never use</h2>
+      <p class="d-lede" style="margin-bottom:22px">Twelve hundred square metres over two floors. A full free
+        weight area, a turf strip for sled work, forty pieces of cardio equipment, and a separate room
+        for classes so nobody is doing burpees next to your bench press.</p>
+      <div class="d-grid d-grid--2" style="gap:14px">
+        <div class="d-feat"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-dumbbell"></use></svg></div>
+          <h3>Free weights</h3><p>Ten racks, dumbbells to 60kg, and platforms you do not have to queue for.</p></div>
+        <div class="d-feat"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-users"></use></svg></div>
+          <h3>Coached, not watched</h3><p>Someone on the floor at all times who will actually correct your form.</p></div>
+        <div class="d-feat"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-clock"></use></svg></div>
+          <h3>Open early and late</h3><p>5am to 11pm every day, including weekends and public holidays.</p></div>
+        <div class="d-feat"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-heart"></use></svg></div>
+          <h3>Beginners welcome</h3><p>A free two-session start-up programme, so you are never guessing.</p></div>
+      </div>
+    </div>
+    <div class="d-grid" style="gap:12px">
+      <div class="d-media" style="border-radius:var(--d-r-lg)"><img src="../../assets/img/demo/gym-2.webp" width="1600" height="1066" loading="lazy" alt="A rack of dumbbells."></div>
+      <div class="d-grid d-grid--2" style="gap:12px">
+        <div class="d-media" style="border-radius:var(--d-r-lg)"><img src="../../assets/img/demo/gym-people-2.webp" width="1600" height="1066" loading="lazy" alt="Two members doing core work."></div>
+        <div class="d-media" style="border-radius:var(--d-r-lg)"><img src="../../assets/img/demo/gym-5.webp" width="1600" height="1067" loading="lazy" alt="Hex dumbbells racked on the gym floor."></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Classes -->
+<section class="d-sec d-sec--alt" id="classes">
+  <div class="d-wrap">
+    <div class="d-head">
+      <span class="d-eyebrow">Class timetable</span>
+      <h2 class="d-h2">Forty-two classes a week, all included</h2>
+      <p class="d-lede">Every class is included in every membership. Book from your phone, and if you cannot
+        make it, cancel up to two hours before with no penalty.</p>
+    </div>
+    <div class="iw-wrapx">
+      <table class="iw-tt">
+        <caption class="d-sr">Weekly class timetable for Ironwood Fitness</caption>
+        <thead><tr><th scope="col">Time</th><th scope="col">Monday</th><th scope="col">Tuesday</th>
+          <th scope="col">Wednesday</th><th scope="col">Thursday</th><th scope="col">Friday</th><th scope="col">Saturday</th></tr></thead>
+        <tbody>
+          <tr><td>6:00am</td><td>Strength 101</td><td>Conditioning</td><td>Strength 101</td><td>Conditioning</td><td>Strength 101</td><td>Team workout</td></tr>
+          <tr><td>9:30am</td><td>Mobility</td><td>Over 50s</td><td>Mobility</td><td>Over 50s</td><td>Mobility</td><td>Beginners</td></tr>
+          <tr><td>12:15pm</td><td>Express 30</td><td>Express 30</td><td>Express 30</td><td>Express 30</td><td>Express 30</td><td>—</td></tr>
+          <tr><td>5:30pm</td><td>Barbell club</td><td>Boxing</td><td>Barbell club</td><td>Boxing</td><td>Barbell club</td><td>—</td></tr>
+          <tr><td>7:00pm</td><td>Conditioning</td><td>Yoga</td><td>Conditioning</td><td>Yoga</td><td>Open floor</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:14.5px;color:var(--d-body);margin-top:14px">Sunday is open floor from 7am to 6pm — no classes, no queues.</p>
+  </div>
+</section>
+
+<!-- Prices -->
+<section class="d-sec" id="prices">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Memberships</span>
+      <h2 class="d-h2">Three prices. No contract, cancel any month.</h2>
+      <p class="d-lede" style="margin-inline:auto">There is no joining fee and no minimum term. If you stop
+        coming, stop paying — we would rather you came back later than felt trapped.</p>
+    </div>
+    <div class="d-grid d-grid--3">
+      <article class="iw-plan d-rv">
+        <h3 style="font-size:1.15rem">Off-peak</h3>
+        <p class="iw-plan__p">₱1,290<small> / month</small></p>
+        <p style="font-size:14.5px;color:var(--d-body)">Weekdays before 4pm and all weekend.</p>
+        <ul>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Full gym floor access</li>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> All morning classes</li>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Free start-up session</li>
+        </ul>
+        <a class="d-btn d-btn--o" href="#trial">Start free trial</a>
+      </article>
+      <article class="iw-plan iw-plan--best d-rv">
+        <h3 style="font-size:1.15rem">Full member</h3>
+        <p class="iw-plan__p">₱1,890<small> / month</small></p>
+        <p style="font-size:14.5px;color:var(--d-body)">Any time the doors are open, every class included.</p>
+        <ul>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Open 5am – 11pm, seven days</li>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> All 42 classes each week</li>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Programme reviewed every 8 weeks</li>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Bring a friend once a month</li>
+        </ul>
+        <a class="d-btn d-btn--2" href="#trial">Start free trial</a>
+      </article>
+      <article class="iw-plan d-rv">
+        <h3 style="font-size:1.15rem">Coached</h3>
+        <p class="iw-plan__p">₱4,500<small> / month</small></p>
+        <p style="font-size:14.5px;color:var(--d-body)">Everything above, plus one-to-one coaching weekly.</p>
+        <ul>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Four private sessions a month</li>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> A written plan that changes as you do</li>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Nutrition guidance, kept simple</li>
+          <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Message your coach any day</li>
+        </ul>
+        <a class="d-btn d-btn--o" href="#trial">Talk to a coach</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Coaches -->
+<section class="d-sec d-sec--alt" id="coaches">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Coaches</span>
+      <h2 class="d-h2">The people who will actually know your name</h2>
+    </div>
+    <div class="d-grid d-grid--3">
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/gym-people-1.webp" width="1600" height="1063" loading="lazy" alt="Coach working with a member."></div>
+        <div class="d-card__b"><h3>Marco Reyes</h3>
+          <p>Head coach. Twelve years in strength and rehabilitation. Marco runs Barbell Club and the
+             free start-up sessions.</p></div>
+      </article>
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/gym-4.webp" width="1600" height="1067" loading="lazy" alt="A member training with dumbbells."></div>
+        <div class="d-card__b"><h3>Bea Lorenzo</h3>
+          <p>Conditioning and boxing. Bea works mostly with people who have not trained in years and
+             are not sure where to begin.</p></div>
+      </article>
+      <article class="d-card d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/gym-3.webp" width="1600" height="1069" loading="lazy" alt="Coach guiding a sled push."></div>
+        <div class="d-card__b"><h3>Nico Alvarez</h3>
+          <p>Mobility, yoga and the Over 50s class. Nico is the reason half our members can finally
+             touch their toes again.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="d-sec">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Members</span>
+      <h2 class="d-h2">4.8 out of 5, from 512 members</h2>
+    </div>
+    <div class="d-quotes">
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p>"I signed up for the free week fully expecting to quit. Fourteen months later I am still here
+           and I can deadlift my own bodyweight."</p>
+        <b>Ryan C.</b><small>Full member since 2024</small>
+      </article>
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p>"The Over 50s class changed things for me. Nobody is showing off and nobody is watching.
+           I go three mornings a week now."</p>
+        <b>Linda F.</b><small>Off-peak member</small>
+      </article>
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p>"No contract was the reason I joined. Funny thing is I have never once thought about
+           cancelling."</p>
+        <b>Paolo D.</b><small>Coached member</small>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Trial form -->
+<section class="d-sec d-sec--alt" id="trial">
+  <div class="d-wrap d-split">
+    <div>
+      <span class="d-eyebrow">Free trial</span>
+      <h2 class="d-h2">Seven days, no card, no contract</h2>
+      <p class="d-lede" style="margin-bottom:26px">Fill this in and we will message you a start date and a
+        time to come in for your free start-up session.</p>
+
+      <form class="d-form" data-demo-form novalidate>
+        <div class="d-form__row">
+          <div class="d-field"><label for="iw-name">Your name</label><input id="iw-name" type="text" required autocomplete="name"></div>
+          <div class="d-field"><label for="iw-phone">Mobile number</label><input id="iw-phone" type="tel" required autocomplete="tel"></div>
+        </div>
+        <div class="d-field"><label for="iw-email">Email address</label><input id="iw-email" type="email" required autocomplete="email"></div>
+        <div class="d-form__row">
+          <div class="d-field"><label for="iw-goal">Main goal</label>
+            <select id="iw-goal" required><option value="">Choose one</option><option>Get stronger</option>
+            <option>Lose weight</option><option>Get fitter for sport</option><option>Feel better and move well</option>
+            <option>Come back after a break</option></select></div>
+          <div class="d-field"><label for="iw-exp">Training experience</label>
+            <select id="iw-exp" required><option value="">Choose one</option><option>Complete beginner</option>
+            <option>Trained before, stopped</option><option>Train regularly already</option></select></div>
+        </div>
+        <div class="d-field"><label for="iw-when">When would you like to start?</label><input id="iw-when" type="date"></div>
+
+        <div class="d-sent">
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>
+          <span><strong>Thank you — your free week is requested.</strong><br>
+          On a real website this reaches the front desk instantly, adds you to the member list, and
+          sends you an automatic welcome message. This is a sample site, so nothing was sent.</span>
+        </div>
+
+        <button class="d-btn d-btn--2" type="submit">Claim my free week
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+        <p class="d-form__note">No card details needed. Nobody will phone you at dinner time.</p>
+      </form>
+    </div>
+
+    <div>
+      <span class="d-eyebrow">Find us</span>
+      <h2 class="d-h2">Come and look around</h2>
+      <div class="d-contact" style="margin-bottom:20px">
+        <div><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+          <span><b>Unit 3, 210 Foundry Road</b><span>Free parking, entrance on the side street</span></span></div>
+        <a href="tel:+63325550133"><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+          <span><b>+63 32 555 0133</b><span>Front desk, 6am – 9pm</span></span></a>
+        <a href="mailto:hello@ironwoodfitness.example"><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-mail"></use></svg></span>
+          <span><b>hello@ironwoodfitness.example</b><span>Corporate memberships and enquiries</span></span></a>
+        <div><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-clock"></use></svg></span>
+          <span><b>5am – 11pm, seven days</b><span>Sunday open floor 7am – 6pm</span></span></div>
+      </div>
+      <div class="d-media d-media--wide"><img src="../../assets/img/demo/gym-people-3.webp" width="1600" height="1000" loading="lazy" alt="A mobility session at Ironwood Fitness."></div>
+    </div>
+  </div>
+</section>
+
+<section class="d-band">
+  <div class="d-wrap">
+    <h2 class="d-h2">Still thinking about it?</h2>
+    <p>That is normal. Come in, look around, ask questions, and leave without signing anything.
+       No appointment needed.</p>
+    <div class="d-btns">
+      <a class="d-btn d-btn--2" href="#trial">Start your free week</a>
+      <a class="d-btn d-btn--o" href="tel:+63325550133">Call the front desk</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="d-foot">
+  <div class="d-wrap">
+    <div class="d-foot__in">
+      <div>
+        <span class="d-logo">Ironwood<small>Strength &amp; Conditioning</small></span>
+        <p>An independent gym on Foundry Road. Open 5am to 11pm every day, with coaching included
+           in every membership.</p>
+      </div>
+      <div><h4>Explore</h4>
+        <ul><li><a href="#gym">The gym</a></li><li><a href="#classes">Classes</a></li>
+        <li><a href="#prices">Memberships</a></li><li><a href="#coaches">Coaches</a></li>
+        <li><a href="#trial">Free trial</a></li></ul></div>
+      <div><h4>Contact</h4>
+        <ul><li>Unit 3, 210 Foundry Road</li><li><a href="tel:+63325550133">+63 32 555 0133</a></li>
+        <li><a href="mailto:hello@ironwoodfitness.example">hello@ironwoodfitness.example</a></li>
+        <li>Instagram · Facebook · TikTok</li></ul></div>
+    </div>
+    <div class="d-foot__base">
+      <span>&copy; <span data-year>2026</span> Ironwood Fitness — a fictional business.</span>
+      <span>Sample website by <a href="../../index.html">Pace Digital Works</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="d-chat" href="../../index.html#start">
+  <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-chat"></use></svg><span>Chat with us</span></a>
+
+<script src="../demo.js" defer></script>
+</body>
+</html>

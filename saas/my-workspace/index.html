@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>My Workspace — SaaS Dashboard App | Pace Digital Works</title>
+<meta name="description" content="A look inside My Workspace, a small business app built by Pace Digital Works: clients, tasks, hours worked and invoices in one screen.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0D9488">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230D9488'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='700' fill='%23FFFFFF' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --ws-sidebar-bg: #0d3730;
+    --ws-sidebar-hover: #144d43;
+    --ws-sidebar-text: #b2cfca;
+    --ws-sidebar-active: #184e44;
+    --ws-accent: #38b28f;
+    --ws-bg: #ecf0ed;
+    --ws-card-bg: #ffffff;
+    --ws-border: #e0e7e4;
+    --ws-text-dark: #1e293b;
+    --ws-text-muted: #64748b;
+    --ws-green: #059669;
+    --ws-red: #dc2626;
+    --ws-orange: #d97706;
+    --ws-btn-primary: #0e5a4e;
+  }
+
+  body {
+    background-color: var(--ws-bg);
+    color: var(--ws-text-dark);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+  }
+
+  .a-app {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    min-height: 100vh;
+    background: var(--ws-bg);
+    position: relative;
+  }
+
+  /* Sidebar styling */
+  .a-side {
+    background: var(--ws-sidebar-bg);
+    color: var(--ws-sidebar-text);
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+  }
+
+  .a-side__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 8px 24px;
+  }
+
+  .a-side__mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: #38b28f;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+    display: grid;
+    place-items: center;
+  }
+
+  .a-side__brand b {
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: .03em;
+    display: block;
+    line-height: 1.2;
+  }
+
+  .a-side__brand span {
+    font-size: 12px;
+    color: #89b8af;
+    letter-spacing: 0;
+  }
+
+  .a-side a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 9px;
+    color: var(--ws-sidebar-text);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all .15s ease;
+    margin-bottom: 2px;
+  }
+
+  .a-side a:hover {
+    background: rgba(255, 255, 255, .07);
+    color: #ffffff;
+  }
+
+  .a-side a[aria-current="page"] {
+    background: var(--ws-sidebar-active);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .a-side a[aria-current="page"] .a-ico {
+    color: #4dd6b1;
+  }
+
+  .a-side__pill {
+    margin-left: auto;
+    background: rgba(255, 255, 255, .15);
+    color: #fff;
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .a-side__pill--red {
+    background: #ef4444;
+  }
+
+  .a-side__group {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #6a9c92;
+    padding: 20px 12px 8px;
+  }
+
+  .a-side__footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .a-side__user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-top: 8px;
+    border-radius: 9px;
+  }
+
+  .a-side__user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #4dd6b1;
+    color: #0d3730;
+    font-weight: 700;
+    font-size: 13px;
+    display: grid;
+    place-items: center;
+  }
+
+  /* Mobile Navigation Top Header Bar */
+  .ws-mobile-header {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--ws-sidebar-bg);
+    color: #ffffff;
+    padding: 12px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 110;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  .ws-menu-toggle {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .ws-menu-toggle:active {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .ws-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 90;
+    backdrop-filter: blur(2px);
+  }
+
+  /* Main Container Padding */
+  .a-main {
+    padding: 24px;
+    min-width: 0;
+  }
+
+  /* Header Controls */
+  .ws-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .ws-header__title-group h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ws-text-dark);
+    margin-bottom: 4px;
+  }
+
+  .ws-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .ws-search-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid var(--ws-border);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 13.5px;
+    color: var(--ws-text-muted);
+    width: 200px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+
+  .ws-search-input input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 13.5px;
+    color: var(--ws-text-dark);
+  }
+
+  .ws-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #ffffff;
+    border: 1px solid var(--ws-border);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ws-text-dark);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+
+  .ws-icon-badge-btn {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid var(--ws-border);
+    display: grid;
+    place-items: center;
+    color: var(--ws-text-dark);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+
+  .ws-badge-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 2px solid #ffffff;
+  }
+
+  .ws-btn-new-task {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--ws-btn-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 999px;
+    padding: 9px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease;
+    box-shadow: 0 2px 6px rgba(14, 90, 78, 0.2);
+  }
+
+  .ws-btn-new-task:hover {
+    background: #09473d;
+  }
+
+  /* KPI Cards Grid (4 Columns x 2 Rows) */
+  .ws-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .ws-kpi-card {
+    background: var(--ws-card-bg);
+    border: 1px solid var(--ws-border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    min-height: 90px;
+  }
+
+  .ws-kpi-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--ws-text-muted);
+    margin-bottom: 10px;
+  }
+
+  .ws-kpi-card__val {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--ws-text-dark);
+  }
+
+  .ws-kpi-card__val--green { color: var(--ws-green); }
+  .ws-kpi-card__val--red { color: var(--ws-red); }
+  .ws-kpi-card__val--orange { color: var(--ws-orange); }
+
+  /* Kanban Board 4 Columns */
+  .ws-board-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .ws-col-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .ws-col-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ws-text-dark);
+  }
+
+  .ws-col-icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--ws-text-muted);
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+
+  .ws-card-item {
+    background: var(--ws-card-bg);
+    border: 1px solid var(--ws-border);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    position: relative;
+  }
+
+  .ws-card-item--accent-red {
+    border-left: 4px solid #ef4444;
+  }
+
+  .ws-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ws-text-dark);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .ws-card-sub {
+    font-size: 12.5px;
+    color: var(--ws-text-muted);
+    margin-bottom: 10px;
+  }
+
+  .ws-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--ws-text-muted);
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .ws-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f1f5f3;
+    border-radius: 6px;
+    padding: 3px 7px;
+  }
+
+  .ws-pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+
+  .ws-pill-tag--green {
+    background: #e6f4ee;
+    color: #086052;
+  }
+
+  .ws-pill-tag--red {
+    background: #fde8e8;
+    color: #dc2626;
+  }
+
+  .ws-avatar-stack {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .ws-avatar-stack span {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    margin-left: -6px;
+    background: #cbd5e1;
+    display: grid;
+    place-items: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .ws-avatar-stack span:first-child {
+    margin-left: 0;
+  }
+
+  .ws-progress-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .ws-progress-bar {
+    flex: 1;
+    height: 6px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    overflow: hidden;
+  }
+
+  .ws-progress-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: #059669;
+  }
+
+  .ws-progress-text {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--ws-text-muted);
+  }
+
+  .ws-card-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--ws-text-muted);
+    border-top: 1px solid #f1f5f3;
+    padding-top: 8px;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+
+  /* Right Side Widgets */
+  .ws-widget-card {
+    background: var(--ws-card-bg);
+    border: 1px solid var(--ws-border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  }
+
+  .ws-widget-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .ws-widget-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .ws-widget-header a {
+    font-size: 12.5px;
+    color: #059669;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .ws-completed-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f5f3;
+    font-size: 13.5px;
+  }
+
+  .ws-completed-item:last-child {
+    border-bottom: none;
+  }
+
+  .ws-check-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #059669;
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    flex: none;
+    font-size: 11px;
+  }
+
+  .ws-completed-val {
+    margin-left: auto;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--ws-text-dark);
+  }
+
+  .ws-chart-val {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ws-text-dark);
+    margin-bottom: 12px;
+  }
+
+  .ws-chart-svg {
+    width: 100%;
+    height: 100px;
+    overflow: visible;
+  }
+
+  .ws-chart-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--ws-text-muted);
+    margin-top: 8px;
+    margin-bottom: 12px;
+  }
+
+  /* ==========================================================================
+     MOBILE & TABLET RESPONSIVE MEDIA QUERIES
+     ========================================================================== */
+  @media (max-width: 1100px) {
+    .ws-kpi-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    .a-app {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ws-mobile-header {
+      display: flex;
+    }
+
+    /* Sidebar becomes a drawer on mobile */
+    .a-side {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 260px;
+      transform: translateX(-100%);
+      transition: transform 0.25s ease-in-out;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.25);
+    }
+
+    .a-app.nav-open .a-side {
+      transform: translateX(0);
+    }
+
+    .a-app.nav-open .ws-backdrop {
+      display: block;
+    }
+
+    .a-main {
+      padding: 16px;
+    }
+
+    /* Kanban Board Touch Swipe / Scroll on Mobile */
+    .ws-board-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding-bottom: 16px;
+      margin-inline: -16px;
+      padding-inline: 16px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ws-board-grid > div {
+      flex: 0 0 85%;
+      max-width: 320px;
+      scroll-snap-align: start;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .ws-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .ws-header__actions {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 8px;
+    }
+
+    .ws-search-input {
+      grid-column: 1 / -1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ws-btn-new-task {
+      grid-column: 1 / -1;
+      justify-content: center;
+      padding: 11px;
+    }
+
+    .ws-kpi-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .ws-kpi-card {
+      padding: 12px 14px;
+      min-height: 80px;
+    }
+
+    .ws-kpi-card__val {
+      font-size: 20px;
+    }
+
+    .ws-kpi-card__top {
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Global Pace Digital Bar -->
+<div class="pd-bar">
+  <div class="pd-bar__in">
+    <span class="pd-bar__tag">Software mockup</span>
+    <span>This is <strong>My Workspace</strong>, a small app for freelancers and small teams.</span>
+    <a href="../../index.html">Build my system</a>
+  </div>
+</div>
+
+<!-- Mobile Header Bar -->
+<div class="ws-mobile-header">
+  <button class="ws-menu-toggle" aria-label="Toggle Navigation Menu" onclick="document.querySelector('.a-app').classList.toggle('nav-open')">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="a-side__mark" style="width:30px;height:30px;font-size:14px">W</div>
+    <b style="font-size:15px;letter-spacing:.02em">My Workspace</b>
+  </div>
+  <button class="ws-btn-new-task" style="padding:6px 12px;font-size:12px" onclick="alert('New task form')">
+    + Task
+  </button>
+</div>
+
+<div class="a-app">
+
+  <!-- Mobile Drawer Backdrop -->
+  <div class="ws-backdrop" onclick="document.querySelector('.a-app').classList.remove('nav-open')"></div>
+
+  <!-- Left Sidebar Navigation -->
+  <nav class="a-side" aria-label="Main">
+    <div class="a-side__brand">
+      <div class="a-side__mark">W</div>
+      <div>
+        <b>My Workspace</b>
+        <span>Workspace Pro</span>
+      </div>
+    </div>
+
+    <a href="#" aria-current="page" onclick="document.querySelector('.a-app').classList.remove('nav-open')">
+      <svg class="a-ico" aria-hidden="true" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" fill="none" d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline stroke="currentColor" stroke-width="2" fill="none" points="9 22 9 12 15 12 15 22"/></svg>
+      Dashboard
+    </a>
+    <a href="#" onclick="document.querySelector('.a-app').classList.remove('nav-open')">
+      <svg class="a-ico" aria-hidden="true" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" fill="none" d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>
+      Tasks
+      <span class="a-side__pill a-side__pill--red">6</span>
+    </a>
+    <a href="#" onclick="document.querySelector('.a-app').classList.remove('nav-open')">
+      <svg class="a-ico" aria-hidden="true" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" fill="none" d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke="currentColor" stroke-width="2" fill="none" d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Clients
+    </a>
+    <a href="#" onclick="document.querySelector('.a-app').classList.remove('nav-open')">
+      <svg class="a-ico" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path stroke="currentColor" stroke-width="2" d="m12 6v6l4 2"/></svg>
+      Time
+    </a>
+
+    <span class="a-side__group">FINANCE</span>
+    <a href="#" onclick="document.querySelector('.a-app').classList.remove('nav-open')">
+      <svg class="a-ico" aria-hidden="true" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" fill="none" d="M14.5 2.5H6.5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-12Z"/><path stroke="currentColor" stroke-width="2" fill="none" d="M14.5 2.5v5h5M8.5 13.5h7M8.5 17h5"/></svg>
+      Unbilled
+      <span class="a-side__pill a-side__pill--red">2</span>
+    </a>
+    <a href="#" onclick="document.querySelector('.a-app').classList.remove('nav-open')">
+      <svg class="a-ico" aria-hidden="true" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" fill="none" d="M3 3v18h18"/><path stroke="currentColor" stroke-width="2" fill="none" d="M7.5 16.5v-4M12 16.5v-8M16.5 16.5v-5.5M21 16.5V6"/></svg>
+      Invoices
+    </a>
+
+    <span class="a-side__group">SETTINGS</span>
+    <a href="#" onclick="document.querySelector('.a-app').classList.remove('nav-open')">
+      <svg class="a-ico" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path stroke="currentColor" stroke-width="2" fill="none" d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Settings
+    </a>
+
+    <div class="a-side__footer">
+      <a href="#" style="font-size:13px;opacity:0.8;justify-content:space-between">
+        <span>Accounts & Sites</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <div class="a-side__user">
+        <div class="a-side__user-avatar">CP</div>
+        <div style="font-size:13px">
+          <strong style="color:#fff;display:block;line-height:1.1">Chad Pace</strong>
+          <span style="font-size:11px;color:#89b8af">Workspace Admin</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="a-main">
+
+    <!-- Top Header -->
+    <div class="ws-header">
+      <div class="ws-header__title-group">
+        <h1>Dashboard</h1>
+        <div style="font-size:13.5px;color:var(--ws-text-muted)">Where everything stands right now</div>
+      </div>
+
+      <div class="ws-header__actions">
+        <div class="ws-search-input">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" placeholder="Search tasks, clients...">
+        </div>
+
+        <button class="ws-filter-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
+          All Clients
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+
+        <div class="ws-icon-badge-btn" title="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m12 8v4M12 16h.01"/></svg>
+          <span class="ws-badge-dot">1</span>
+        </div>
+
+        <div class="ws-icon-badge-btn" title="Alerts">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="ws-badge-dot">2</span>
+        </div>
+
+        <button class="ws-btn-new-task">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          New Task
+        </button>
+      </div>
+    </div>
+
+    <!-- 8 KPI Cards Grid (4 Columns x 2 Rows) -->
+    <div class="ws-kpi-grid">
+      <!-- Row 1 Card 1 -->
+      <div class="ws-kpi-card">
+        <div class="ws-kpi-card__top">
+          <span>PENDING</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <div class="ws-kpi-card__val">4</div>
+      </div>
+
+      <!-- Row 1 Card 2 -->
+      <div class="ws-kpi-card">
+        <div class="ws-kpi-card__top">
+          <span>IN PROGRESS</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="ws-kpi-card__val ws-kpi-card__val--green">3</div>
+      </div>
+
+      <!-- Row 1 Card 3 -->
+      <div class="ws-kpi-card">
+        <div class="ws-kpi-card__top">
+          <span>WAITING ON CLIENT</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="ws-kpi-card__val">3</div>
+      </div>
+
+      <!-- Row 1 Card 4 -->
+      <div class="ws-kpi-card">
+        <div class="ws-kpi-card__top">
+          <span>OVERDUE</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="ws-kpi-card__val ws-kpi-card__val--red">6</div>
+      </div>
+
+      <!-- Row 2 Card 1 -->
+      <div class="ws-kpi-card">
+        <div class="ws-kpi-card__top">
+          <span>COMPLETED · AUG 2026</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ws-kpi-card__val ws-kpi-card__val--green">1</div>
+      </div>
+
+      <!-- Row 2 Card 2 -->
+      <div class="ws-kpi-card">
+        <div class="ws-kpi-card__top">
+          <span>HOURS THIS WEEK</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="ws-kpi-card__val">10.6</div>
+      </div>
+
+      <!-- Row 2 Card 3 -->
+      <div class="ws-kpi-card">
+        <div class="ws-kpi-card__top">
+          <span>REVENUE · AUG 2026</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="ws-kpi-card__val ws-kpi-card__val--green">USD 980</div>
+      </div>
+
+      <!-- Row 2 Card 4 -->
+      <div class="ws-kpi-card">
+        <div class="ws-kpi-card__top">
+          <span>OUTSTANDING</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="ws-kpi-card__val ws-kpi-card__val--orange">USD 980</div>
+      </div>
+    </div>
+
+    <!-- Main Board 4-Column Layout (Touch Swipeable on Mobile) -->
+    <div class="ws-board-grid">
+
+      <!-- Column 1: To Do -->
+      <div>
+        <div class="ws-col-header">
+          <h3>To Do</h3>
+          <button class="ws-col-icon-btn">+</button>
+        </div>
+
+        <div class="ws-card-item">
+          <div class="ws-card-title">Campaign Design Briefing</div>
+          <div class="ws-card-sub">Trey Starks</div>
+          <div class="ws-card-meta">
+            <span class="ws-meta-item">📅 Tomorrow</span>
+            <span class="ws-meta-item">⏱ 1.3h</span>
+          </div>
+          <div class="ws-card-select">
+            <span>To Do</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+
+        <div class="ws-card-item">
+          <div class="ws-card-title">Hard to Find Developer</div>
+          <div class="ws-card-sub">Tia Suarez</div>
+          <div class="ws-card-meta">
+            <span class="ws-meta-item">📅 In 4 days</span>
+            <span class="ws-meta-item">⏱ 11.3h</span>
+          </div>
+          <div class="ws-card-select">
+            <span>To Do</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+
+        <div class="ws-card-item">
+          <div class="ws-card-title">Engineering Specs Draft</div>
+          <div class="ws-card-sub">Terrence</div>
+          <div class="ws-card-meta">
+            <span class="ws-meta-item">📅 Aug 14</span>
+            <span class="ws-meta-item">⏱ 0.5h</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-bottom:8px">
+            <span class="ws-pill-tag" style="background:#f1f5f3;color:#475569">Backlog</span>
+            <span class="ws-pill-tag ws-pill-tag--green">Training</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: In Progress -->
+      <div>
+        <div class="ws-col-header">
+          <h3>In Progress</h3>
+          <button class="ws-col-icon-btn">↓</button>
+        </div>
+
+        <div class="ws-card-item">
+          <div class="ws-card-title">Website Optimization</div>
+          <div class="ws-card-sub">Playa Media</div>
+          <div class="ws-card-meta">
+            <span class="ws-meta-item">📅 Tuesday</span>
+            <span class="ws-meta-item">⏱ 3.0h</span>
+          </div>
+          <div class="ws-avatar-stack">
+            <span style="background:#38b28f;color:#fff">TS</span>
+            <span style="background:#0ea5e9;color:#fff">PM</span>
+            <span style="background:#f59e0b;color:#fff">AA</span>
+          </div>
+          <div class="ws-progress-bar-wrap">
+            <div class="ws-progress-bar"><div class="ws-progress-bar-fill" style="width: 100%"></div></div>
+            <span class="ws-progress-text">100%</span>
+          </div>
+          <div class="ws-card-select">
+            <span>In Progress</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+
+        <div class="ws-card-item">
+          <div class="ws-card-title">Stripe Payment Integration</div>
+          <div class="ws-card-sub">Playa Media</div>
+          <div class="ws-card-meta">
+            <span class="ws-pill-tag ws-pill-tag--red">30 mins left</span>
+            <span class="ws-meta-item">⏱ 3.3h</span>
+          </div>
+          <div class="ws-progress-bar-wrap">
+            <div class="ws-progress-bar"><div class="ws-progress-bar-fill" style="width: 90%"></div></div>
+            <span class="ws-progress-text">90%</span>
+          </div>
+          <div class="ws-card-select">
+            <span>In Progress</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Waiting for Client -->
+      <div>
+        <div class="ws-col-header">
+          <h3>Waiting for Client</h3>
+          <button class="ws-col-icon-btn">↓</button>
+        </div>
+
+        <div class="ws-card-item ws-card-item--accent-red">
+          <div class="ws-card-title">iOS App Discovery Wireframes</div>
+          <div class="ws-card-sub">Alena Alacia</div>
+          <div class="ws-card-meta">
+            <span class="ws-pill-tag ws-pill-tag--red">14 mins overdue</span>
+            <span class="ws-meta-item">⏱ 3.3h</span>
+          </div>
+          <div class="ws-progress-bar-wrap">
+            <div class="ws-progress-bar"><div class="ws-progress-bar-fill" style="width: 53%"></div></div>
+            <span class="ws-progress-text">53%</span>
+          </div>
+          <div class="ws-card-select">
+            <span>Waiting for Client</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+
+        <div class="ws-card-item">
+          <div class="ws-card-title">Pediatric App UI Redesign</div>
+          <div class="ws-card-sub">Alena Alacia</div>
+          <div class="ws-card-meta">
+            <span class="ws-pill-tag ws-pill-tag--red">25 mins left</span>
+          </div>
+          <div class="ws-card-select">
+            <span>Waiting for Client</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+
+        <div class="ws-card-item">
+          <div class="ws-card-title">System Status & API Constraints Update</div>
+          <div class="ws-card-sub">Terrence</div>
+          <div class="ws-card-meta">
+            <span class="ws-pill-tag ws-pill-tag--green">Training</span>
+          </div>
+          <div class="ws-card-select">
+            <span>Waiting for Client</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 4: Right Side Stacked Widgets -->
+      <div>
+        <!-- Widget 1: Completed Tasks -->
+        <div class="ws-widget-card">
+          <div class="ws-widget-header">
+            <h3>Completed Tasks</h3>
+            <a href="#">See all</a>
+          </div>
+
+          <div class="ws-completed-item">
+            <div class="ws-check-circle">✓</div>
+            <span>Wireframe Review</span>
+            <span class="ws-completed-val">$850.00</span>
+          </div>
+
+          <div class="ws-completed-item">
+            <div class="ws-check-circle">✓</div>
+            <div style="flex:1">
+              <span>Brand Design System</span>
+              <div class="ws-progress-bar" style="margin-top:4px"><div class="ws-progress-bar-fill" style="width:100%"></div></div>
+            </div>
+            <span class="ws-completed-val">$1,200.00</span>
+          </div>
+
+          <div class="ws-completed-item">
+            <div class="ws-check-circle">✓</div>
+            <div style="flex:1">
+              <span>Database Migration</span>
+              <div class="ws-progress-bar" style="margin-top:4px"><div class="ws-progress-bar-fill" style="width:100%"></div></div>
+            </div>
+            <span class="ws-completed-val">$650.00</span>
+          </div>
+
+          <div style="margin-top:12px">
+            <span class="ws-pill-tag ws-pill-tag--green" style="cursor:pointer">+ Add completed item</span>
+          </div>
+        </div>
+
+        <!-- Widget 2: Revenue Stats Chart -->
+        <div class="ws-widget-card">
+          <div class="ws-widget-header">
+            <h3>Monthly Revenue</h3>
+          </div>
+          <div class="ws-chart-val">$5,460.00</div>
+
+          <!-- SVG Area Chart -->
+          <svg class="ws-chart-svg" viewBox="0 0 300 90">
+            <defs>
+              <linearGradient id="emeraldGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#059669" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#059669" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+            <!-- Area fill -->
+            <path d="M 0 70 C 40 65, 75 75, 110 50 C 145 25, 185 65, 220 30 C 255 10, 280 25, 300 20 L 300 90 L 0 90 Z" fill="url(#emeraldGrad)"/>
+            <!-- Line stroke -->
+            <path d="M 0 70 C 40 65, 75 75, 110 50 C 145 25, 185 65, 220 30 C 255 10, 280 25, 300 20" fill="none" stroke="#059669" stroke-width="2.5"/>
+            <!-- Data points -->
+            <circle cx="110" cy="50" r="3.5" fill="#059669"/>
+            <circle cx="220" cy="30" r="3.5" fill="#059669"/>
+            <circle cx="300" cy="20" r="3.5" fill="#059669"/>
+          </svg>
+
+          <div class="ws-chart-labels">
+            <span>Jan</span>
+            <span>Feb</span>
+            <span>Mar</span>
+            <span>Apr</span>
+            <span>May</span>
+          </div>
+
+          <div class="ws-search-input" style="width:100%;box-sizing:border-box">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" placeholder="Search tasks...">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- Bottom Explainer Section -->
+<section class="a-note">
+  <div class="a-note__in">
+    <h2>What this app actually does</h2>
+    <p>My Workspace is a small system for one person working for themselves. Clients, tasks, hours and invoices, all in one screen, so that Monday morning starts with a plan instead of a search through messages.</p>
+    <ul>
+      <li>
+        <svg class="a-ico a-ico--sm" aria-hidden="true" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M20 6 9 17l-5-5"/></svg>
+        <span><b>The timer feeds the invoice.</b> You start a timer against a client, and those minutes are already on the next bill.</span>
+      </li>
+      <li>
+        <svg class="a-ico a-ico--sm" aria-hidden="true" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M20 6 9 17l-5-5"/></svg>
+        <span><b>Late invoices are impossible to ignore.</b> They sit clearly marked on your dashboard.</span>
+      </li>
+    </ul>
+    <div class="a-note__cta">
+      <a class="a-btn a-btn--p" href="../../index.html#start">Build my system</a>
+      <a class="a-btn a-btn--g" href="../../index.html">Back to Pace Digital Works</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

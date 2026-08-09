@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# The sample websites in /demos/ and the software mockups in /saas/ are for
+# showing clients, not for Google. They are kept out of search by a "noindex"
+# tag inside each page — NOT by a Disallow rule here.
+#
+# Do not add "Disallow: /demos/" back. A Disallow stops Google opening the
+# page at all, so it can never read the noindex tag inside it. Google would
+# still find the address from the links on the home page and could list it
+# as a bare result with no description — which is exactly what we do not want
+# for a business that does not really exist.
+
+Sitemap: https://pacedigital.pages.dev/sitemap.xml

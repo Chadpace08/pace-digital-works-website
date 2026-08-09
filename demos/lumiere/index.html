@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumière Studio — Sample salon &amp; spa website | Pace Digital Works</title>
+<meta name="description" content="A sample salon and spa website built by Pace Digital Works. Treatment menu with prices, the team, and an appointment booking form. Lumière Studio is a fictional business.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#7A5C63">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Karla:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../demo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%237A5C63'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='600' fill='%23FBF1EC' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --d-bg: #FFFCFA; --d-alt: #F7EFEC; --d-surface: #FFFFFF;
+    --d-ink: #2B2124; --d-body: #6E5E62; --d-line: #EBDDD8;
+    --d-brand: #7A5C63; --d-on-brand: #FFF8F5;
+    --d-accent: #C99A86; --d-accent-ink: #99664F;
+    --d-display: 'Playfair Display', Georgia, serif;
+    --d-sans: 'Karla', system-ui, sans-serif;
+    --d-r: 14px; --d-r-lg: 26px;
+  }
+  h1, h2, h3 { font-weight: 500; }
+  .d-h1 { font-size: clamp(2.6rem, 6.4vw, 4.4rem); }
+  .lm-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
+  .lm-tab {
+    border: 1.5px solid var(--d-line); background: #fff; color: var(--d-body);
+    border-radius: 999px; min-height: 44px; padding: 10px 20px; font-size: 14.5px; font-weight: 600;
+    transition: all .2s var(--d-ease);
+  }
+  .lm-tab:hover { border-color: var(--d-accent); color: var(--d-ink); }
+  .lm-tab[aria-selected="true"] { background: var(--d-brand); border-color: var(--d-brand); color: #fff; }
+  .lm-panel[hidden] { display: none; }
+  .lm-team { text-align: center; }
+  .lm-team img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; margin-bottom: 16px; }
+  .lm-team b { display: block; font-family: var(--d-display); font-size: 1.15rem; }
+  .lm-team span { font-size: 14px; color: var(--d-body); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.5L12 17.5l-5.8 3.05 1.1-6.5-4.7-4.6 6.5-.95Z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10.2c0 5.8-8 11.8-8 11.8s-8-6-8-11.8a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M21.5 16.9v2.8a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6 2 2 0 0 1 2-2.2h2.8a2 2 0 0 1 2 1.7c.13 1 .36 1.9.7 2.8a2 2 0 0 1-.46 2.1L7.7 9.7a16 16 0 0 0 6 6l1.2-1.15a2 2 0 0 1 2.1-.45c.9.33 1.83.57 2.8.7a2 2 0 0 1 1.7 2.1Z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 1.9"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.9L3 20.5l1.6-4.8A8.3 8.3 0 0 1 3.5 11 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13c0-5.5 5.5-9.5 16-9.5 0 10.5-4 16-9.5 16Z"/><path d="M4 20c4-6 8.5-8.5 12-9.5"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24"><path d="m11.5 3 2 5.5 5.5 2-5.5 2-2 5.5-2-5.5-5.5-2 5.5-2Z"/><path d="M19 15.5v4M17 17.5h4"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5s-8-5-8-10.3A4.8 4.8 0 0 1 12 6.8a4.8 4.8 0 0 1 8 3.4c0 5.3-8 10.3-8 10.3Z"/></symbol>
+</defs></svg>
+
+<div class="pd-bar">
+  <div class="pd-bar__in">
+    <span class="pd-bar__tag">Sample website</span>
+    <span><strong>Lumière Studio</strong> is a fictional salon, built to show what your beauty business website could look like.</span>
+    <a href="../../index.html">Build mine <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+  </div>
+</div>
+
+<header class="d-nav">
+  <div class="d-wrap d-nav__in">
+    <a class="d-logo" href="#top">Lumière<small>Hair · Skin · Spa</small></a>
+    <nav class="d-menu" data-menu aria-label="Main">
+      <a href="#treatments">Treatments</a>
+      <a href="#spa">The spa</a>
+      <a href="#team">Our team</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#book">Book</a>
+      <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#book">Book an appointment</a>
+    </nav>
+    <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#book">Book an appointment</a>
+    <button class="d-burger" data-burger type="button" aria-label="Open the menu" aria-expanded="false">
+      <svg class="d-ico" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="d-hero d-hero--center">
+  <div class="d-hero__bg">
+    <img src="../../assets/img/demo/salon-3.webp" width="1600" height="1067" alt="The interior of Lumière Studio." fetchpriority="high">
+  </div>
+  <div class="d-wrap d-hero__in">
+    <span class="d-eyebrow">Hair · skin · quiet hours</span>
+    <h1 class="d-h1">Two hours that belong entirely to you.</h1>
+    <p>A small studio with four chairs and three treatment rooms. We take one client at a time,
+       we never run late, and nobody will try to sell you anything at the counter.</p>
+    <div class="d-btns">
+      <a class="d-btn d-btn--2 d-btn--pill" href="#book">Book an appointment</a>
+      <a class="d-btn d-btn--o d-btn--pill" href="#treatments">See treatments &amp; prices</a>
+    </div>
+  </div>
+</section>
+
+<section class="d-sec d-sec--tight">
+  <div class="d-wrap d-grid d-grid--4">
+    <div class="d-rv"><svg class="d-ico d-ico--lg" style="color:var(--d-accent-ink);margin-bottom:10px" aria-hidden="true"><use href="#i-clock"></use></svg>
+      <b style="display:block;font-family:var(--d-display);font-size:1.1rem">Never running late</b>
+      <span style="font-size:14.4px;color:var(--d-body)">One client per stylist, per booking</span></div>
+    <div class="d-rv"><svg class="d-ico d-ico--lg" style="color:var(--d-accent-ink);margin-bottom:10px" aria-hidden="true"><use href="#i-leaf"></use></svg>
+      <b style="display:block;font-family:var(--d-display);font-size:1.1rem">Gentle products</b>
+      <span style="font-size:14.4px;color:var(--d-body)">Ammonia free colour, no harsh scents</span></div>
+    <div class="d-rv"><svg class="d-ico d-ico--lg" style="color:var(--d-accent-ink);margin-bottom:10px" aria-hidden="true"><use href="#i-sparkle"></use></svg>
+      <b style="display:block;font-family:var(--d-display);font-size:1.1rem">Free consultation</b>
+      <span style="font-size:14.4px;color:var(--d-body)">Fifteen minutes before any big change</span></div>
+    <div class="d-rv"><svg class="d-ico d-ico--lg" style="color:var(--d-accent-ink);margin-bottom:10px" aria-hidden="true"><use href="#i-heart"></use></svg>
+      <b style="display:block;font-family:var(--d-display);font-size:1.1rem">No pressure to buy</b>
+      <span style="font-size:14.4px;color:var(--d-body)">We tell you if you do not need it</span></div>
+  </div>
+</section>
+
+<!-- Treatments -->
+<section class="d-sec d-sec--alt" id="treatments">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Treatments</span>
+      <h2 class="d-h2">Everything, with the price next to it</h2>
+      <p class="d-lede" style="margin-inline:auto">No "from" prices and no surprises when you get to the desk.
+        Long or thick hair may add a little — we tell you before we start, not after.</p>
+    </div>
+
+    <div class="lm-tabs" role="tablist" aria-label="Treatment groups">
+      <button class="lm-tab" role="tab" id="tab-hair" aria-controls="p-hair" aria-selected="true" type="button">Hair</button>
+      <button class="lm-tab" role="tab" id="tab-colour" aria-controls="p-colour" aria-selected="false" type="button">Colour</button>
+      <button class="lm-tab" role="tab" id="tab-skin" aria-controls="p-skin" aria-selected="false" type="button">Skin &amp; face</button>
+      <button class="lm-tab" role="tab" id="tab-body" aria-controls="p-body" aria-selected="false" type="button">Massage &amp; body</button>
+    </div>
+
+    <div class="lm-panel" id="p-hair" role="tabpanel" aria-labelledby="tab-hair">
+      <div class="d-list">
+        <div class="d-row"><span class="d-row__t"><b>Cut &amp; finish</b><span>Consultation, wash, cut, blow dry — 60 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱1,200</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Restyle</b><span>For a real change of shape — 90 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱1,800</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Blow dry</b><span>Wash and style, no cut — 45 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱750</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Keratin smoothing</b><span>Three months of easy mornings — 3 hrs</span></span><span class="d-row__dots"></span><span class="d-row__p">₱6,500</span></div>
+      </div>
+    </div>
+    <div class="lm-panel" id="p-colour" role="tabpanel" aria-labelledby="tab-colour" hidden>
+      <div class="d-list">
+        <div class="d-row"><span class="d-row__t"><b>Root touch-up</b><span>Regrowth only, ammonia free — 90 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱2,200</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Full colour</b><span>All over, single shade — 2 hrs</span></span><span class="d-row__dots"></span><span class="d-row__p">₱3,400</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Balayage</b><span>Hand painted, grows out softly — 3 hrs</span></span><span class="d-row__dots"></span><span class="d-row__p">₱5,800</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Toner &amp; gloss</b><span>Refresh between appointments — 45 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱1,400</span></div>
+      </div>
+    </div>
+    <div class="lm-panel" id="p-skin" role="tabpanel" aria-labelledby="tab-skin" hidden>
+      <div class="d-list">
+        <div class="d-row"><span class="d-row__t"><b>Signature facial</b><span>Cleanse, exfoliate, mask, massage — 60 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱2,400</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Deep hydration</b><span>For dry or tired skin — 75 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱3,100</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Brow shape &amp; tint</b><span>Threading or wax — 30 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱650</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Lash lift</b><span>Six to eight weeks — 60 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱1,900</span></div>
+      </div>
+    </div>
+    <div class="lm-panel" id="p-body" role="tabpanel" aria-labelledby="tab-body" hidden>
+      <div class="d-list">
+        <div class="d-row"><span class="d-row__t"><b>Relaxing massage</b><span>Whole body, light to medium — 60 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱1,600</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Deep tissue</b><span>Shoulders, back and neck — 60 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱1,900</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Hot stone</b><span>Warm basalt stones — 90 min</span></span><span class="d-row__dots"></span><span class="d-row__p">₱2,800</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Half day retreat</b><span>Facial, massage and lunch — 4 hrs</span></span><span class="d-row__dots"></span><span class="d-row__p">₱6,900</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Spa -->
+<section class="d-sec" id="spa">
+  <div class="d-wrap d-split">
+    <div>
+      <span class="d-eyebrow">The spa rooms</span>
+      <h2 class="d-h2">Three quiet rooms at the back of the building</h2>
+      <p class="d-lede" style="margin-bottom:20px">No music you did not choose, no phone at the desk ringing
+        through the wall. The rooms are warm, the towels are heated, and you get the room for the whole
+        booking — not until the next person arrives.</p>
+      <p style="color:var(--d-body);margin-bottom:24px">Come fifteen minutes early if you can. There is tea,
+        a soft chair, and nothing at all you need to do.</p>
+      <a class="d-btn d-btn--1 d-btn--pill" href="#book">Book a treatment
+        <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+    <div class="d-grid d-grid--2" style="gap:12px">
+      <div class="d-media" style="border-radius:var(--d-r)"><img src="../../assets/img/demo/salon-spa-2.webp" width="1600" height="1200" loading="lazy" alt="A facial treatment in progress."></div>
+      <div class="d-media" style="border-radius:var(--d-r)"><img src="../../assets/img/demo/salon-spa-3.webp" width="1600" height="1200" loading="lazy" alt="A client relaxing during a treatment."></div>
+      <div class="d-media" style="border-radius:var(--d-r)"><img src="../../assets/img/demo/salon-spa-1.webp" width="1600" height="1065" loading="lazy" alt="Hands during a gentle hand massage."></div>
+      <div class="d-media" style="border-radius:var(--d-r)"><img src="../../assets/img/demo/salon-1.webp" width="1600" height="1067" loading="lazy" alt="A stylist working on a client's hair."></div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="d-sec d-sec--alt" id="team">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Our team</span>
+      <h2 class="d-h2">Four people, and you can ask for any of them</h2>
+    </div>
+    <div class="d-grid d-grid--4">
+      <div class="lm-team d-rv"><img src="../../assets/img/demo/salon-2.webp" width="800" height="800" loading="lazy" alt="Rosa, senior stylist.">
+        <b>Rosa Villamor</b><span>Senior stylist · colour</span></div>
+      <div class="lm-team d-rv"><img src="../../assets/img/demo/salon-spa-3.webp" width="800" height="800" loading="lazy" alt="Chesa, skin therapist.">
+        <b>Chesa Lim</b><span>Skin therapist · facials</span></div>
+      <div class="lm-team d-rv"><img src="../../assets/img/demo/salon-1.webp" width="800" height="800" loading="lazy" alt="Dan, stylist.">
+        <b>Dan Ocampo</b><span>Stylist · cutting</span></div>
+      <div class="lm-team d-rv"><img src="../../assets/img/demo/salon-spa-1.webp" width="800" height="800" loading="lazy" alt="Mira, massage therapist.">
+        <b>Mira Santos</b><span>Massage therapist</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="d-sec" id="reviews">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Reviews</span>
+      <h2 class="d-h2">4.9 out of 5, from 204 clients</h2>
+    </div>
+    <div class="d-quotes">
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p>"Rosa spent twenty minutes just talking about what would suit me before she picked up the
+           scissors. First time I have left a salon without wanting to fix it at home."</p>
+        <b>Karen M.</b><small>Cut &amp; colour</small>
+      </article>
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p>"Booked the half day retreat for my mother's birthday. They messaged me the day before to
+           check she could manage the stairs. Small thing, meant a lot."</p>
+        <b>Jomar T.</b><small>Half day retreat</small>
+      </article>
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p>"I have sensitive skin and I am usually nervous about facials. Chesa explained every step
+           before doing it. No reaction at all."</p>
+        <b>Andrea S.</b><small>Signature facial</small>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Booking -->
+<section class="d-sec d-sec--alt" id="book">
+  <div class="d-wrap d-split">
+    <div>
+      <span class="d-eyebrow">Book an appointment</span>
+      <h2 class="d-h2">Tell us what you would like</h2>
+      <p class="d-lede" style="margin-bottom:26px">We confirm by message within the hour. If your time is
+        taken we will offer you the two closest ones.</p>
+
+      <form class="d-form" data-demo-form novalidate>
+        <div class="d-form__row">
+          <div class="d-field"><label for="lm-name">Your name</label><input id="lm-name" type="text" required autocomplete="name"></div>
+          <div class="d-field"><label for="lm-phone">Mobile number</label><input id="lm-phone" type="tel" required autocomplete="tel"></div>
+        </div>
+        <div class="d-form__row">
+          <div class="d-field"><label for="lm-serv">Treatment</label>
+            <select id="lm-serv" required><option value="">Choose a treatment</option>
+            <option>Cut &amp; finish</option><option>Colour or balayage</option><option>Facial</option>
+            <option>Massage</option><option>Half day retreat</option><option>Not sure — please advise</option></select></div>
+          <div class="d-field"><label for="lm-with">Preferred person</label>
+            <select id="lm-with"><option>No preference</option><option>Rosa</option><option>Chesa</option>
+            <option>Dan</option><option>Mira</option></select></div>
+        </div>
+        <div class="d-form__row">
+          <div class="d-field"><label for="lm-date">Preferred date</label><input id="lm-date" type="date" required></div>
+          <div class="d-field"><label for="lm-time">Time of day</label>
+            <select id="lm-time" required><option value="">Choose</option><option>Morning</option>
+            <option>Early afternoon</option><option>Late afternoon</option><option>Evening (Thu &amp; Fri only)</option></select></div>
+        </div>
+        <div class="d-field"><label for="lm-note">Anything we should know?</label>
+          <textarea id="lm-note" placeholder="Allergies, sensitive skin, first visit, an occasion…"></textarea></div>
+
+        <div class="d-sent">
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>
+          <span><strong>Thank you — your request was received.</strong><br>
+          On a real website this arrives in the salon's inbox and phone at once, and an automatic
+          reminder goes out the day before. This is a sample site, so nothing was sent.</span>
+        </div>
+
+        <button class="d-btn d-btn--1 d-btn--pill" type="submit">Request this appointment
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+        <p class="d-form__note">Please give 24 hours notice to change or cancel.</p>
+      </form>
+    </div>
+
+    <div>
+      <span class="d-eyebrow">Visit the studio</span>
+      <h2 class="d-h2">Where to find us</h2>
+      <div class="d-contact" style="margin-bottom:20px">
+        <div><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+          <span><b>2nd floor, 88 Lantana Street</b><span>Lift at the back, free parking after 5pm</span></span></div>
+        <a href="tel:+63325550166"><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+          <span><b>+63 32 555 0166</b><span>Call or send a message</span></span></a>
+        <a href="mailto:hello@lumierestudio.example"><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-mail"></use></svg></span>
+          <span><b>hello@lumierestudio.example</b><span>Gift cards and group bookings</span></span></a>
+        <div><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-clock"></use></svg></span>
+          <span><b>Tue – Sat, 9am – 6pm</b><span>Late nights Thursday and Friday until 8pm · Closed Sun &amp; Mon</span></span></div>
+      </div>
+      <div class="d-media"><img src="../../assets/img/demo/salon-3.webp" width="1600" height="1067" loading="lazy" alt="The studio floor, with chairs and mirrors."></div>
+    </div>
+  </div>
+</section>
+
+<section class="d-band">
+  <div class="d-wrap">
+    <h2 class="d-h2">Buying a gift?</h2>
+    <p>A gift card can be for any amount or any treatment, and it never expires. We send it by email
+       the same day, or on the morning you choose.</p>
+    <div class="d-btns">
+      <a class="d-btn d-btn--2 d-btn--pill" href="#book">Buy a gift card</a>
+      <a class="d-btn d-btn--o d-btn--pill" href="#treatments">See treatments</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="d-foot">
+  <div class="d-wrap">
+    <div class="d-foot__in">
+      <div>
+        <span class="d-logo">Lumière<small>Hair · Skin · Spa</small></span>
+        <p>A small hair and skin studio on Lantana Street. Four chairs, three treatment rooms,
+           and no rushing.</p>
+      </div>
+      <div><h4>Explore</h4>
+        <ul><li><a href="#treatments">Treatments</a></li><li><a href="#spa">The spa</a></li>
+        <li><a href="#team">Our team</a></li><li><a href="#reviews">Reviews</a></li>
+        <li><a href="#book">Book</a></li></ul></div>
+      <div><h4>Visit</h4>
+        <ul><li>2nd floor, 88 Lantana Street</li><li><a href="tel:+63325550166">+63 32 555 0166</a></li>
+        <li><a href="mailto:hello@lumierestudio.example">hello@lumierestudio.example</a></li>
+        <li>Instagram · Facebook</li></ul></div>
+    </div>
+    <div class="d-foot__base">
+      <span>&copy; <span data-year>2026</span> Lumière Studio — a fictional business.</span>
+      <span>Sample website by <a href="../../index.html">Pace Digital Works</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="d-chat" href="../../index.html#start">
+  <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-chat"></use></svg><span>Chat with us</span></a>
+
+<script src="../demo.js" defer></script>
+<script>
+  /* Treatment group tabs */
+  const tabs = document.querySelectorAll('.lm-tab');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    });
+  });
+</script>
+</body>
+</html>

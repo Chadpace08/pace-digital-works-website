@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fern &amp; Fold — Sample online shop | Pace Digital Works</title>
+<meta name="description" content="A sample online shop built by Pace Digital Works. Product pages, a basket and a checkout for a small homeware maker. Fern &amp; Fold is a fictional business.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#3E4C3A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../demo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233E4C3A'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='700' fill='%23EFE8DA' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --d-bg: #FFFDFA; --d-alt: #F4F1EA; --d-surface: #FFFFFF;
+    --d-ink: #23281F; --d-body: #5F6858; --d-line: #E5E0D3;
+    --d-brand: #3E4C3A; --d-on-brand: #FBF8F1;
+    --d-accent: #B4794A; --d-accent-ink: #8E5A2F;
+    --d-display: 'DM Serif Display', Georgia, serif;
+    --d-sans: 'DM Sans', system-ui, sans-serif;
+    --d-r: 10px; --d-r-lg: 20px;
+  }
+  h1, h2, h3 { font-weight: 400; }
+  .ff-bar { background: var(--d-brand); color: var(--d-on-brand); text-align: center;
+    font-size: 13.5px; padding: 9px 16px; letter-spacing: .02em; }
+  .ff-prod .d-card__img { aspect-ratio: 1; }
+  .ff-prod__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
+  .ff-price { font-family: var(--d-display); font-size: 1.32rem; color: var(--d-ink); }
+  .ff-price s { color: var(--d-body); font-size: 1rem; margin-right: 7px; }
+  .ff-swatch { display: flex; gap: 6px; margin-top: 10px; }
+  .ff-swatch i { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(0,0,0,.12); display: block; }
+  .ff-cart {
+    position: relative; display: inline-flex; align-items: center; gap: 8px;
+    border: 1.5px solid var(--d-line); border-radius: 999px; padding: 9px 16px;
+    background: #fff; font-size: 14px; font-weight: 600; text-decoration: none; color: var(--d-ink);
+  }
+  .ff-cart b { background: var(--d-accent); color: #fff; border-radius: 999px;
+    min-width: 20px; height: 20px; display: grid; place-items: center; font-size: 11.5px; }
+  .ff-why { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 24px; text-align: center; }
+  @media (max-width: 780px) { .ff-why { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  .ff-why svg { margin: 0 auto 10px; color: var(--d-accent-ink); }
+  .ff-why b { display: block; font-family: var(--d-display); font-size: 1.08rem; margin-bottom: 4px; }
+  .ff-why span { font-size: 14.2px; color: var(--d-body); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.5L12 17.5l-5.8 3.05 1.1-6.5-4.7-4.6 6.5-.95Z"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M6.5 2.5 3.5 6.5v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-13l-3-4Z"/><path d="M3.5 6.5h17"/><path d="M15.5 10.5a3.5 3.5 0 0 1-7 0"/></symbol>
+<symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v10h-11Z"/><path d="M13.5 10h4l3 3v3.5h-7Z"/><circle cx="6.5" cy="18.5" r="2"/><circle cx="17" cy="18.5" r="2"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13c0-5.5 5.5-9.5 16-9.5 0 10.5-4 16-9.5 16Z"/><path d="M4 20c4-6 8.5-8.5 12-9.5"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 21.5s7.5-3.5 7.5-9.5V5.5L12 2.5 4.5 5.5V12c0 6 7.5 9.5 7.5 9.5Z"/><path d="m9.2 11.8 2 2 3.6-3.6"/></symbol>
+<symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 11V4.8a1.8 1.8 0 0 1 3.6 0V11"/><path d="M11.6 11V3.8a1.8 1.8 0 0 1 3.6 0V11"/><path d="M15.2 11.5V6.8a1.8 1.8 0 0 1 3.6 0V15a6.5 6.5 0 0 1-6.5 6.5h-1A6.3 6.3 0 0 1 5 15.6l-.7-1.9a1.7 1.7 0 0 1 3-1.6l.7 1.2"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.9L3 20.5l1.6-4.8A8.3 8.3 0 0 1 3.5 11 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10.2c0 5.8-8 11.8-8 11.8s-8-6-8-11.8a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></symbol>
+</defs></svg>
+
+<div class="pd-bar">
+  <div class="pd-bar__in">
+    <span class="pd-bar__tag">Sample website</span>
+    <span><strong>Fern &amp; Fold</strong> is a fictional shop, built to show what your online store could look like.</span>
+    <a href="../../index.html">Build mine <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+  </div>
+</div>
+
+<p class="ff-bar" style="margin:0">Free delivery on orders over ₱2,500 · Every piece made by hand in Rizal</p>
+
+<header class="d-nav">
+  <div class="d-wrap d-nav__in">
+    <a class="d-logo" href="#top">Fern &amp; Fold<small>Handmade homeware</small></a>
+    <nav class="d-menu" data-menu aria-label="Main">
+      <a href="#shop">Shop</a>
+      <a href="#story">Our story</a>
+      <a href="#care">Care &amp; delivery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#news">Newsletter</a>
+      <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#shop">Shop all</a>
+    </nav>
+    <a class="ff-cart" href="#shop">
+      <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-bag"></use></svg> Basket <b>2</b></a>
+    <button class="d-burger" data-burger type="button" aria-label="Open the menu" aria-expanded="false">
+      <svg class="d-ico" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="d-shero">
+  <div class="d-wrap d-split">
+    <div>
+      <span class="d-eyebrow">Stoneware · linen · wood</span>
+      <h1 class="d-h1">Things for the table that get better with use.</h1>
+      <p class="d-lede" style="margin-bottom:26px">Everything here is made by two people in a small studio.
+        No two pieces are identical, which is the point. Made to be used every day, not kept in a cabinet.</p>
+      <div class="d-btns">
+        <a class="d-btn d-btn--1 d-btn--pill" href="#shop">Shop the collection</a>
+        <a class="d-btn d-btn--o d-btn--pill" href="#story">Meet the makers</a>
+      </div>
+    </div>
+    <div class="d-media"><img src="../../assets/img/demo/ecommerce-life-2.webp" width="1600" height="1067" alt="A potter shaping a bowl on a wheel." fetchpriority="high"></div>
+  </div>
+</section>
+
+<!-- Shop -->
+<section class="d-sec d-sec--alt" id="shop">
+  <div class="d-wrap">
+    <div class="d-head">
+      <span class="d-eyebrow">Shop</span>
+      <h2 class="d-h2">This month's collection</h2>
+      <p class="d-lede">Small batches. When a piece sells out we make more, but it takes about three weeks.</p>
+    </div>
+
+    <div class="d-grid d-grid--4">
+      <article class="d-card ff-prod d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/ecommerce-1.webp" width="1200" height="1200" loading="lazy" alt="A stack of handmade stoneware bowls."></div>
+        <div class="d-card__b">
+          <h3 style="font-size:1.08rem">Everyday bowl, set of four</h3>
+          <p style="font-size:14px">Deep enough for soup, shallow enough for rice.</p>
+          <div class="ff-swatch" aria-hidden="true"><i style="background:#D8CEBC"></i><i style="background:#8C9A84"></i><i style="background:#3E3A35"></i></div>
+          <div class="ff-prod__row"><span class="ff-price">₱2,400</span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#shop">Add to basket</a></div>
+        </div>
+      </article>
+
+      <article class="d-card ff-prod d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/ecommerce-life-3.webp" width="1200" height="800" loading="lazy" alt="Rows of small handmade cups."></div>
+        <div class="d-card__b">
+          <h3 style="font-size:1.08rem">Morning cup, pair</h3>
+          <p style="font-size:14px">Holds 250ml. Comfortable in one hand.</p>
+          <div class="ff-swatch" aria-hidden="true"><i style="background:#C89A6E"></i><i style="background:#E4DCCB"></i></div>
+          <div class="ff-prod__row"><span class="ff-price"><s>₱1,600</s>₱1,290</span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#shop">Add to basket</a></div>
+        </div>
+      </article>
+
+      <article class="d-card ff-prod d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/ecommerce-4.webp" width="1200" height="900" loading="lazy" alt="A ceramic vase on a shelf."></div>
+        <div class="d-card__b">
+          <h3 style="font-size:1.08rem">Stem vase</h3>
+          <p style="font-size:14px">For one branch or a handful of garden flowers.</p>
+          <div class="ff-swatch" aria-hidden="true"><i style="background:#B9C3AE"></i><i style="background:#EFE7D8"></i></div>
+          <div class="ff-prod__row"><span class="ff-price">₱1,850</span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#shop">Add to basket</a></div>
+        </div>
+      </article>
+
+      <article class="d-card ff-prod d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/ecommerce-2.webp" width="1200" height="900" loading="lazy" alt="Folded natural linen cloth."></div>
+        <div class="d-card__b">
+          <h3 style="font-size:1.08rem">Washed linen napkins, four</h3>
+          <p style="font-size:14px">Softer every wash. Hemmed by hand.</p>
+          <div class="ff-swatch" aria-hidden="true"><i style="background:#E7E0D2"></i><i style="background:#A7B0A0"></i><i style="background:#8E7B68"></i></div>
+          <div class="ff-prod__row"><span class="ff-price">₱1,450</span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#shop">Add to basket</a></div>
+        </div>
+      </article>
+
+      <article class="d-card ff-prod d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/ecommerce-life-1.webp" width="1200" height="800" loading="lazy" alt="Stacked terracotta pots."></div>
+        <div class="d-card__b">
+          <h3 style="font-size:1.08rem">Terracotta planter, three sizes</h3>
+          <p style="font-size:14px">Unglazed, so the roots can breathe.</p>
+          <div class="ff-swatch" aria-hidden="true"><i style="background:#C0764B"></i><i style="background:#9B5A38"></i></div>
+          <div class="ff-prod__row"><span class="ff-price">From ₱690</span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#shop">Add to basket</a></div>
+        </div>
+      </article>
+
+      <article class="d-card ff-prod d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/ecommerce-life-2.webp" width="1200" height="800" loading="lazy" alt="Hands working clay on a wheel."></div>
+        <div class="d-card__b">
+          <h3 style="font-size:1.08rem">Pottery class, two hours</h3>
+          <p style="font-size:14px">Six people maximum. You keep what you make.</p>
+          <div class="ff-swatch" aria-hidden="true"><i style="background:#8C9A84"></i></div>
+          <div class="ff-prod__row"><span class="ff-price">₱2,200</span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#shop">Book a place</a></div>
+        </div>
+      </article>
+
+      <article class="d-card ff-prod d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/ecommerce-1.webp" width="1200" height="1200" loading="lazy" alt="A gift set of bowls wrapped for sending."></div>
+        <div class="d-card__b">
+          <h3 style="font-size:1.08rem">Housewarming gift set</h3>
+          <p style="font-size:14px">Two bowls, two cups, napkins, wrapped and boxed.</p>
+          <div class="ff-swatch" aria-hidden="true"><i style="background:#D8CEBC"></i><i style="background:#8C9A84"></i></div>
+          <div class="ff-prod__row"><span class="ff-price">₱4,200</span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#shop">Add to basket</a></div>
+        </div>
+      </article>
+
+      <article class="d-card ff-prod d-rv">
+        <div class="d-card__img"><img src="../../assets/img/demo/ecommerce-4.webp" width="1200" height="900" loading="lazy" alt="A gift card resting against a vase."></div>
+        <div class="d-card__b">
+          <h3 style="font-size:1.08rem">Gift card</h3>
+          <p style="font-size:14px">Any amount, sent by email, never expires.</p>
+          <div class="ff-swatch" aria-hidden="true"><i style="background:#B4794A"></i></div>
+          <div class="ff-prod__row"><span class="ff-price">From ₱500</span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#shop">Choose amount</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section class="d-sec d-sec--tight">
+  <div class="d-wrap ff-why">
+    <div><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-hand"></use></svg>
+      <b>Made by hand</b><span>Two makers, one small studio in Rizal</span></div>
+    <div><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-truck"></use></svg>
+      <b>Sent in 2–3 days</b><span>Free over ₱2,500, tracked nationwide</span></div>
+    <div><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-shield"></use></svg>
+      <b>Arrives safely</b><span>Packed in straw, or we replace it free</span></div>
+    <div><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-leaf"></use></svg>
+      <b>No plastic</b><span>Paper, straw and recycled card only</span></div>
+  </div>
+</section>
+
+<!-- Story -->
+<section class="d-sec d-sec--alt" id="story">
+  <div class="d-wrap d-split">
+    <div class="d-media"><img src="../../assets/img/demo/ecommerce-life-1.webp" width="1600" height="1067" loading="lazy" alt="Finished pots drying in the studio."></div>
+    <div>
+      <span class="d-eyebrow">Our story</span>
+      <h2 class="d-h2">Two people, one kiln, and a lot of patience</h2>
+      <p class="d-lede" style="margin-bottom:20px">Fern &amp; Fold started in 2021 in a garage with one
+        second-hand wheel. We now make about four hundred pieces a month, and every single one still
+        passes through both our hands.</p>
+      <p style="color:var(--d-body);margin-bottom:24px">Because it is made by hand, no two pieces match
+        exactly. There will be small differences in colour and shape. We think that is the best part;
+        if you want them identical, a factory will serve you better and we will happily say so.</p>
+      <a class="d-btn d-btn--o d-btn--pill" href="#news">Follow what we are making
+        <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- Care -->
+<section class="d-sec" id="care">
+  <div class="d-wrap d-split">
+    <div>
+      <span class="d-eyebrow">Care &amp; delivery</span>
+      <h2 class="d-h2">The practical bits</h2>
+      <div class="d-list" style="margin-top:10px">
+        <div class="d-row"><span class="d-row__t"><b>Dishwasher safe</b><span>All stoneware. The linen is machine washable at 40 degrees.</span></span></div>
+        <div class="d-row"><span class="d-row__t"><b>Microwave safe</b><span>Everything except pieces with the gold rim.</span></span></div>
+        <div class="d-row"><span class="d-row__t"><b>Delivery time</b><span>Sent within 2–3 working days. Nationwide, tracked.</span></span><span class="d-row__dots"></span><span class="d-row__p">Free over ₱2,500</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Returns</b><span>Thirty days, no reason needed, as long as it is unused.</span></span><span class="d-row__dots"></span><span class="d-row__p">30 days</span></div>
+        <div class="d-row"><span class="d-row__t"><b>Broken in transit</b><span>Send us a photo. We replace it and you keep the pieces.</span></span><span class="d-row__dots"></span><span class="d-row__p">Replaced free</span></div>
+      </div>
+    </div>
+    <div id="reviews">
+      <span class="d-eyebrow">Reviews</span>
+      <h2 class="d-h2">4.9 from 1,140 orders</h2>
+      <div style="display:grid;gap:16px">
+        <article class="d-quote">
+          <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+          <p>"Bought the bowls eighteen months ago and we use them every single day. Not one chip."</p>
+          <b>Mica L.</b><small>Everyday bowl, set of four</small>
+        </article>
+        <article class="d-quote">
+          <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+          <p>"One cup arrived cracked. Sent a photo at 9am and a replacement was posted the same day.
+             No argument at all."</p>
+          <b>Alvin R.</b><small>Morning cup, pair</small>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="d-sec d-sec--brand" id="news">
+  <div class="d-wrap" style="max-width:640px;text-align:center">
+    <span class="d-eyebrow">Newsletter</span>
+    <h2 class="d-h2">See new pieces before they go on sale</h2>
+    <p class="d-lede" style="margin:0 auto 26px">One email a month with what came out of the kiln.
+      Subscribers get first pick, because small batches sell out.</p>
+    <form class="d-form" data-demo-form novalidate style="max-width:460px;margin-inline:auto">
+      <div class="d-field"><label class="d-sr" for="ff-email">Your email address</label>
+        <input id="ff-email" type="email" required placeholder="you@example.com" autocomplete="email"></div>
+      <div class="d-sent">
+        <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>
+        <span><strong>Thank you — you are on the list.</strong><br>
+        On a real website this adds you to the shop's mailing list and sends an automatic welcome
+        email. This is a sample site, so nothing was sent.</span>
+      </div>
+      <button class="d-btn d-btn--2 d-btn--pill" type="submit" style="width:100%">Join the list</button>
+      <p class="d-form__note" style="color:rgba(255,255,255,.65)">One email a month. Leave whenever you like.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="d-foot">
+  <div class="d-wrap">
+    <div class="d-foot__in">
+      <div>
+        <span class="d-logo">Fern &amp; Fold<small>Handmade homeware</small></span>
+        <p>Handmade stoneware, linen and wood for the table. Made in a small studio in Rizal
+           and sent all over the Philippines.</p>
+      </div>
+      <div><h4>Shop</h4>
+        <ul><li><a href="#shop">All products</a></li><li><a href="#care">Care &amp; delivery</a></li>
+        <li><a href="#reviews">Reviews</a></li><li><a href="#news">Newsletter</a></li></ul></div>
+      <div><h4>Contact</h4>
+        <ul><li><a href="mailto:hello@fernandfold.example">hello@fernandfold.example</a></li>
+        <li>Studio visits by appointment</li><li>Antipolo, Rizal</li>
+        <li>Instagram · Facebook</li></ul></div>
+    </div>
+    <div class="d-foot__base">
+      <span>&copy; <span data-year>2026</span> Fern &amp; Fold — a fictional business.</span>
+      <span>Sample website by <a href="../../index.html">Pace Digital Works</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="d-chat" href="../../index.html#start">
+  <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-chat"></use></svg><span>Chat with us</span></a>
+
+<script src="../demo.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isla Voyage — Sample travel &amp; tours website | Pace Digital Works</title>
+<meta name="description" content="A sample travel and island tour website built by Pace Digital Works. Tour packages, what is included, prices and a booking form. Isla Voyage is a fictional business.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#05668D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../demo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%2305668D'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='700' fill='%23F4A261' text-anchor='middle'%3EIV%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --d-bg: #FFFFFF; --d-alt: #EDF6F9; --d-surface: #FFFFFF;
+    --d-ink: #0B2733; --d-body: #4E6672; --d-line: #D9E7ED;
+    --d-brand: #05668D; --d-on-brand: #FFFFFF;
+    --d-accent: #F4A261; --d-accent-ink: #B5652A;
+    --d-display: 'Outfit', system-ui, sans-serif;
+    --d-sans: 'Outfit', system-ui, sans-serif;
+    --d-r: 16px; --d-r-lg: 24px;
+  }
+  h1, h2, h3 { font-weight: 700; letter-spacing: -.025em; }
+  .iv-tour .d-card__b { gap: 0; }
+  .iv-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .iv-chip { background: var(--d-alt); color: var(--d-brand); border-radius: 999px;
+    padding: 5px 12px; font-size: 12.5px; font-weight: 600; }
+  .iv-inc { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 7px; }
+  .iv-inc li { display: flex; gap: 9px; font-size: 14px; color: var(--d-body); }
+  .iv-inc svg { color: #159B5C; flex: none; margin-top: 3px; }
+  .iv-ribbon { position: absolute; top: 14px; right: 14px; z-index: 2;
+    background: var(--d-accent); color: #3A1E05; border-radius: 999px;
+    padding: 5px 13px; font-size: 12px; font-weight: 700; }
+  .d-card__img { position: relative; }
+  .iv-day { display: grid; grid-template-columns: 74px 1fr; gap: 18px; padding: 20px 0;
+    border-bottom: 1px solid var(--d-line); }
+  .iv-day b { background: var(--d-brand); color: #fff; border-radius: 12px;
+    height: 52px; display: grid; place-items: center; font-size: 13px; line-height: 1.15; text-align: center; }
+  .iv-day h3 { font-size: 1.08rem; margin-bottom: 5px; }
+  .iv-day p { font-size: 14.6px; color: var(--d-body); margin: 0; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.5L12 17.5l-5.8 3.05 1.1-6.5-4.7-4.6 6.5-.95Z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10.2c0 5.8-8 11.8-8 11.8s-8-6-8-11.8a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M21.5 16.9v2.8a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6 2 2 0 0 1 2-2.2h2.8a2 2 0 0 1 2 1.7c.13 1 .36 1.9.7 2.8a2 2 0 0 1-.46 2.1L7.7 9.7a16 16 0 0 0 6 6l1.2-1.15a2 2 0 0 1 2.1-.45c.9.33 1.83.57 2.8.7a2 2 0 0 1 1.7 2.1Z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.9L3 20.5l1.6-4.8A8.3 8.3 0 0 1 3.5 11 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/></symbol>
+<symbol id="i-boat" viewBox="0 0 24 24"><path d="M3 17.5c1.6 0 1.6 1.4 3.2 1.4s1.6-1.4 3.2-1.4 1.6 1.4 3.2 1.4 1.6-1.4 3.2-1.4 1.6 1.4 3.2 1.4"/><path d="M4.5 14.5 6 9.5h12l1.5 5"/><path d="M12 9.5V4M12 4l4 2-4 1.6"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 21.5s7.5-3.5 7.5-9.5V5.5L12 2.5 4.5 5.5V12c0 6 7.5 9.5 7.5 9.5Z"/><path d="m9.2 11.8 2 2 3.6-3.6"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 20.5v-1.8a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4v1.8"/><circle cx="9.2" cy="7.5" r="3.6"/><path d="M21.5 20.5v-1.8a4 4 0 0 0-3-3.8M16 4a3.6 3.6 0 0 1 0 7"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 1.9"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></symbol>
+</defs></svg>
+
+<div class="pd-bar">
+  <div class="pd-bar__in">
+    <span class="pd-bar__tag">Sample website</span>
+    <span><strong>Isla Voyage</strong> is a fictional tour operator, built to show what your travel website could look like.</span>
+    <a href="../../index.html">Build mine <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+  </div>
+</div>
+
+<header class="d-nav">
+  <div class="d-wrap d-nav__in">
+    <a class="d-logo" href="#top">
+      <span class="d-logo__mark"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-boat"></use></svg></span>
+      Isla Voyage<small>Island tours since 2014</small></a>
+    <nav class="d-menu" data-menu aria-label="Main">
+      <a href="#tours">Tours</a>
+      <a href="#itinerary">A day with us</a>
+      <a href="#safety">Safety</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#book">Book</a>
+      <a class="d-btn d-btn--2 d-btn--sm d-btn--pill" href="#book">Book a tour</a>
+    </nav>
+    <a class="d-btn d-btn--2 d-btn--sm d-btn--pill" href="#book">Book a tour</a>
+    <button class="d-burger" data-burger type="button" aria-label="Open the menu" aria-expanded="false">
+      <svg class="d-ico" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="d-hero">
+  <div class="d-hero__bg">
+    <img src="../../assets/img/demo/travel-3.webp" width="1200" height="899" alt="An aerial view of a tropical coastline." fetchpriority="high">
+  </div>
+  <div class="d-wrap d-hero__in">
+    <span class="d-eyebrow">Small boats · small groups · local guides</span>
+    <h1 class="d-h1">Twelve people on the boat. Not sixty.</h1>
+    <p>We run island tours the way we would want to go on them — early, unhurried, and away from
+       the places where four hundred people arrive at once.</p>
+    <div class="d-btns">
+      <a class="d-btn d-btn--2 d-btn--pill" href="#tours">See the tours</a>
+      <a class="d-btn d-btn--o d-btn--pill" href="#book">Check availability</a>
+    </div>
+  </div>
+</section>
+
+<section class="d-sec d-sec--tight">
+  <div class="d-wrap d-grid d-grid--4">
+    <div><svg class="d-ico d-ico--lg" style="color:var(--d-brand);margin-bottom:9px" aria-hidden="true"><use href="#i-users"></use></svg>
+      <b style="display:block;font-size:1.05rem">Maximum 12 guests</b>
+      <span style="font-size:14.2px;color:var(--d-body)">Never a crowded boat</span></div>
+    <div><svg class="d-ico d-ico--lg" style="color:var(--d-brand);margin-bottom:9px" aria-hidden="true"><use href="#i-sun"></use></svg>
+      <b style="display:block;font-size:1.05rem">6:30am departures</b>
+      <span style="font-size:14.2px;color:var(--d-body)">Beat every other boat there</span></div>
+    <div><svg class="d-ico d-ico--lg" style="color:var(--d-brand);margin-bottom:9px" aria-hidden="true"><use href="#i-shield"></use></svg>
+      <b style="display:block;font-size:1.05rem">Licensed &amp; insured</b>
+      <span style="font-size:14.2px;color:var(--d-body)">Life jackets for every guest</span></div>
+    <div><svg class="d-ico d-ico--lg" style="color:var(--d-brand);margin-bottom:9px" aria-hidden="true"><use href="#i-clock"></use></svg>
+      <b style="display:block;font-size:1.05rem">Free cancellation</b>
+      <span style="font-size:14.2px;color:var(--d-body)">Up to 48 hours before</span></div>
+  </div>
+</section>
+
+<!-- Tours -->
+<section class="d-sec d-sec--alt" id="tours">
+  <div class="d-wrap">
+    <div class="d-head">
+      <span class="d-eyebrow">Tours</span>
+      <h2 class="d-h2">Four trips, and we tell you exactly what is in them</h2>
+      <p class="d-lede">Prices are per person and include everything listed. There is no "optional
+        environmental fee" waiting for you at the pier.</p>
+    </div>
+
+    <div class="d-grid d-grid--2">
+      <article class="d-card iv-tour d-rv">
+        <div class="d-card__img" style="aspect-ratio:16/10"><span class="iv-ribbon">Most booked</span>
+          <img src="../../assets/img/demo/travel-2.webp" width="1600" height="900" loading="lazy" alt="Limestone cliffs rising out of clear water."></div>
+        <div class="d-card__b">
+          <div class="iv-meta"><span class="iv-chip">Full day</span><span class="iv-chip">4 stops</span><span class="iv-chip">Snorkelling</span></div>
+          <h3>The Lagoon Run</h3>
+          <p style="margin-bottom:14px">Two hidden lagoons, a limestone cove and a sandbar that only appears
+            at low tide. We leave first, so you swim before anyone else arrives.</p>
+          <ul class="iv-inc">
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Boat, fuel, licensed captain and two guides</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Lunch cooked on the boat, plus fruit and water</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Snorkel gear, life jacket and dry bag</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> All island and pier fees</li>
+          </ul>
+          <div class="d-card__meta"><span class="d-card__price">₱2,800 <span style="font-size:13px;color:var(--d-body);font-weight:400">per person</span></span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#book">Check dates</a></div>
+        </div>
+      </article>
+
+      <article class="d-card iv-tour d-rv">
+        <div class="d-card__img" style="aspect-ratio:16/10">
+          <img src="../../assets/img/demo/travel-4.webp" width="1600" height="900" loading="lazy" alt="A long stretch of beach seen from above."></div>
+        <div class="d-card__b">
+          <div class="iv-meta"><span class="iv-chip">Half day</span><span class="iv-chip">3 stops</span><span class="iv-chip">Easy</span></div>
+          <h3>Morning Beaches</h3>
+          <p style="margin-bottom:14px">Back by one o'clock. Three quiet beaches, plenty of shade, and gentle
+            water. The one we recommend for families and for anyone who is not a strong swimmer.</p>
+          <ul class="iv-inc">
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Boat, captain and one guide</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Snacks, fruit and unlimited water</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Life jackets in children's sizes</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> All island fees</li>
+          </ul>
+          <div class="d-card__meta"><span class="d-card__price">₱1,650 <span style="font-size:13px;color:var(--d-body);font-weight:400">per person</span></span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#book">Check dates</a></div>
+        </div>
+      </article>
+
+      <article class="d-card iv-tour d-rv">
+        <div class="d-card__img" style="aspect-ratio:16/10">
+          <img src="../../assets/img/demo/travel-dest-3.webp" width="1600" height="1200" loading="lazy" alt="A traditional boat at sunset."></div>
+        <div class="d-card__b">
+          <div class="iv-meta"><span class="iv-chip">Evening</span><span class="iv-chip">3 hours</span><span class="iv-chip">No swimming</span></div>
+          <h3>Sunset &amp; Supper</h3>
+          <p style="margin-bottom:14px">Out at four, back after dark. Grilled fish, rice and calamansi juice
+            served on the boat while the sun goes down behind the headland.</p>
+          <ul class="iv-inc">
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Boat, captain and one guide</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Supper cooked fresh on board</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Blankets, lights and life jackets</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Hotel pick-up within town</li>
+          </ul>
+          <div class="d-card__meta"><span class="d-card__price">₱1,950 <span style="font-size:13px;color:var(--d-body);font-weight:400">per person</span></span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#book">Check dates</a></div>
+        </div>
+      </article>
+
+      <article class="d-card iv-tour d-rv">
+        <div class="d-card__img" style="aspect-ratio:16/10">
+          <img src="../../assets/img/demo/travel-dest-1.webp" width="1600" height="1067" loading="lazy" alt="A traditional outrigger boat on a quiet beach."></div>
+        <div class="d-card__b">
+          <div class="iv-meta"><span class="iv-chip">Private</span><span class="iv-chip">Your route</span><span class="iv-chip">Up to 12</span></div>
+          <h3>Private charter</h3>
+          <p style="margin-bottom:14px">The whole boat, for your group only. Pick the stops, pick the time,
+            and stay longer anywhere you like it. Good for families and small celebrations.</p>
+          <ul class="iv-inc">
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Whole boat for up to 12 people</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Route planned with you the day before</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Lunch, snacks and drinks included</li>
+            <li><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> All fees, gear and hotel pick-up</li>
+          </ul>
+          <div class="d-card__meta"><span class="d-card__price">₱22,000 <span style="font-size:13px;color:var(--d-body);font-weight:400">whole boat</span></span>
+            <a class="d-btn d-btn--1 d-btn--sm d-btn--pill" href="#book">Check dates</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Itinerary -->
+<section class="d-sec" id="itinerary">
+  <div class="d-wrap d-split">
+    <div>
+      <span class="d-eyebrow">A day with us</span>
+      <h2 class="d-h2">The Lagoon Run, hour by hour</h2>
+      <p class="d-lede" style="margin-bottom:10px">So you know exactly what you are agreeing to before
+        you pay anything.</p>
+      <div style="margin-top:16px">
+        <div class="iv-day"><b>6:00<br>am</b><div><h3>Hotel pick-up</h3>
+          <p>We collect you from your hotel inside town. Bring a towel and sunscreen; we have everything else.</p></div></div>
+        <div class="iv-day"><b>6:30<br>am</b><div><h3>Leave the pier</h3>
+          <p>Coffee and bread on the boat while we go. The sea is calmest at this hour.</p></div></div>
+        <div class="iv-day"><b>7:30<br>am</b><div><h3>First lagoon</h3>
+          <p>Ninety minutes, and usually the only boat there. Swim, kayak, or sit and do nothing.</p></div></div>
+        <div class="iv-day"><b>11:00<br>am</b><div><h3>Lunch on the sandbar</h3>
+          <p>Grilled fish, rice, vegetables and fruit, cooked on board and eaten with your feet in the water.</p></div></div>
+        <div class="iv-day"><b>1:30<br>pm</b><div><h3>Coral garden</h3>
+          <p>The best snorkelling of the day, in shallow water. Guides in the water with anyone who wants company.</p></div></div>
+        <div class="iv-day"><b>4:00<br>pm</b><div><h3>Back at your hotel</h3>
+          <p>Salty, sunburnt and quiet. Photos from the day are sent to you that evening.</p></div></div>
+      </div>
+    </div>
+    <div class="d-grid" style="gap:12px;align-content:start">
+      <div class="d-media"><img src="../../assets/img/demo/travel-1.webp" width="1600" height="1067" loading="lazy" alt="Boats moored beside an island."></div>
+      <div class="d-grid d-grid--2" style="gap:12px">
+        <div class="d-media"><img src="../../assets/img/demo/travel-dest-2.webp" width="1600" height="1067" loading="lazy" alt="The outrigger arms of a traditional boat."></div>
+        <div class="d-media"><img src="../../assets/img/demo/travel-4.webp" width="1600" height="1200" loading="lazy" alt="An empty beach from above."></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Safety -->
+<section class="d-sec d-sec--brand" id="safety">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Safety</span>
+      <h2 class="d-h2">The part most tour websites leave out</h2>
+      <p class="d-lede" style="margin-inline:auto">You are getting on a boat in a place you do not know,
+        with people you have never met. Here is exactly who we are.</p>
+    </div>
+    <div class="d-grid d-grid--3">
+      <article class="d-feat d-rv"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-shield"></use></svg></div>
+        <h3>Licensed and insured</h3><p>Registered with the tourism office and the coastguard. Public
+          liability insurance covers every guest on board. We will show you the papers.</p></article>
+      <article class="d-feat d-rv"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-users"></use></svg></div>
+        <h3>Trained crew</h3><p>Every guide holds a current first aid and water rescue certificate.
+          There are two crew in the water at every snorkelling stop.</p></article>
+      <article class="d-feat d-rv"><div class="d-feat__ico"><svg class="d-ico d-ico--lg" aria-hidden="true"><use href="#i-boat"></use></svg></div>
+        <h3>We cancel when we should</h3><p>If the sea is rough, we do not go. You get a full refund or
+          another date. No captain of ours has ever been asked to push it.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="d-sec" id="reviews">
+  <div class="d-wrap">
+    <div class="d-head d-head--c">
+      <span class="d-eyebrow">Reviews</span>
+      <h2 class="d-h2">4.9 out of 5, from 862 travellers</h2>
+    </div>
+    <div class="d-quotes">
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p>"We had the first lagoon completely to ourselves for an hour. Six other boats turned up as
+           we were leaving. That early start is worth everything."</p>
+        <b>Hannah W.</b><small>The Lagoon Run · March</small>
+      </article>
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p>"They cancelled our first date because of the weather and refunded us within the hour, no
+           argument. We rebooked for two days later and it was perfect."</p>
+        <b>Tomas G.</b><small>Morning Beaches · August</small>
+      </article>
+      <article class="d-quote d-rv">
+        <div class="d-quote__stars" aria-label="Five out of five"><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg><svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-star"></use></svg></div>
+        <p>"Our youngest is six and nervous in water. One guide stayed with her the entire time.
+           By the last stop she was snorkelling on her own."</p>
+        <b>Divina S.</b><small>Private charter · December</small>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Book -->
+<section class="d-sec d-sec--alt" id="book">
+  <div class="d-wrap d-split">
+    <div>
+      <span class="d-eyebrow">Book a tour</span>
+      <h2 class="d-h2">Check your date</h2>
+      <p class="d-lede" style="margin-bottom:26px">We confirm by message within a few hours. Nothing is
+        charged until we have told you the boat is free.</p>
+
+      <form class="d-form" data-demo-form novalidate>
+        <div class="d-form__row">
+          <div class="d-field"><label for="iv-tour">Which tour</label>
+            <select id="iv-tour" required><option value="">Choose a tour</option>
+            <option>The Lagoon Run — full day</option><option>Morning Beaches — half day</option>
+            <option>Sunset &amp; Supper — evening</option><option>Private charter</option></select></div>
+          <div class="d-field"><label for="iv-date">Date</label><input id="iv-date" type="date" required></div>
+        </div>
+        <div class="d-form__row">
+          <div class="d-field"><label for="iv-adults">Adults</label>
+            <select id="iv-adults" required><option value="">Choose</option><option>1</option><option>2</option>
+            <option>3</option><option>4</option><option>5</option><option>6</option><option>7 or more</option></select></div>
+          <div class="d-field"><label for="iv-kids">Children under 12</label>
+            <select id="iv-kids"><option>0</option><option>1</option><option>2</option><option>3</option><option>4 or more</option></select></div>
+        </div>
+        <div class="d-form__row">
+          <div class="d-field"><label for="iv-name">Your name</label><input id="iv-name" type="text" required autocomplete="name"></div>
+          <div class="d-field"><label for="iv-email">Email address</label><input id="iv-email" type="email" required autocomplete="email"></div>
+        </div>
+        <div class="d-field"><label for="iv-hotel">Which hotel are you staying at?</label>
+          <input id="iv-hotel" type="text" placeholder="For the free pick-up"></div>
+        <div class="d-field"><label for="iv-msg">Anything we should know?</label>
+          <textarea id="iv-msg" placeholder="Non-swimmers, food allergies, a birthday, seasickness…"></textarea></div>
+
+        <div class="d-sent">
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>
+          <span><strong>Thank you — your booking request was received.</strong><br>
+          On a real website this checks the boat's availability, messages the operator, and emails
+          you a confirmation. This is a sample site, so nothing was sent.</span>
+        </div>
+
+        <button class="d-btn d-btn--2 d-btn--pill" type="submit">Request this tour
+          <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+        <p class="d-form__note">Free cancellation up to 48 hours before. Full refund if we cancel for weather.</p>
+      </form>
+    </div>
+
+    <div>
+      <span class="d-eyebrow">Find us</span>
+      <h2 class="d-h2">At the pier, every morning</h2>
+      <div class="d-contact" style="margin-bottom:20px">
+        <a href="tel:+63325550111"><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+          <span><b>+63 32 555 0111</b><span>6am – 8pm, seven days</span></span></a>
+        <a href="mailto:hello@islavoyage.example"><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-mail"></use></svg></span>
+          <span><b>hello@islavoyage.example</b><span>Group bookings and questions</span></span></a>
+        <div><span class="d-contact__i"><svg class="d-ico" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+          <span><b>Booth 4, Municipal Pier</b><span>Blue and orange booth, opposite the fish market</span></span></div>
+      </div>
+      <div class="d-media"><img src="../../assets/img/demo/travel-dest-1.webp" width="1600" height="1067" loading="lazy" alt="The Isla Voyage boat waiting at the beach."></div>
+    </div>
+  </div>
+</section>
+
+<section class="d-band">
+  <div class="d-wrap">
+    <h2 class="d-h2">Not sure which tour suits you?</h2>
+    <p>Tell us who is coming and how confident you are in the water. We will tell you honestly which
+       trip to book — including when the answer is "none of ours".</p>
+    <div class="d-btns">
+      <a class="d-btn d-btn--2 d-btn--pill" href="#book">Ask us</a>
+      <a class="d-btn d-btn--o d-btn--pill" href="#tours">Compare the tours</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="d-foot">
+  <div class="d-wrap">
+    <div class="d-foot__in">
+      <div>
+        <span class="d-logo">Isla Voyage<small>Island tours since 2014</small></span>
+        <p>A small, licensed island tour operator. Twelve guests maximum, local guides, and boats
+           that leave before everyone else.</p>
+      </div>
+      <div><h4>Explore</h4>
+        <ul><li><a href="#tours">Tours</a></li><li><a href="#itinerary">A day with us</a></li>
+        <li><a href="#safety">Safety</a></li><li><a href="#reviews">Reviews</a></li>
+        <li><a href="#book">Book</a></li></ul></div>
+      <div><h4>Contact</h4>
+        <ul><li>Booth 4, Municipal Pier</li><li><a href="tel:+63325550111">+63 32 555 0111</a></li>
+        <li><a href="mailto:hello@islavoyage.example">hello@islavoyage.example</a></li>
+        <li>Facebook · Instagram</li></ul></div>
+    </div>
+    <div class="d-foot__base">
+      <span>&copy; <span data-year>2026</span> Isla Voyage — a fictional business.</span>
+      <span>Sample website by <a href="../../index.html">Pace Digital Works</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="d-chat" href="../../index.html#start">
+  <svg class="d-ico d-ico--sm" aria-hidden="true"><use href="#i-chat"></use></svg><span>Chat with us</span></a>
+
+<script src="../demo.js" defer></script>
+</body>
+</html>
