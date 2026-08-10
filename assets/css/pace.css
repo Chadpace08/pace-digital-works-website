@@ -1143,43 +1143,106 @@ p:last-child { margin-bottom: 0; }
   .fold__chev { transition: none; }
 }
 
-/* ---------- Floating Messenger Widget ---------------------------------- */
+/* ---------- Floating Messenger Widget ----------------------------------
+   A round, glowing brass coin with the Messenger mark in Ink. Deliberately
+   NOT Messenger blue — it sits on ivory and dark sections alike, and reads
+   as part of this site rather than a bolted-on plugin. */
 .float-widget {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 26px;
+  right: 26px;
   z-index: 999;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 22px;
-  border-radius: 100px;
-  background: #19794E; /* Dark emerald green like screenshot */
-  color: #FFFFFF;
-  font-family: var(--font-body);
-  font-size: 14.5px;
-  font-weight: 600;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 26%, #F2DCA6 0%, #DFC183 46%, #C7A45E 100%);
+  color: var(--ink);
   text-decoration: none;
-  box-shadow: 0 8px 24px rgba(25, 121, 78, 0.35), 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), background-color 0.3s var(--ease);
+  -webkit-tap-highlight-color: transparent;
+  box-shadow:
+    0 0 0 1px rgba(140, 106, 59, .38),
+    0 0 30px 8px rgba(216, 185, 120, .45),
+    0 12px 28px rgba(27, 24, 21, .30);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+/* Soft halo that breathes outward, like the glow in the reference. */
+.float-widget::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(216, 185, 120, .55);
+  animation: fw-pulse 2.8s var(--ease-out) infinite;
+  pointer-events: none;
+}
+@keyframes fw-pulse {
+  0%   { box-shadow: 0 0 0 0    rgba(216, 185, 120, .55); }
+  70%  { box-shadow: 0 0 0 18px rgba(216, 185, 120, 0); }
+  100% { box-shadow: 0 0 0 0    rgba(216, 185, 120, 0); }
 }
 .float-widget:hover {
-  background: #146641;
-  color: #FFFFFF;
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 14px 32px rgba(25, 121, 78, 0.45), 0 6px 16px rgba(0, 0, 0, 0.2);
+  color: var(--ink);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 0 0 1px rgba(140, 106, 59, .50),
+    0 0 40px 12px rgba(216, 185, 120, .60),
+    0 16px 34px rgba(27, 24, 21, .34);
 }
+.float-widget:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+/* The Messenger mark is a solid logo, not an outline icon, so it opts out of
+   the site-wide stroke styling. evenodd keeps the bolt a clean cutout. */
 .float-widget .ico {
-  width: 18px;
-  height: 18px;
+  width: 30px;
+  height: 30px;
   flex: none;
+  fill: currentColor;
+  fill-rule: evenodd;
+  stroke: none;
+}
+/* Label stays hidden until hover/keyboard focus, so the button reads as a
+   clean circle but still says what it does. */
+.float-widget__label {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(8px);
+  padding: 7px 13px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--on-dark);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 8px 20px rgba(27, 24, 21, .22);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease-out);
+}
+.float-widget:hover .float-widget__label,
+.float-widget:focus-visible .float-widget__label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
 }
 @media (max-width: 480px) {
   .float-widget {
     bottom: 18px;
     right: 18px;
-    padding: 10px 18px;
-    font-size: 13.5px;
+    width: 56px;
+    height: 56px;
   }
+  .float-widget .ico { width: 27px; height: 27px; }
+  .float-widget__label { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-widget::before { animation: none; }
+  .float-widget:hover { transform: none; }
 }
 
