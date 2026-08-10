@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | Pace Digital Works</title>
+
+<!-- This page exists so Cloudflare Pages answers a wrong address with a real
+     "not found" status. Without it, every wrong address returned the home
+     page with a "success" status, which made Google treat broken links as
+     copies of the home page, and let a missing image be cached for a year. -->
+<meta name="robots" content="noindex, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/css/pace.css">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+
+<style>
+  .nf {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--sp-8, 40px) 24px;
+    gap: 18px;
+  }
+  .nf__num {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 12vw, 132px);
+    line-height: 1;
+    color: var(--clay);
+    letter-spacing: -.02em;
+  }
+  .nf__t {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 4vw, 34px);
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 0;
+  }
+  .nf__p {
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--body);
+    max-width: 46ch;
+    margin: 0;
+  }
+  .nf__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    justify-content: center;
+    margin-top: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+  .nf__links a { color: var(--clay-ink); }
+</style>
+</head>
+<body>
+
+<main class="nf">
+  <div class="nf__num">404</div>
+  <h1 class="nf__t">This page has moved or never existed</h1>
+  <p class="nf__p">
+    The address you opened is not on this site. Nothing is broken on your side —
+    the link was probably mistyped or is out of date.
+  </p>
+  <nav class="nf__links">
+    <a href="/">Back to the home page</a>
+    <a href="/#examples">See example websites</a>
+    <a href="/#start">Get in touch</a>
+  </nav>
+</main>
+
+</body>
+</html>

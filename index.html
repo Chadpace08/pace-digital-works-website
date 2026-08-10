@@ -249,10 +249,13 @@
 <link rel="stylesheet" href="assets/css/pace.css">
 <!-- Google asks for /favicon.ico at the root and for square icons whose size
      is a multiple of 48px. Without the .ico file the server answered that
-     address with the whole home page, so no icon could be read. -->
+     address with the whole home page, so no icon could be read.
+     The 48 and 96 icons sit at the root on purpose: the /assets/img/ rule in
+     _headers marks files there as unchangeable for a year, and those two
+     addresses already hold a cached copy of the home page. -->
 <link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" type="image/png" sizes="48x48" href="/assets/img/favicon-48.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon-96.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
 
