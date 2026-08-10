@@ -11,4 +11,4 @@ Allow: /
 # as a bare result with no description — which is exactly what we do not want
 # for a business that does not really exist.
 
-Sitemap: https://pacedigital.pages.dev/sitemap.xml
+Sitemap: https://pacedigitalworks.com/sitemap.xml

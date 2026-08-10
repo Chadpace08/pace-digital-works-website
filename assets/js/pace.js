@@ -356,12 +356,11 @@ document.querySelectorAll('.eg--rail').forEach((rail) => {
 const enquiry = document.querySelector('[data-enquiry]');
 
 if (enquiry) {
-  const TO = 'charlenepace88@gmail.com';
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeajazor';
+  const TO = 'hello@pacedigitalworks.com';
   const msg = enquiry.querySelector('[data-enquiry-msg]');
-  const copyBtn = enquiry.querySelector('[data-enquiry-copy]');
+  const submitBtn = enquiry.querySelector('button[type="submit"]');
 
-  /* Rebuilt each time rather than appended to, so an old fallback link can
-     never sit under a newer message. */
   const say = (text, links = []) => {
     if (!msg) return;
     msg.textContent = text;
@@ -375,16 +374,13 @@ if (enquiry) {
     msg.hidden = false;
   };
 
-  /* Only the boxes that were actually filled in reach the email, so a short
-     answer does not arrive padded with empty headings. */
   const answered = () =>
     [...enquiry.querySelectorAll('input, textarea')]
       .filter((f) => f.value.trim())
       .map((f) => `${f.name}: ${f.value.trim()}`);
 
   const bodyText = () =>
-    ['Hello Chad,', '', 'I would like a website for my business.', '', ...answered(), '', 'Thank you.']
-      .join('\n');
+    ['Hello Chad,', '', 'I would like a website for my business.', '', ...answered(), '', 'Thank you.'].join('\n');
 
   const missing = () => {
     const bad = [];
@@ -396,7 +392,7 @@ if (enquiry) {
     return bad;
   };
 
-  enquiry.addEventListener('submit', (e) => {
+  enquiry.addEventListener('submit', async (e) => {
     e.preventDefault();
     const bad = missing();
 
@@ -406,21 +402,35 @@ if (enquiry) {
       return;
     }
 
-    const biz = enquiry.querySelector('#f-biz').value.trim();
-    const subject = `Website enquiry — ${biz}`;
-    const body = bodyText();
+    const name = enquiry.querySelector('#f-name').value.trim();
+    const email = enquiry.querySelector('#f-email').value.trim();
+    const submitTextSpan = submitBtn ? submitBtn.querySelector('.btn__t') : null;
+    const originalBtnText = submitTextSpan ? submitTextSpan.textContent : 'Submit my details';
 
-    window.location.href =
-      `mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (submitBtn) submitBtn.disabled = true;
+    if (submitTextSpan) submitTextSpan.textContent = 'Sending...';
 
-    const gmail = 'https://mail.google.com/mail/?view=cm&fs=1'
-      + `&to=${encodeURIComponent(TO)}`
-      + `&su=${encodeURIComponent(subject)}`
-      + `&body=${encodeURIComponent(body)}`;
+    try {
+      const data = new FormData(enquiry);
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
 
-    say('Your email app should now open with all of this written in — press send there and it comes '
-      + 'straight to me. Nothing opened? Your computer may have no email app set up. Use this instead:',
-      [['Open it in Gmail', gmail]]);
+      if (response.ok) {
+        say(`Thank you, ${name}! Your enquiry has been received successfully. I’ll review your message and get back to you shortly.`);
+        enquiry.reset();
+      } else {
+        const result = await response.json();
+        say(result.errors ? result.errors.map((err) => err.message).join(', ') : 'There was a problem sending your form. Please try sending again or reach out via WhatsApp/Facebook.');
+      }
+    } catch (err) {
+      say('Network connection error. Please check your internet connection or reach out directly via WhatsApp.');
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+      if (submitTextSpan) submitTextSpan.textContent = originalBtnText;
+    }
   });
 
   enquiry.addEventListener('input', (e) => {
@@ -428,23 +438,5 @@ if (enquiry) {
     if (fld && fld.classList.contains('is-bad')) fld.classList.remove('is-bad');
   });
 
-  if (copyBtn) {
-    copyBtn.addEventListener('click', async () => {
-      const text = bodyText();
-      try {
-        await navigator.clipboard.writeText(text);
-      } catch {
-        /* Clipboard permission can be refused. Selecting the text by hand
-           always works, so fall back to that rather than failing silently. */
-        const tmp = document.createElement('textarea');
-        tmp.value = text;
-        tmp.style.cssText = 'position:fixed;top:0;left:-9999px';
-        document.body.appendChild(tmp);
-        tmp.select();
-        document.execCommand('copy');
-        tmp.remove();
-      }
-      say(`Copied. Paste it into an email to ${TO} and send it from there.`);
-    });
-  }
+
 }
