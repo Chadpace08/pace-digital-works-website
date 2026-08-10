@@ -1206,8 +1206,11 @@ p:last-child { margin-bottom: 0; }
   stroke: none;
 }
 /* Label stays hidden until hover/keyboard focus, so the button reads as a
-   clean circle but still says what it does. */
-.float-widget__label {
+   clean circle but still says what it does. Any span inside the widget is
+   treated as the label, so a browser holding an older cached index.html
+   still renders the circle correctly instead of wrapping text inside it. */
+.float-widget__label,
+.float-widget > span {
   position: absolute;
   right: calc(100% + 12px);
   top: 50%;
@@ -1227,7 +1230,9 @@ p:last-child { margin-bottom: 0; }
   transition: opacity 0.25s var(--ease), transform 0.25s var(--ease-out);
 }
 .float-widget:hover .float-widget__label,
-.float-widget:focus-visible .float-widget__label {
+.float-widget:hover > span,
+.float-widget:focus-visible .float-widget__label,
+.float-widget:focus-visible > span {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
 }
@@ -1239,7 +1244,8 @@ p:last-child { margin-bottom: 0; }
     height: 56px;
   }
   .float-widget .ico { width: 27px; height: 27px; }
-  .float-widget__label { display: none; }
+  .float-widget__label,
+  .float-widget > span { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .float-widget::before { animation: none; }
