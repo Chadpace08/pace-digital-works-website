@@ -1,4 +1,13 @@
-.wrangler/
-node_modules/
-.DS_Store
-Thumbs.db
+# This folder holds private working material: client guides, checklists,
+# promo videos, Canva assets and internal notes.
+#
+# The GitHub repository is PUBLIC. Only the website itself may be published.
+# So: ignore everything here, then allow back the one folder that is the site.
+#
+# If you add a new file to this folder, it stays private automatically.
+# Do not add a rule to allow it unless you want it public.
+
+/*
+
+!/.gitignore
+!/pace-digital/
