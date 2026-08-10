@@ -6,6 +6,7 @@
 <title>Website Design Philippines | Pace Digital Works</title>
 <meta name="description" content="Web design, Google visibility and lead generation for small businesses — built by one studio in the Philippines. See real client sites and free examples.">
 <meta name="theme-color" content="#1B1815">
+<script>if(location.hostname.endsWith('.pages.dev')){location.replace('https://pacedigitalworks.com'+location.pathname+location.search+location.hash);}</script>
 <link rel="canonical" href="https://pacedigitalworks.com/">
 
 <!-- ===== Structured data =================================================
@@ -324,7 +325,10 @@
 <header class="hdr" data-hdr>
   <div class="wrap hdr__in">
     <a class="brand" href="index.html" aria-label="Pace Digital Works — home">
-      <img class="brand__img" src="assets/img/logo.png" alt="Pace Digital Works logo" width="36" height="36">
+      <!-- logo-small.png is the same picture as logo.png, saved smaller: 12KB
+           instead of 1.2MB. The header shows it at 54x36, so 162x108 stays
+           sharp on high-resolution screens. logo.png is kept as the master. -->
+      <img class="brand__img" src="assets/img/logo-small.png" alt="Pace Digital Works logo" width="54" height="36">
       <span class="brand__name">Pace <span class="brand__accent">Digital</span> Works</span>
       <span class="brand__rule" aria-hidden="true"></span>
       <span class="brand__sub">Studio</span>
