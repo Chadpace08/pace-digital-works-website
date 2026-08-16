@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Addresses here have no ".html" on the end. Cloudflare Pages strips it and
+     redirects /terms.html to /terms, so the clean form is the real address and
+     the one Google should be given. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pacedigitalworks.com/</loc>
@@ -7,13 +10,13 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://pacedigitalworks.com/privacy.html</loc>
+    <loc>https://pacedigitalworks.com/privacy</loc>
     <lastmod>2026-08-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://pacedigitalworks.com/terms.html</loc>
+    <loc>https://pacedigitalworks.com/terms</loc>
     <lastmod>2026-08-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
