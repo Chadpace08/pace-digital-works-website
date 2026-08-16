@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Cookiebot Cookie Consent Banner -->
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="b22f8c48-6a34-4c8e-b06d-b1584a6fefa5" data-blockingmode="auto" type="text/javascript"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Website Design Philippines | Pace Digital Works</title>
@@ -427,7 +429,12 @@
       </h2>
     </div>
 
-    <div class="quotes">
+    <!-- On a phone this row becomes a sideways swipe, the same way the Services
+         cards do. The tabindex makes the row reachable with a keyboard, so it
+         can be scrolled with the arrow keys and not only with a thumb. On a
+         laptop it is an ordinary three-column grid and none of that applies. -->
+    <div class="quotes quotes--rail" tabindex="0" role="group"
+         aria-label="What clients say — on a phone, swipe sideways to see them all">
       <figure class="quote rv">
         <blockquote>
           <p class="quote__lead">"Everything feels so much easier now."</p>
@@ -471,6 +478,13 @@
           <span class="quote__what">Yenpace Art Gallery website</span>
         </figcaption>
       </figure>
+    </div>
+
+    <!-- The "01 / 03" mark. Hidden on a laptop, where all three quotes are
+         already side by side and nothing is waiting off-screen. -->
+    <div class="rail-prog" aria-hidden="true">
+      <div class="rail-prog__track"><div class="rail-prog__fill" data-rail-fill></div></div>
+      <span class="rail-prog__count" data-rail-count>01 / 03</span>
     </div>
   </div>
 </section>
@@ -1475,17 +1489,42 @@
 
       <div>
         <h4>Get in touch</h4>
-        <ul>
-          <li><a href="mailto:hello@pacedigitalworks.com">Send an email</a></li>
-          <li><a href="https://wa.me/639563800054" target="_blank" rel="noopener">Chat on WhatsApp</a></li>
-          <li><a href="https://www.facebook.com/pacedigitalworks" target="_blank" rel="noopener">Message on Facebook</a></li>
+        <!-- Icons instead of words. Each one still carries its name three ways,
+             so nothing is lost by dropping the visible label: aria-label reads
+             it out to a screen reader, title shows it on hover, and .sr-only
+             text is there for anything that reads neither. -->
+        <ul class="ftr__icons">
+          <li>
+            <a class="ftr__icon" href="mailto:hello@pacedigitalworks.com"
+               title="Send an email" aria-label="Send an email">
+              <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+              <span class="sr-only">Send an email</span>
+            </a>
+          </li>
+          <li>
+            <a class="ftr__icon" href="https://wa.me/639563800054" target="_blank" rel="noopener"
+               title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+              <svg class="ico" aria-hidden="true"><use href="#i-chat"></use></svg>
+              <span class="sr-only">Chat on WhatsApp</span>
+            </a>
+          </li>
+          <li>
+            <a class="ftr__icon" href="https://www.facebook.com/pacedigitalworks" target="_blank" rel="noopener"
+               title="Message on Facebook" aria-label="Message on Facebook">
+              <svg class="ico" aria-hidden="true"><use href="#i-facebook"></use></svg>
+              <span class="sr-only">Message on Facebook</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
 
     <div class="ftr__base">
       <span>&copy; <span data-year>2026</span> Pace Digital Works</span>
-      <span>Sample websites use fictional names and stock photography</span>
+      <nav class="ftr__legal" aria-label="Legal">
+        <a href="privacy.html">Privacy policy</a>
+        <a href="terms.html">Terms of service</a>
+      </nav>
     </div>
   </div>
 </footer>

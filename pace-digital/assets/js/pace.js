@@ -284,19 +284,24 @@ if (flow) {
   }
 }
 
-/* 11. "01 / 08" mark under the services swipe row --------------------------
-   On a phone the Services cards become a row you swipe. Without a marker,
-   someone seeing only the first card could think that is the whole section.
-   This fills a hairline and updates the number as they swipe.
+/* 11. "01 / 08" mark under a swipe row -------------------------------------
+   On a phone the Services cards and the client quotes each become a row you
+   swipe. Without a marker, someone seeing only the first card could think
+   that is the whole section. This fills a hairline and updates the number as
+   they swipe.
 
    The Website Examples section is a stacked deck, not a row, so it has no
    marker and is not handled here.
+
+   Nothing below is specific to one section: it takes whichever rows carry a
+   rail class, counts their own children, and pairs each with the .rail-prog
+   that follows it. Adding another swipe row needs no change here.
 
    It watches the cards with IntersectionObserver — the same tool already
    used for the scroll reveal above — instead of listening to every scroll
    event. That means code runs only when the card in view actually changes,
    which keeps a slower phone smooth.                                       */
-document.querySelectorAll('.eg--rail').forEach((rail) => {
+document.querySelectorAll('.eg--rail, .quotes--rail').forEach((rail) => {
   const prog = rail.nextElementSibling;
   if (!prog || !prog.classList.contains('rail-prog')) return;
 

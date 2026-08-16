@@ -864,11 +864,38 @@ p:last-child { margin-bottom: 0; }
 .ftr ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }
 .ftr a { color: var(--on-dark-2); text-decoration: none; font-size: 14.6px; transition: color .25s var(--ease); }
 .ftr a:hover { color: var(--brass-lite); }
+/* The "Get in touch" column is icons, not words. Each is a hairline square
+   big enough to hit with a thumb — 44px is the smallest target that is
+   comfortable on a phone, so these are drawn to that size rather than to the
+   icon's own 24px. Two class names, because `.ftr a` above sets a font size
+   and colour these have to shake off. */
+.ftr .ftr__icons { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+.ftr .ftr__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border: 1px solid var(--line-dark); border-radius: var(--r-xs);
+  color: var(--on-dark-2);
+  transition: color .25s var(--ease), border-color .25s var(--ease),
+              background-color .25s var(--ease);
+}
+.ftr .ftr__icon .ico { width: 21px; height: 21px; }
+.ftr .ftr__icon:hover, .ftr .ftr__icon:focus-visible {
+  color: var(--brass-lite);
+  border-color: var(--brass);
+  background: rgba(216, 185, 120, .07);
+}
+
 .ftr__base {
   margin-top: var(--sp-block); padding-top: var(--sp-6); border-top: 1px solid var(--line-dark);
   display: flex; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap;
   font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
 }
+/* Privacy and Terms sit on the bottom line, where people look for them.
+   font-size and letter-spacing are inherited on purpose, so the two links
+   match the copyright line beside them instead of taking the larger size
+   `.ftr a` gives the links in the columns above. */
+.ftr__legal { display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6); }
+.ftr .ftr__legal a { font-size: inherit; letter-spacing: inherit; }
 
 /* ---------- 19. Motion ---------------------------------------------------
    Everything that starts hidden is guarded by the .js class, which is set
@@ -1088,6 +1115,68 @@ p:last-child { margin-bottom: 0; }
   color: var(--brass) !important; margin-top: var(--sp-2) !important;
 }
 
+/* ---- Client quotes: a sideways swipe on phones -------------------------
+   Three testimonials stacked in one column made the section a long scroll
+   past text a reader has already decided about. Side by side and swiped
+   with a thumb, one quote is read at a time and the next one is a flick
+   away — the same behaviour as the Services row, so a phone user learns
+   the gesture once.
+
+   Nothing here touches the laptop layout: every rule sits inside the
+   639px query, and above it the row is the same three-column grid it has
+   always been.
+
+   The swipe is the phone's own scrolling with `scroll-snap`, not a
+   JavaScript slider. That is why it stays smooth on a cheap Android phone,
+   keeps the arrow keys and a screen reader working, and has nothing to go
+   wrong if a script fails to load.
+
+   This block deliberately sits AFTER the `.quotes` grid rules above.
+   A media query adds no weight in CSS, so `.quotes { display: grid }`
+   would otherwise beat a flex rule written earlier in the file.        */
+@media (max-width: 639px) {
+  .quotes--rail {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--sp-3);
+    /* The grid drew its dividing hairlines with a background showing through
+       1px gaps. A row of separate cards does not want either. */
+    background: none;
+    border-block: 0;
+    /* Bleed past the page gutter so a card can reach the true screen edge.
+       That is what lets the next card peek in and say "there is more". */
+    margin-inline: calc(var(--gut) * -1);
+    padding-inline: var(--gut);
+    padding-bottom: var(--sp-2);
+    scroll-padding-inline: var(--gut);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .quotes--rail::-webkit-scrollbar { display: none; }
+
+  /* The cards keep their .rv reveal class for the laptop layout, where they
+     rise into view one after another. Inside a swipe row that same reveal
+     works against the reader: the third quote sits off the side of the
+     screen, so it is still hidden when you flick to it, and you watch an
+     empty card fade in for most of a second before you can read it. The
+     last two lines cancel that. On a phone the movement people see is the
+     swipe itself, which is the whole point of the row.
+
+     Two class names, and written after the `.js .rv` rule further up, so
+     the cancel actually wins. */
+  .quotes--rail .quote {
+    flex: 0 0 82%;                /* leaves 18% so the next card peeks in */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;     /* a fast flick cannot skip past a quote */
+    border: 1px solid var(--line);
+    padding: var(--sp-5);
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ---------- 22. Fold-out list -------------------------------------------
    Replaces a wall of 12 boxes with 10 thin lines that open on tap. Built on
    the browser's own <details> and <summary> tags, so opening and closing
@@ -1251,4 +1340,116 @@ p:last-child { margin-bottom: 0; }
   .float-widget::before { animation: none; }
   .float-widget:hover { transform: none; }
 }
+
+/* ---------- Legal pages (terms.html, privacy.html) ----------------------
+   One narrow column of running text. These pages are read, not scanned, so
+   the measure is capped near 72 characters and the type is a step smaller
+   than the home page. Both legal pages share this block — do not copy it
+   into a page-level <style> tag, or the two will drift apart.
+
+   None of the home page's reveal animation is used here. A visitor arriving
+   to check a clause should see the whole clause immediately. */
+/* Legal pages run a stripped-down header: wordmark and one button, no section
+   menu and no burger — those anchors point at the home page, not at this one.
+   Two things follow from that. The button has to survive the 1200px rule that
+   hides it elsewhere, because here there is no drawer holding a copy of it;
+   and the bottom hairline is permanent, because pace.js is not loaded to add
+   .is-stuck on scroll. Below 560px the wordmark needs the whole bar, so the
+   button steps out and the footer carries the call to action instead. */
+.hdr--legal { border-bottom-color: var(--line); }
+@media (max-width: 1200px) { .hdr--legal > .wrap > .btn { display: inline-flex; } }
+@media (max-width: 560px)  { .hdr--legal > .wrap > .btn { display: none; } }
+
+.legal { padding-block: clamp(48px, 6vw, 84px) clamp(64px, 8vw, 104px); }
+.legal__col { max-width: 78ch; }
+
+.legal__head { margin-bottom: var(--sp-block); }
+.legal__head h1 { margin-bottom: var(--sp-4); }
+/* The two dates sit in a small caption, not in the body text, so the eye can
+   find "last updated" without reading the opening paragraph.
+   These two, and the contents list further down, are written with two class
+   names on purpose: `.legal p` and `.legal li` near the bottom of this block
+   are also two-part selectors, and a single class would lose to them. */
+.legal .legal__meta {
+  font-size: 12px; font-weight: 500; letter-spacing: .06em;
+  color: var(--muted); margin: 0;
+}
+.legal .legal__meta strong { color: var(--ink-2); font-weight: 600; }
+
+/* The opening paragraphs run one step larger than the clauses. */
+.legal .legal__intro { font-size: 16.5px; color: var(--body); }
+.legal .legal__intro strong { color: var(--ink); font-weight: 600; }
+
+/* Contents box — a tinted card, the same clay wash used elsewhere on the
+   site, so it reads as part of the page rather than a browser default. */
+.legal__toc {
+  background: var(--clay-wash); border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: var(--sp-6) var(--sp-7);
+  margin-block: var(--sp-block);
+}
+.legal__toc ol {
+  margin: 0; padding: 0; list-style: none; counter-reset: toc;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-2) var(--sp-7);
+}
+@media (max-width: 640px) { .legal__toc ol { grid-template-columns: minmax(0, 1fr); } }
+.legal .legal__toc li { counter-increment: toc; font-size: 14.5px; line-height: 1.5; margin-bottom: 0; }
+.legal .legal__toc li::before {
+  content: counter(toc) ". ";
+  font-family: var(--font-display); color: var(--clay-ink); font-weight: 600;
+}
+/* scroll-margin-top clears the sticky header when a contents link jumps to
+   a heading — without it the heading lands underneath the bar. */
+.legal h2 {
+  font-size: clamp(1.28rem, 2vw, 1.62rem); line-height: 1.2;
+  margin: var(--sp-9) 0 var(--sp-5); scroll-margin-top: 110px;
+  display: flex; gap: var(--sp-4); align-items: baseline;
+}
+/* The contents box carries an h2 too. It comes after the rule above on
+   purpose, and is written with two class names so it wins on specificity —
+   otherwise the box heading would take the big clause-heading treatment. */
+.legal .legal__toc h2 {
+  display: block;
+  font-family: var(--font-body); font-size: 10.5px; font-weight: 600;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--brass); margin: 0 0 var(--sp-5);
+}
+.legal__no {
+  font-family: var(--font-display); font-size: .74em; font-weight: 600;
+  color: var(--clay); letter-spacing: 0; flex: none;
+}
+.legal h3 {
+  font-family: var(--font-body); font-size: 14px; font-weight: 700;
+  letter-spacing: .04em; color: var(--ink);
+  margin: var(--sp-7) 0 var(--sp-3);
+}
+
+.legal p, .legal li { font-size: 15.5px; line-height: 1.75; color: var(--body); }
+.legal strong { color: var(--ink); font-weight: 600; }
+.legal ul { margin: 0 0 1em; padding-left: var(--sp-5); }
+.legal li { margin-bottom: var(--sp-2); }
+.legal li::marker { color: var(--clay); }
+.legal a { color: var(--clay-ink); text-decoration: underline; text-underline-offset: 3px; }
+/* Two class names again, so the contents links stay quiet inside the box. */
+.legal .legal__toc a { color: var(--ink-2); text-decoration: none; }
+.legal .legal__toc a:hover { color: var(--clay-ink); text-decoration: underline; }
+
+/* A boxed clause — used where a paragraph carries more weight than the ones
+   around it (the "read this before you pay" points). */
+.legal__note {
+  background: var(--paper); border-left: 2px solid var(--clay);
+  padding: var(--sp-5) var(--sp-6); margin-block: var(--sp-6);
+}
+.legal__note p:last-child { margin-bottom: 0; }
+
+/* Two class names so it beats the `.legal a` underline above. */
+.legal .legal__back {
+  display: inline-block; margin-top: var(--sp-9);
+  font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--clay-ink); text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--sp-1);
+}
+.legal .legal__back:hover { border-bottom-color: var(--clay); }
 
