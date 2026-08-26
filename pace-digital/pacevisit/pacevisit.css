@@ -1,0 +1,294 @@
+/* ==========================================================================
+   PaceVisit product page — the only styles that are not already in pace.css
+   ==========================================================================
+   Follows DESIGN-SYSTEM.md exactly:
+     - editorial palette only, taken from the tokens in pace.css
+     - corners are cut (2-3px), never a pill
+     - hairlines instead of shadows
+     - spacing from the 4/8/12/16/24/32/48/64/96 scale
+   The one deliberate exception is the phone mock, which is a picture OF the
+   product and therefore carries the app's own blue inside its screen. That
+   blue must never escape the phone frame onto the page.
+   ========================================================================== */
+
+/* The app's own palette — used inside the phone screen and nowhere else. */
+:root {
+  --pv-app:       #0284C7;   /* PaceVisit clinical blue   */
+  --pv-app-deep:  #075985;
+  --pv-app-wash:  #F0F9FF;
+  --pv-app-line:  #DCEEF9;
+  --pv-app-ink:   #0F172A;
+}
+
+/* ---------- Hero ---------------------------------------------------------- */
+.pv-hero { padding-top: clamp(40px, 5vw, 72px); }
+
+.pv-hero__in {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+.pv-hero__h { margin-block: var(--sp-5) var(--sp-6); }
+
+.pv-hero__copy .btn-row { margin-top: clamp(28px, 3.4vw, 40px); }
+
+.pv-note {
+  margin-top: var(--sp-5);
+  font-size: 13.2px;
+  color: var(--muted);
+  padding-left: var(--sp-4);
+  border-left: 2px solid var(--brass);
+}
+
+/* ---------- The phone mock ------------------------------------------------ */
+.pv-hero__art { display: flex; justify-content: center; }
+
+.pv-phone {
+  width: min(300px, 100%);
+  background: var(--ink);
+  border-radius: 26px;              /* a phone is genuinely round-cornered —
+                                       this is an object, not a UI element,
+                                       so the cut-corner rule does not apply */
+  padding: 10px;
+  position: relative;
+  border: 1px solid var(--line);
+}
+
+.pv-phone__notch {
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  width: 74px; height: 5px; border-radius: 3px;
+  background: rgba(239, 231, 218, .28);
+  z-index: 2;
+}
+
+.pv-phone__screen {
+  background: var(--pv-app-wash);
+  border-radius: 18px;
+  padding: 32px var(--sp-4) var(--sp-4);
+  min-height: 430px;
+}
+
+.pv-phone__day {
+  text-align: center;
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #7C8A96;
+  margin-bottom: var(--sp-4);
+}
+
+.pv-bubble {
+  background: var(--pv-app);
+  color: #fff;
+  font-size: 13.4px;
+  line-height: 1.5;
+  padding: var(--sp-4);
+  border-radius: 14px 14px 14px 3px;
+}
+
+.pv-phone__meta {
+  font-size: 10.8px;
+  color: #7C8A96;
+  margin: var(--sp-3) 0 var(--sp-6);
+  display: flex; align-items: center; gap: 6px;
+}
+.pv-phone__meta::before {
+  content: ""; width: 5px; height: 5px; border-radius: 50%;
+  background: #059669; flex: none;
+}
+
+.pv-phone__card {
+  background: #fff;
+  border: 1px solid var(--pv-app-line);
+  border-radius: 10px;
+  padding: var(--sp-4);
+}
+
+.pv-phone__label {
+  display: block;
+  font-size: 9.8px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--pv-app-deep); font-weight: 600;
+  margin-bottom: var(--sp-3);
+}
+
+.pv-phone__row {
+  display: flex; gap: var(--sp-3);
+  font-size: 12.6px; color: var(--pv-app-ink);
+  padding: 7px 0;
+  border-top: 1px solid var(--pv-app-wash);
+}
+.pv-phone__row:first-of-type { border-top: 0; }
+.pv-phone__row span {
+  font-variant-numeric: tabular-nums;
+  color: var(--pv-app); font-weight: 600; flex: none; width: 42px;
+}
+.pv-phone__row--dim { color: #9AA7B2; }
+.pv-phone__row--dim span { color: #9AA7B2; font-weight: 400; }
+
+@media (max-width: 900px) {
+  .pv-hero__in { grid-template-columns: minmax(0, 1fr); }
+  .pv-hero__art { order: -1; }
+  .pv-phone { width: min(260px, 100%); }
+  .pv-phone__screen { min-height: 0; }
+}
+
+/* ---------- Statistics (three, not the usual four) ------------------------ */
+.pv-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* The section behind them is Sand, so the cells lift to Paper instead. */
+.pv-stats .stat { background: var(--paper); }
+@media (max-width: 780px) {
+  .pv-stats { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- The "how it works today" panel -------------------------------- */
+.pv-panel { margin-top: clamp(32px, 4vw, 48px); }
+.pv-panel h3 { margin-bottom: var(--sp-4); }
+.pv-panel p { color: var(--body); margin-bottom: var(--sp-4); max-width: 68ch; }
+
+.pv-panel__pull {
+  margin-bottom: 0 !important;
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: clamp(1.06rem, 1.5vw, 1.24rem);
+  font-style: italic;
+  color: var(--ink) !important;
+}
+
+/* ---------- The honest "what it does not do" block ------------------------ */
+.pv-honest {
+  margin-top: clamp(32px, 4vw, 48px);
+  display: grid; grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--sp-5);
+  background: var(--clay-wash);
+  border: 1px solid #E8CEBC;
+  border-radius: var(--r-sm);
+  padding: clamp(24px, 3vw, 36px);
+}
+.pv-honest > .ico { color: var(--clay-ink); }
+.pv-honest h3 { margin-bottom: var(--sp-4); }
+.pv-honest p { color: #6A5648; font-size: 14.6px; margin-bottom: var(--sp-3); max-width: 70ch; }
+.pv-honest strong { color: var(--ink); }
+.pv-honest__note {
+  margin-bottom: 0 !important;
+  font-size: 13px !important;
+  color: var(--clay-ink) !important;
+}
+@media (max-width: 620px) {
+  .pv-honest { grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
+}
+
+/* ---------- The four steps ------------------------------------------------ */
+.pv-steps {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px; background: var(--line);
+  border: 1px solid var(--line);
+}
+.pv-step {
+  background: var(--paper);
+  padding: clamp(24px, 3vw, 36px) clamp(18px, 2.2vw, 28px);
+}
+.pv-step__no {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 15px; color: var(--clay-ink);
+  margin-bottom: var(--sp-4);
+}
+.pv-step h3 { margin-bottom: var(--sp-3); }
+.pv-step p { font-size: 14.2px; color: var(--body); }
+
+@media (max-width: 960px) { .pv-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .pv-steps { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Pricing ------------------------------------------------------- */
+.pv-plans {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px; background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.pv-plan {
+  background: var(--paper);
+  padding: clamp(28px, 3.2vw, 40px) clamp(20px, 2.4vw, 32px);
+  display: flex; flex-direction: column;
+  position: relative;
+}
+
+.pv-plan--lead { background: var(--sand); }
+
+.pv-plan__flag {
+  position: absolute; top: 0; left: 0;
+  background: var(--clay-btn); color: #FFF7F1;
+  font-size: 9.6px; letter-spacing: .17em; text-transform: uppercase;
+  font-weight: 600;
+  padding: 6px 12px;
+}
+
+.pv-plan__name {
+  font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--brass); font-weight: 600;
+  margin-bottom: var(--sp-4);
+}
+.pv-plan--lead .pv-plan__name { margin-top: var(--sp-4); }
+
+.pv-plan__price {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 2.7rem); line-height: 1;
+  letter-spacing: -.03em; color: var(--ink);
+}
+.pv-plan__price span {
+  font-family: var(--font-body);
+  font-size: 13px; letter-spacing: 0; color: var(--muted); font-weight: 400;
+}
+
+.pv-plan__sub {
+  font-size: 13px; color: var(--muted);
+  margin: var(--sp-3) 0 var(--sp-6);
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--line);
+}
+
+.pv-plan__list {
+  list-style: none; margin: 0 0 var(--sp-6); padding: 0;
+  display: grid; gap: var(--sp-3);
+  flex: 1;
+}
+.pv-plan__list li {
+  display: grid; grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--sp-3); align-items: start;
+  font-size: 14.2px; color: var(--body);
+}
+.pv-plan__list .ico { color: var(--clay-ink); margin-top: 2px; }
+
+.pv-plan .btn { width: 100%; justify-content: center; }
+
+.pv-pricenote {
+  margin-top: var(--sp-6);
+  text-align: center;
+  font-size: 13.2px; color: var(--muted);
+  max-width: 62ch; margin-inline: auto;
+}
+
+@media (max-width: 860px) { .pv-plans { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Early-access panel -------------------------------------------- */
+.pv-start {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 56px);
+}
+.pv-start__col h3 { margin-bottom: var(--sp-5); }
+.pv-start__col .pv-plan__list { margin-bottom: 0; }
+@media (max-width: 700px) { .pv-start { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Closing call to action ---------------------------------------- */
+.pv-cta { margin-top: clamp(32px, 4vw, 48px); text-align: center; }
+.pv-cta__line {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.7vw, 1.34rem);
+  color: var(--ink);
+  margin-bottom: var(--sp-6);
+}
+.pv-cta__row { justify-content: center; }

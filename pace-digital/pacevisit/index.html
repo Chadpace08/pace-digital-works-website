@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Cookiebot Cookie Consent Banner -->
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="b22f8c48-6a34-4c8e-b06d-b1584a6fefa5" data-blockingmode="auto" type="text/javascript"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PaceVisit — Booking &amp; reminders for dental clinics | Pace Digital Works</title>
+<meta name="description" content="PaceVisit is booking and reminder software for small dental clinics in the Philippines. Patients book online, reminders go out automatically, and nobody has to check the notebook.">
+<meta name="theme-color" content="#1B1815">
+<script>if(location.hostname.endsWith('.pages.dev')){location.replace('https://pacedigitalworks.com'+location.pathname+location.search+location.hash);}</script>
+<link rel="canonical" href="https://pacedigitalworks.com/pacevisit/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="PaceVisit — Booking &amp; reminders for dental clinics">
+<meta property="og:description" content="Patients book online. Reminders go out automatically. Nobody has to check the notebook.">
+<meta property="og:url" content="https://pacedigitalworks.com/pacevisit/">
+<meta property="og:image" content="https://pacedigitalworks.com/assets/img/og-cover.jpg">
+
+<link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+
+<!-- ===== Structured data ==================================================
+     Facts for search engines and AI assistants. Nobody browsing sees it.
+
+     Every claim below is taken from this page, and every claim on this page
+     was checked against the product's own migrations before it was written.
+     The FAQ answers here must stay word-for-word identical to the visible
+     "Common questions" section. If you change one, change both.
+
+     No "review" or "aggregateRating" — PaceVisit has no customers yet, and
+     inventing one would be a lie as well as a Search Console error. ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://pacedigitalworks.com/pacevisit/#software",
+      "name": "PaceVisit",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web browser",
+      "url": "https://pacedigitalworks.com/pacevisit/",
+      "description": "Booking and reminder software for small dental clinics. Patients book online without an account, reminder emails send themselves, and text reminders are written for the clinic to send from their own phone in one tap.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://pacedigitalworks.com/#organization" },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free",
+          "price": "0",
+          "priceCurrency": "PHP",
+          "description": "One staff member, 40 bookings a month, booking page and email confirmations."
+        },
+        {
+          "@type": "Offer",
+          "name": "Clinic",
+          "price": "990",
+          "priceCurrency": "PHP",
+          "description": "Up to three staff, unlimited bookings, automatic email reminders, one-tap text reminders, deposit rules, six-month recalls and reports. First month free."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pacedigitalworks.com/pacevisit/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does PaceVisit send the text messages by itself?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, and that is on purpose. PaceVisit writes the message and opens your phone's messaging app with everything already filled in. You press send. The text then comes from your clinic's own number, the one your patients already recognise, instead of an unfamiliar sender ID. It also costs you nothing per message. Email reminders are different: those send themselves with nobody touching them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can patients pay a deposit through the booking page?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not yet. PaceVisit works out the deposit you asked for and shows it to the patient, then you record the payment when it arrives — cash, GCash, Maya or bank transfer, with the reference number. Collecting money online is on the roadmap. We would rather tell you what it does today than promise a screen that does not exist."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do my patients need to download an app or make an account?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. They tap your booking link, pick a time and put in their name and number. That is the whole thing. No app, no password, no account. It works on any phone with a browser."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if two patients book the same slot at the same second?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only one of them gets it. The database itself refuses the second booking rather than the app trying to check first and hoping. The second patient sees a message saying that time has just gone, and the free times reload. Double-booking is not unlikely here, it is impossible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my patient list private?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every table in the database has row level security switched on and scoped to your clinic, which means the database refuses to hand another clinic your records even if the app itself had a bug. The public booking page runs on a separate connection that never carries anyone's login."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I am not good with computers. Can I still use it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and I set it up for you myself — your services, your prices, your opening hours, your staff. You do not start from an empty screen. If something confuses you, message me and I will fix it or change it."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- Fonts are self-hosted in assets/fonts and declared by pace.css, so there is
+     nothing to preconnect to. Do not add a Google Fonts link back in here. -->
+<link rel="stylesheet" href="../assets/css/pace.css">
+<link rel="stylesheet" href="pacevisit.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to the main content</a>
+
+<!-- ===== Icon set: one style only (Lucide-style outline), matching the studio
+     site exactly. Never add a second style, and never use emoji as icons. ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.9L3 20.5l1.6-4.8A8.3 8.3 0 0 1 3.5 11 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 20.5v-1.8a4 4 0 0 0-4-4H6.5a4 4 0 0 0-4 4v1.8"/><circle cx="9.2" cy="7.5" r="3.6"/><path d="M21.5 20.5v-1.8a4 4 0 0 0-3-3.8M16 4a3.6 3.6 0 0 1 0 7"/></symbol>
+<symbol id="i-peso" viewBox="0 0 24 24"><path d="M7 20V4h5.5a4.5 4.5 0 0 1 0 9H7"/><path d="M4.5 8.5h11M4.5 12h11"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7.5 16.5v-4M12 16.5v-8M16.5 16.5v-5.5M21 16.5V6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 21.5s7.5-3.5 7.5-9.5V5.5L12 2.5 4.5 5.5V12c0 6 7.5 9.5 7.5 9.5Z"/><path d="m9.2 11.8 2 2 3.6-3.6"/></symbol>
+<symbol id="i-tooth" viewBox="0 0 24 24"><path d="M12 3.5c-1.6 0-2.3.7-3.9.7-1.5 0-3.6.6-3.6 4.2 0 2.6.8 4 1.4 6.2.5 1.9.6 5.9 2.4 5.9 1.7 0 1.6-3.6 2.2-5.3.3-.9.8-1.3 1.5-1.3s1.2.4 1.5 1.3c.6 1.7.5 5.3 2.2 5.3 1.8 0 1.9-4 2.4-5.9.6-2.2 1.4-3.6 1.4-6.2 0-3.6-2.1-4.2-3.6-4.2-1.6 0-2.3-.7-3.9-.7Z"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2.5 3.5 3.5L17 9.5"/><path d="M3.5 12V9.5a3.5 3.5 0 0 1 3.5-3.5h13.5"/><path d="m7 21.5-3.5-3.5L7 14.5"/><path d="M20.5 12v2.5a3.5 3.5 0 0 1-3.5 3.5H3.5"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M21.5 16.9v2.8a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6 2 2 0 0 1 2-2.2h2.8a2 2 0 0 1 2 1.7c.13 1 .36 1.9.7 2.8a2 2 0 0 1-.46 2.1L7.7 9.7a16 16 0 0 0 6 6l1.2-1.15a2 2 0 0 1 2.1-.45c.9.33 1.83.57 2.8.7a2 2 0 0 1 1.7 2.1Z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></symbol>
+<symbol id="i-facebook" viewBox="0 0 24 24"><path d="M17.5 2.5H15A4.5 4.5 0 0 0 10.5 7v3H7.5v4h3v7.5h4V14h3l.5-4h-3.5V7a1 1 0 0 1 1-1h2.5Z"/></symbol>
+<symbol id="i-messenger" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.145 2 11.258c0 2.91 1.45 5.51 3.727 7.185V22l3.433-1.885c.91.252 1.875.388 2.84.388 5.523 0 10-4.145 10-9.258S17.523 2 12 2zm1 12.316l-2.6-2.772-5.07 2.772 5.57-5.91 2.6 2.772 5.07-2.772-5.57 5.91z" fill="currentColor"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+</defs></svg>
+
+<!-- ===================== Top strip ===================== -->
+<div class="strip">
+  <div class="wrap strip__in">
+    <span>PaceVisit — Booking &amp; reminders for dental clinics</span>
+    <span><span class="strip__dot"></span>Looking for our first three clinics</span>
+  </div>
+</div>
+
+<!-- ===================== Header ===================== -->
+<header class="hdr" data-hdr>
+  <div class="wrap hdr__in">
+    <a class="brand" href="../index.html" aria-label="Pace Digital Works — home">
+      <img class="brand__img" src="../assets/img/logo-small.png" alt="Pace Digital Works logo" width="54" height="36">
+      <span class="brand__name">Pace <span class="brand__accent">Digital</span> Works</span>
+    </a>
+
+    <nav class="nav" data-nav aria-label="Main">
+      <a href="#cost">The problem</a>
+      <a href="#does">What it does</a>
+      <a href="#how">How it works</a>
+      <a href="#dental">Why dental</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">Questions</a>
+      <a class="btn btn--ink btn--sm" href="#start"><span class="btn__t">Get early access</span></a>
+    </nav>
+
+    <a class="btn btn--ink btn--sm" href="#start"><span class="btn__t">Get early access</span></a>
+
+    <button class="burger" data-burger type="button" aria-label="Open the menu" aria-expanded="false">
+      <svg class="ico" aria-hidden="true"><use href="#i-menu"></use></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================== Hero ===================== -->
+<section class="section section--tight pv-hero">
+  <div class="wrap pv-hero__in">
+
+    <div class="pv-hero__copy">
+      <p class="kicker"><span class="kicker__no">—</span> A Pace Digital Works product</p>
+      <h1 class="h-lg rv-lines pv-hero__h">
+        <span class="ln"><span>Your patients forget.</span></span>
+        <span class="ln"><span>PaceVisit <em class="acc">remembers.</em></span></span>
+      </h1>
+      <p class="lede rv">Booking and reminder software for small dental clinics. Patients book
+        themselves online, the reminder emails send themselves, and the text reminder is written
+        and waiting for you to tap send from your own clinic number.</p>
+
+      <div class="btn-row rv">
+        <a class="btn btn--clay" href="#start">
+          <span class="btn__t">Get early access</span>
+          <svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
+        </a>
+        <a class="btn btn--line" href="#does"><span class="btn__t">See what it does</span></a>
+      </div>
+
+      <p class="pv-note rv">Free for the first month. No contract. I set it up for you myself.</p>
+    </div>
+
+    <!-- The phone is drawn, not photographed. It is a picture of the product,
+         so it carries the app's own blue inside the screen while the page
+         around it stays editorial. Do not put a photograph beside it. -->
+    <div class="pv-hero__art rv" aria-hidden="true">
+      <div class="pv-phone">
+        <div class="pv-phone__notch"></div>
+        <div class="pv-phone__screen">
+          <p class="pv-phone__day">Yesterday, 4:02 PM</p>
+          <div class="pv-bubble">
+            Hi Maria — this is a reminder from Smile Dental. Your cleaning is
+            tomorrow, Tuesday 27 Aug, at 10:00 AM. Reply here if you need to move it.
+          </div>
+          <p class="pv-phone__meta">Sent from the clinic's own number</p>
+
+          <div class="pv-phone__card">
+            <span class="pv-phone__label">Tomorrow</span>
+            <p class="pv-phone__row"><span>10:00</span> Maria S. — Cleaning</p>
+            <p class="pv-phone__row"><span>11:30</span> Ana R. — Check-up</p>
+            <p class="pv-phone__row pv-phone__row--dim"><span>13:00</span> Free</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== 01 — The cost ===================== -->
+<section class="section surf--sand" id="cost">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="kicker__no">01</span> The problem</p>
+      <h2 class="h-lg rv-lines">
+        <span class="ln"><span>Six to ten patients</span></span>
+        <span class="ln"><span>a week <em class="acc">don't turn up.</em></span></span>
+      </h2>
+      <p class="lede rv">Most clinic owners have stopped counting, because counting it makes them
+        angry. Here is what those empty chairs are actually worth.</p>
+    </div>
+
+    <div class="stats pv-stats">
+      <div class="stat rv">
+        <b class="is-clay">&#8369;1,500+</b>
+        <span>What one missed dental appointment costs. A missed haircut costs about &#8369;200.</span>
+      </div>
+      <div class="stat rv">
+        <b data-count="3334">3,334</b>
+        <span>Dental clinics in Metro Manila. About 97.6% are owned by one dentist.</span>
+      </div>
+      <div class="stat rv">
+        <b>1</b>
+        <span>One saved no-show a month more than covers the &#8369;990 fee. That is the whole argument.</span>
+      </div>
+    </div>
+
+    <div class="panel rv pv-panel">
+      <h3 class="h-sm">How it works in most clinics today</h3>
+      <p>Patients message the clinic's Facebook page. Whoever is at reception replies, checks a
+        paper appointment book on the counter, writes the name in a box, and messages back. If
+        she is on break, or it is Sunday, the message sits there for hours.</p>
+      <p>Reminders are supposed to go out the day before. They go out when it is quiet. On busy
+        days they do not go out at all &mdash; and busy days are exactly when the schedule is
+        fullest.</p>
+      <p class="pv-panel__pull">None of that is anyone's fault. It is just what happens when the
+        appointment book is made of paper.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 — What it does ===================== -->
+<section class="section" id="does">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="kicker__no">02</span> What it does</p>
+      <h2 class="h-lg rv-lines">
+        <span class="ln"><span>Booking is the easy</span></span>
+        <span class="ln"><span>part. <em class="acc">We do the rest.</em></span></span>
+      </h2>
+      <p class="lede rv">Taking the booking was never the hard bit. Everything that has to happen
+        afterwards is the hard bit, and that is the part nobody has time for.</p>
+    </div>
+
+    <div class="eg eg--3 eg--rail" tabindex="0" role="group"
+         aria-label="What PaceVisit does — on a phone, swipe sideways to see them all">
+
+      <article class="cell rv">
+        <span class="cell__no">01</span>
+        <svg class="ico ico--lg" aria-hidden="true"><use href="#i-calendar"></use></svg>
+        <h3>Patients book themselves</h3>
+        <p>You get one link. Put it on your Facebook page. Patients tap it, see your real free
+          times, and book. No app to download, no account, no password.</p>
+      </article>
+
+      <article class="cell rv">
+        <span class="cell__no">02</span>
+        <svg class="ico ico--lg" aria-hidden="true"><use href="#i-mail"></use></svg>
+        <h3>Emails send themselves</h3>
+        <p>Confirmation when they book. Reminder the day before. Thank-you afterwards. Nobody
+          presses anything &mdash; the system does it while the clinic is closed.</p>
+      </article>
+
+      <article class="cell rv">
+        <span class="cell__no">03</span>
+        <svg class="ico ico--lg" aria-hidden="true"><use href="#i-chat"></use></svg>
+        <h3>Texts and Messenger, in one tap</h3>
+        <p>The message is written for you and opens in your phone ready to send &mdash; by text or on
+          Messenger. It comes from your clinic's own number, the one patients recognise and reply
+          to, and it costs you nothing per message.</p>
+      </article>
+
+      <article class="cell rv">
+        <span class="cell__no">04</span>
+        <svg class="ico ico--lg" aria-hidden="true"><use href="#i-repeat"></use></svg>
+        <h3>Six-month recalls</h3>
+        <p>Every patient who had a cleaning gets a nudge when the next one is due. This is money
+          you are already owed and almost nobody chases it.</p>
+      </article>
+
+      <article class="cell rv">
+        <span class="cell__no">05</span>
+        <svg class="ico ico--lg" aria-hidden="true"><use href="#i-peso"></use></svg>
+        <h3>Deposits and balances</h3>
+        <p>Set a deposit rule per treatment. PaceVisit works out what is owed and shows it to the
+          patient. You record the payment &mdash; cash, GCash, Maya or transfer &mdash; with its reference.</p>
+      </article>
+
+      <article class="cell rv">
+        <span class="cell__no">06</span>
+        <svg class="ico ico--lg" aria-hidden="true"><use href="#i-chart"></use></svg>
+        <h3>No-shows, counted</h3>
+        <p>You finally see the number: no-shows this month against last month. You cannot fix
+          what nobody is measuring.</p>
+      </article>
+
+    </div>
+
+    <div class="pv-honest rv">
+      <svg class="ico ico--lg" aria-hidden="true"><use href="#i-shield"></use></svg>
+      <div>
+        <h3 class="h-sm">One thing it does not do yet</h3>
+        <p><strong>It does not collect money online.</strong> PaceVisit works out the deposit you
+          asked for and shows it to the patient, then you record the payment when it arrives &mdash;
+          cash, GCash, Maya or bank transfer, with its reference number. Card and e-wallet
+          collection are on the roadmap.</p>
+        <p class="pv-honest__note">It is on this page because you should know before you sign up,
+          not after.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 — How it works ===================== -->
+<section class="section surf--sand" id="how">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="kicker__no">03</span> How it works</p>
+      <h2 class="h-lg rv-lines">
+        <span class="ln"><span>Set it up once.</span></span>
+        <span class="ln"><span>Then it <em class="acc">runs itself.</em></span></span>
+      </h2>
+    </div>
+
+    <ol class="pv-steps">
+      <li class="pv-step rv">
+        <span class="pv-step__no">01</span>
+        <h3 class="h-sm">I set your clinic up</h3>
+        <p>Your treatments, your prices, your opening hours, your dentists, your days off. You do
+          not start from an empty screen and you do not need training for it.</p>
+      </li>
+      <li class="pv-step rv">
+        <span class="pv-step__no">02</span>
+        <h3 class="h-sm">You share one link</h3>
+        <p>It goes on your Facebook page, your Google listing, and in your reply message. That
+          link is now your reception desk, open at 11pm on a Sunday.</p>
+      </li>
+      <li class="pv-step rv">
+        <span class="pv-step__no">03</span>
+        <h3 class="h-sm">Patients pick a real free time</h3>
+        <p>They only ever see times you can actually take &mdash; your hours, minus your bookings,
+          minus your breaks. Two people cannot take the same slot.</p>
+      </li>
+      <li class="pv-step rv">
+        <span class="pv-step__no">04</span>
+        <h3 class="h-sm">The reminders go out</h3>
+        <p>Confirmation straight away, reminder the day before, thank-you after, recall in six
+          months. You look at your phone in the morning and the day is already arranged.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== 04 — Why dental (the one dark section) ===================== -->
+<section class="section surf--dark" id="dental">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="kicker__no">04</span> Why dental</p>
+      <h2 class="h-lg rv-lines">
+        <span class="ln"><span>Built for one job.</span></span>
+        <span class="ln"><span><em class="acc">Not twelve.</em></span></span>
+      </h2>
+      <p class="lede rv">There is plenty of booking software. Almost all of it was built for
+        salons and then pointed at everyone else. Three things are different here.</p>
+    </div>
+
+    <div class="eg eg--3">
+      <article class="cell rv">
+        <span class="cell__no">01</span>
+        <svg class="ico ico--lg" aria-hidden="true"><use href="#i-tooth"></use></svg>
+        <h3>A missed slot matters more</h3>
+        <p>The whole design assumes an empty chair is expensive. That is why the reminders,
+          the recalls and the no-show count came first, and the pretty calendar came second.</p>
+      </article>
+      <article class="cell rv">
+        <span class="cell__no">02</span>
+        <svg class="ico ico--lg" aria-hidden="true"><use href="#i-phone"></use></svg>
+        <h3>Your number, not a robot's</h3>
+        <p>Texts come from the phone on your reception desk. Patients reply to it and someone
+          is actually there. No sender ID registration, no per-message cost.</p>
+      </article>
+      <article class="cell rv">
+        <span class="cell__no">03</span>
+        <svg class="ico ico--lg" aria-hidden="true"><use href="#i-users"></use></svg>
+        <h3>One person to talk to</h3>
+        <p>Not a support ticket in another timezone. You message me, in English or Tagalog, and
+          I answer. That is the advantage of buying from a small studio.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 — Pricing ===================== -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="head head--center">
+      <p class="kicker kicker--center"><span class="kicker__no">05</span> Pricing</p>
+      <h2 class="h-lg rv-lines">
+        <span class="ln"><span>&#8369;990 a month.</span></span>
+        <span class="ln"><span><em class="acc">First month free.</em></span></span>
+      </h2>
+      <p class="lede rv">One saved no-show pays for it. Cancel whenever you like &mdash; there is no
+        contract and no setup fee.</p>
+    </div>
+
+    <div class="pv-plans">
+
+      <article class="pv-plan rv">
+        <p class="pv-plan__name">Free</p>
+        <p class="pv-plan__price">&#8369;0</p>
+        <p class="pv-plan__sub">For trying it out</p>
+        <ul class="pv-plan__list">
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>One staff member</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>40 bookings a month</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Your booking page</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Confirmation emails</li>
+        </ul>
+        <a class="btn btn--line" href="#start"><span class="btn__t">Start free</span></a>
+      </article>
+
+      <article class="pv-plan pv-plan--lead rv">
+        <p class="pv-plan__flag">Recommended</p>
+        <p class="pv-plan__name">Clinic</p>
+        <p class="pv-plan__price">&#8369;990<span>/month</span></p>
+        <p class="pv-plan__sub">For a working clinic</p>
+        <ul class="pv-plan__list">
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Up to 3 staff</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Unlimited bookings</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Automatic email reminders</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>One-tap text reminders</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Six-month recalls</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Deposit rules and payment records</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Patient list and reports</li>
+        </ul>
+        <a class="btn btn--clay" href="#start">
+          <span class="btn__t">Get early access</span>
+          <svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
+        </a>
+      </article>
+
+      <article class="pv-plan rv">
+        <p class="pv-plan__name">Clinic Plus</p>
+        <p class="pv-plan__price">&#8369;1,990<span>/month</span></p>
+        <p class="pv-plan__sub">For two branches</p>
+        <ul class="pv-plan__list">
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Everything in Clinic</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Up to 8 staff</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Two branches</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Full reports</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Priority support</li>
+        </ul>
+        <a class="btn btn--line" href="#start"><span class="btn__t">Ask about it</span></a>
+      </article>
+
+    </div>
+
+    <p class="pv-pricenote rv">Prices are in Philippine pesos. If you join as one of the first
+      clinics, your price stays at &#8369;990 for as long as you stay &mdash; even when it goes up for
+      everyone else.</p>
+  </div>
+</section>
+
+<!-- ===================== 06 — Questions ===================== -->
+<section class="section surf--sand" id="faq">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="kicker__no">06</span> Common questions</p>
+      <h2 class="h-lg rv-lines">
+        <span class="ln"><span>Common <em class="acc">questions.</em></span></span>
+      </h2>
+    </div>
+
+    <!-- These answers are duplicated word-for-word in the FAQPage structured
+         data in the head. Change one, change both. -->
+    <div class="fold">
+      <details class="fold__item rv" open>
+        <summary class="fold__q">
+          <span class="fold__no">01</span>
+          <h3 class="fold__t">Does PaceVisit send the text messages by itself?</h3>
+          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+        </summary>
+        <p class="fold__body">No, and that is on purpose. PaceVisit writes the message and opens
+          your phone's messaging app with everything already filled in. You press send. The text
+          then comes from your clinic's own number, the one your patients already recognise,
+          instead of an unfamiliar sender ID. It also costs you nothing per message. Email
+          reminders are different: those send themselves with nobody touching them.</p>
+      </details>
+
+      <details class="fold__item rv">
+        <summary class="fold__q">
+          <span class="fold__no">02</span>
+          <h3 class="fold__t">Can patients pay a deposit through the booking page?</h3>
+          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+        </summary>
+        <p class="fold__body">Not yet. PaceVisit works out the deposit you asked for and shows it
+          to the patient, then you record the payment when it arrives &mdash; cash, GCash, Maya or bank
+          transfer, with the reference number. Collecting money online is on the roadmap. We would
+          rather tell you what it does today than promise a screen that does not exist.</p>
+      </details>
+
+      <details class="fold__item rv">
+        <summary class="fold__q">
+          <span class="fold__no">03</span>
+          <h3 class="fold__t">Do my patients need to download an app or make an account?</h3>
+          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+        </summary>
+        <p class="fold__body">No. They tap your booking link, pick a time and put in their name
+          and number. That is the whole thing. No app, no password, no account. It works on any
+          phone with a browser.</p>
+      </details>
+
+      <details class="fold__item rv">
+        <summary class="fold__q">
+          <span class="fold__no">04</span>
+          <h3 class="fold__t">What happens if two patients book the same slot at the same second?</h3>
+          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+        </summary>
+        <p class="fold__body">Only one of them gets it. The database itself refuses the second
+          booking rather than the app trying to check first and hoping. The second patient sees a
+          message saying that time has just gone, and the free times reload. Double-booking is not
+          unlikely here, it is impossible.</p>
+      </details>
+
+      <details class="fold__item rv">
+        <summary class="fold__q">
+          <span class="fold__no">05</span>
+          <h3 class="fold__t">Is my patient list private?</h3>
+          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+        </summary>
+        <p class="fold__body">Yes. Every table in the database has row level security switched on
+          and scoped to your clinic, which means the database refuses to hand another clinic your
+          records even if the app itself had a bug. The public booking page runs on a separate
+          connection that never carries anyone's login.</p>
+      </details>
+
+      <details class="fold__item rv">
+        <summary class="fold__q">
+          <span class="fold__no">06</span>
+          <h3 class="fold__t">I am not good with computers. Can I still use it?</h3>
+          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+        </summary>
+        <p class="fold__body">Yes, and I set it up for you myself &mdash; your services, your prices,
+          your opening hours, your staff. You do not start from an empty screen. If something
+          confuses you, message me and I will fix it or change it.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 — Start ===================== -->
+<section class="section" id="start">
+  <div class="wrap">
+    <div class="head head--center">
+      <p class="kicker kicker--center"><span class="kicker__no">07</span> Early access</p>
+      <h2 class="h-lg rv-lines">
+        <span class="ln"><span>Looking for our</span></span>
+        <span class="ln"><span>first <em class="acc">three clinics.</em></span></span>
+      </h2>
+      <p class="lede rv">PaceVisit is built and being tested. I am looking for three Metro Manila
+        dental clinics to use it properly and tell me honestly what is wrong with it.</p>
+    </div>
+
+    <div class="panel rv pv-start">
+      <div class="pv-start__col">
+        <h3 class="h-sm">What you get</h3>
+        <ul class="pv-plan__list">
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Three months free, not one</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>I set the whole clinic up for you</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>&#8369;990 locked in for as long as you stay</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Your requests go to the front of the queue</li>
+        </ul>
+      </div>
+      <div class="pv-start__col">
+        <h3 class="h-sm">What I ask</h3>
+        <ul class="pv-plan__list">
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Use it for real, not just a look</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Tell me honestly when it annoys you</li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg>Let me use your no-show numbers as proof, with your name only if you agree</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pv-cta rv">
+      <p class="pv-cta__line">Message me and tell me about your clinic. No form, no sales call.</p>
+      <div class="btn-row pv-cta__row">
+        <a class="btn btn--clay" href="https://m.me/pacedigitalworks" target="_blank" rel="noopener">
+          <svg class="ico ico--sm" aria-hidden="true"><use href="#i-messenger"></use></svg>
+          <span class="btn__t">Message on Messenger</span>
+        </a>
+        <a class="btn btn--ink" href="https://www.facebook.com/pacedigitalworks" target="_blank" rel="noopener">
+          <svg class="ico ico--sm" aria-hidden="true"><use href="#i-facebook"></use></svg>
+          <span class="btn__t">Visit the page</span>
+        </a>
+        <a class="btn btn--line" href="mailto:hello@pacedigitalworks.com?subject=PaceVisit%20early%20access">
+          <svg class="ico ico--sm" aria-hidden="true"><use href="#i-mail"></use></svg>
+          <span class="btn__t">Send an email</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== Footer ===================== -->
+<footer class="ftr">
+  <div class="wrap">
+    <p class="ftr__mark">Pace <i>Digital</i> Works</p>
+
+    <div class="ftr__in">
+      <div>
+        <h4>PaceVisit</h4>
+        <p>Booking and reminder software for small dental clinics, built by Pace Digital Works in
+           the Philippines. Part of a studio that also builds websites, custom business software
+           and automation.</p>
+      </div>
+
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#cost">The problem</a></li>
+          <li><a href="#does">What it does</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#dental">Why dental</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">Common questions</a></li>
+          <li><a href="../index.html">The studio</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Get in touch</h4>
+        <ul class="ftr__icons">
+          <li>
+            <a class="ftr__icon" href="mailto:hello@pacedigitalworks.com"
+               title="Send an email" aria-label="Send an email">
+              <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+              <span class="sr-only">Send an email</span>
+            </a>
+          </li>
+          <li>
+            <a class="ftr__icon" href="https://m.me/pacedigitalworks" target="_blank" rel="noopener"
+               title="Chat on Messenger" aria-label="Chat on Messenger">
+              <svg class="ico" aria-hidden="true"><use href="#i-messenger"></use></svg>
+              <span class="sr-only">Chat on Messenger</span>
+            </a>
+          </li>
+          <li>
+            <a class="ftr__icon" href="https://www.facebook.com/pacedigitalworks" target="_blank" rel="noopener"
+               title="Message on Facebook" aria-label="Message on Facebook">
+              <svg class="ico" aria-hidden="true"><use href="#i-facebook"></use></svg>
+              <span class="sr-only">Message on Facebook</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ftr__base">
+      <span>&copy; <span data-year>2026</span> Pace Digital Works</span>
+      <nav class="ftr__legal" aria-label="Legal">
+        <a href="../privacy.html">Privacy policy</a>
+        <a href="../terms.html">Terms of service</a>
+        <button type="button" class="ftr__cookies"
+                onclick="if(window.Cookiebot){Cookiebot.renew();}">Cookie settings</button>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/pace.js?v=20260817" defer></script>
+
+<!-- Floating Messenger Widget -->
+<a class="float-widget" href="https://m.me/pacedigitalworks" target="_blank" rel="noopener" aria-label="Chat with us on Facebook Messenger">
+  <svg class="ico" aria-hidden="true"><use href="#i-messenger"></use></svg>
+  <span class="float-widget__label">Chat with us</span>
+</a>
+
+</body>
+</html>
