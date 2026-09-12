@@ -14,10 +14,14 @@
 <meta name="robots" content="noindex, follow">
 <script>if(location.hostname.endsWith('.pages.dev')){location.replace('https://pacedigitalworks.com'+location.pathname+location.search+location.hash);}</script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/pace.css">
+<!-- Fonts are served from this site, not from Google. The two files the
+     first screen needs are preloaded so the headline does not flash in a
+     fallback typeface first. See section 0 of pace.css. -->
+<link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- ?v= is a cache-buster — see the note in index.html. Keep the number the
+     same on every page, and change it on every page together. -->
+<link rel="stylesheet" href="/assets/css/pace.css?v=20260831">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">

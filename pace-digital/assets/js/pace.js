@@ -96,7 +96,11 @@ function countUp(scope) {
   });
 }
 
-/* 5. Gentle drift on the hero pictures ------------------------------------ */
+/* 5. Gentle drift on the hero pictures ------------------------------------
+   Nothing on the page carries data-par since the hero collage became the
+   ask-box on 17 August 2026, so this currently does nothing. It is kept
+   because it is guarded and costs nothing, and any future picture that wants
+   the drift only has to add the attribute. */
 const parallax = [...document.querySelectorAll('[data-par]')];
 
 if (parallax.length && !REDUCE) {
@@ -127,16 +131,71 @@ if (parallax.length && !REDUCE) {
   }
 }
 
-/* 6. Live-work ticker — copy the row once so the slide never shows a gap -- */
+/* 6. Live-work ticker — copy the row so the slide never shows a gap -------
+   How the sliding works: the row is copied, and the CSS slides the whole
+   track left by exactly half its width, forever. When it snaps back to the
+   start, the second half is sitting exactly where the first half was, so the
+   join is invisible.
+
+   That only holds while HALF THE TRACK is at least as wide as the screen.
+   Until 17 August 2026 this made exactly one copy, which was plenty for a
+   row of text names. It is not plenty for a row of screenshots:
+
+     - five screenshot cards come to about 1,120px;
+     - a wide desktop monitor is 1,920px or 2,560px.
+
+   On those screens the copies run out mid-screen and an empty gap slides
+   past on every lap. So this counts how many copies the screen it is
+   actually running on needs, and makes that many — always an even number, so
+   half the track still lands on a clean join.
+
+   If you ever add or remove a site from the strip, change nothing here. The
+   count is worked out from the real measured width. */
 const track = document.querySelector('[data-ticker]');
+
 if (track && !REDUCE) {
-  const group = track.firstElementChild;
-  if (group) {
-    const copy = group.cloneNode(true);
-    copy.setAttribute('aria-hidden', 'true');
-    copy.querySelectorAll('a').forEach((a) => a.setAttribute('tabindex', '-1'));
-    track.appendChild(copy);
-  }
+  /* How wide the window was when the copies were made. Kept so that a resize
+     only rebuilds when the window actually got WIDER — rebuilding for a
+     window that shrank would make the row visibly jump for no gain. */
+  let filledFor = 0;
+
+  const fillTrack = () => {
+    const groups = track.querySelectorAll('.ticker__group');
+    if (!groups.length) return;
+
+    /* Start from one known copy every time, rather than counting what is
+       already there from a previous run. */
+    const master = groups[0];
+    for (let i = groups.length - 1; i >= 1; i--) groups[i].remove();
+
+    const groupWidth = master.getBoundingClientRect().width;
+    if (!groupWidth) return;
+
+    /* The +80px of slack keeps a copy from landing exactly on the screen
+       width, which can flicker a hairline gap on fractional display scaling. */
+    const halves = Math.max(1, Math.ceil((window.innerWidth + 80) / groupWidth));
+
+    for (let i = 1; i < halves * 2; i++) {
+      const copy = master.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      /* The copies are the same links over again. Hidden from screen readers
+         and taken out of the tab order, so a keyboard user goes through each
+         site once instead of four or six times. */
+      copy.querySelectorAll('a').forEach((a) => a.setAttribute('tabindex', '-1'));
+      track.appendChild(copy);
+    }
+
+    filledFor = window.innerWidth;
+  };
+
+  fillTrack();
+
+  let tickerResize = null;
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= filledFor) return;
+    clearTimeout(tickerResize);
+    tickerResize = setTimeout(fillTrack, 250);
+  });
 }
 
 /* 7. Silent screen recordings ---------------------------------------------
@@ -149,15 +208,24 @@ if (videos.length && !REDUCE && 'IntersectionObserver' in window) {
     entries.forEach((entry) => {
       const v = entry.target;
       if (entry.isIntersecting) {
+        /* Attach the poster only now — kept in data-poster so it does not
+           download during the first page paint. rootMargin below means this
+           fires while the card is still ~300px away, so the still is ready
+           before it scrolls into view. */
+        if (v.dataset.poster && !v.getAttribute('poster')) v.setAttribute('poster', v.dataset.poster);
         if (v.preload !== 'auto') v.preload = 'auto';
         v.play().catch(() => { /* the browser refused autoplay — poster stays */ });
       } else if (!v.paused) {
         v.pause();
       }
     });
-  }, { threshold: 0.25 });
+  }, { threshold: 0.25, rootMargin: '300px 0px' });
 
   videos.forEach((v) => vio.observe(v));
+} else {
+  /* Reduced motion, or no IntersectionObserver: the videos never autoplay,
+     so show the still poster straight away instead of an empty frame. */
+  videos.forEach((v) => { if (v.dataset.poster) v.setAttribute('poster', v.dataset.poster); });
 }
 
 /* 8. Website example filters ---------------------------------------------- */
@@ -444,4 +512,104 @@ if (enquiry) {
   });
 
 
+}
+
+
+/* 13. The typing line in the hero ask-box ---------------------------------
+   Types a sentence out one letter at a time, holds it, deletes it, then
+   moves to the next one and starts again.
+
+   Why this is written rather than filmed: it is about 2 KB where a screen
+   recording of the same thing is several megabytes; it stays sharp on a good
+   phone screen where a video goes soft; the wording is changed by editing the
+   list below instead of re-recording; and phones block videos that play by
+   themselves far more often than people expect.
+
+   TO CHANGE THE WORDING: edit PHRASES. Nothing else needs touching. Keep each
+   one under roughly 45 characters, or it wraps onto a third line on a phone
+   and the panel grows taller while it types. */
+const typeOut = document.querySelector('[data-type-out]');
+
+if (typeOut) {
+  const PHRASES = [
+    'Build me a website for my beach resort…',
+    'Set up online booking for my staycation…',
+    'Make a menu page for my restaurant…',
+    'Create a dashboard for my business…',
+    'Get my shop found on Google…'
+  ];
+
+  /* Milliseconds. Typing is slower than deleting on purpose — that is how
+     real typing feels, and an even speed both ways reads as robotic. */
+  const TYPE_MS = 55;     /* per letter, going in       */
+  const DELETE_MS = 26;   /* per letter, coming out     */
+  const HOLD_MS = 1900;   /* pause on the full sentence */
+  const GAP_MS = 420;     /* pause on the empty box     */
+
+  if (REDUCE) {
+    /* Someone who has asked their device for less movement gets one sentence,
+       sitting still. Same meaning, no motion. */
+    typeOut.textContent = PHRASES[0];
+  } else {
+    let phrase = 0;
+    let letter = 0;
+    let erasing = false;
+    let timer = null;
+    let running = true;
+    let onScreen = true;
+
+    const schedule = (ms) => {
+      clearTimeout(timer);
+      if (running) timer = setTimeout(step, ms);
+    };
+
+    function step() {
+      const text = PHRASES[phrase];
+
+      if (!erasing) {
+        letter++;
+        typeOut.textContent = text.slice(0, letter);
+        if (letter === text.length) {
+          erasing = true;
+          return schedule(HOLD_MS);
+        }
+        return schedule(TYPE_MS);
+      }
+
+      letter--;
+      typeOut.textContent = text.slice(0, letter);
+      if (letter === 0) {
+        erasing = false;
+        phrase = (phrase + 1) % PHRASES.length;
+        return schedule(GAP_MS);
+      }
+      return schedule(DELETE_MS);
+    }
+
+    const pause = () => { running = false; clearTimeout(timer); };
+    const resume = () => {
+      if (running) return;
+      running = true;
+      schedule(TYPE_MS);
+    };
+
+    /* Stop the clock when nobody can see it — when the box has scrolled off
+       the screen, or the tab is in the background. A timer firing every 26ms
+       behind a hidden tab is wasted battery on a phone. */
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { pause(); } else if (onScreen) { resume(); }
+    });
+
+    if ('IntersectionObserver' in window) {
+      const tio = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          onScreen = entry.isIntersecting;
+          if (onScreen && !document.hidden) { resume(); } else { pause(); }
+        });
+      }, { threshold: 0 });
+      tio.observe(typeOut);
+    }
+
+    schedule(GAP_MS);
+  }
 }

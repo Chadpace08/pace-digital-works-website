@@ -5,6 +5,73 @@
    No frameworks, no build step. Google Fonts only.
    ========================================================================== */
 
+/* ---------- 0. Fonts ------------------------------------------------------
+   The two typefaces are served from this website, not from Google. Before
+   16 August 2026 they came from fonts.googleapis.com, which meant every
+   visitor's IP address was sent to Google before a single word appeared.
+   Nothing loads from Google now.
+
+   Both are VARIABLE fonts: one file covers every weight in the range, so
+   `font-weight: 400 600` is a range, not a typo. Newsreader also carries an
+   optical-size axis that thickens the letters as they get smaller.
+
+   The unicode-range lines are what keep this cheap. A browser downloads the
+   latin file only, and fetches latin-ext solely if a page actually uses an
+   accented character. Do not delete them to "tidy up" -- that would force
+   every visitor to download both.
+
+   To update a font, re-download from Google Fonts as woff2 and replace the
+   file in assets/fonts/. Keep the file name the same. */
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../fonts/newsreader-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../fonts/newsreader-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../fonts/newsreader-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../fonts/newsreader-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/inter-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 /* ---------- 1. Tokens ---------------------------------------------------- */
 :root {
   /* Ink — warm near-black, never pure black */
@@ -300,8 +367,13 @@ p:last-child { margin-bottom: 0; }
 }
 .hdr.is-stuck { border-bottom-color: var(--line); }
 .hdr__in { display: flex; align-items: center; gap: var(--sp-6); height: 82px; }
+/* The CTA is the last item in this flex row, so any width change in its label
+   — the web font finishing load — used to nudge it sideways. Pinning a width
+   holds it still (it already centres its text). Fixes the header-CTA layout
+   shift Web Analytics flagged. */
+.hdr__in > .btn { min-width: 160px; }
 
-.brand { display: flex; align-items: center; gap: var(--sp-3); text-decoration: none; margin-right: auto; }
+.brand { display: flex; align-items: center; gap: var(--sp-3); text-decoration: none; margin-right: auto; min-width: 0; }
 .brand__img { height: 36px; width: auto; max-height: 38px; object-fit: contain; flex: none; }
 .brand__name {
   font-family: var(--font-display); font-size: 25px; font-weight: 600;
@@ -311,12 +383,6 @@ p:last-child { margin-bottom: 0; }
    same way as the big one in the footer (.ftr__mark i). Newsreader's italic
    is loaded at 400–600, so this is a real italic cut, not a faked slant. */
 .brand__accent { color: var(--clay); font-style: italic; }
-.brand__rule { width: 24px; height: 1px; background: var(--brass); flex: none; }
-.brand__sub {
-  font-size: 9.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase;
-  color: var(--muted); white-space: nowrap;
-}
-@media (max-width: 560px) { .brand__rule, .brand__sub { display: none; } }
 
 .nav { display: flex; align-items: center; gap: var(--sp-1); }
 /* :not(.btn) matters — the menu drawer holds a button, which is also a link.
@@ -333,6 +399,13 @@ p:last-child { margin-bottom: 0; }
   transition: transform .4s var(--ease-out);
 }
 .nav a:not(.btn):hover { color: var(--clay-ink); }
+/* Between 1260px and 1400px the six links plus the button only just fit.
+   Trimming the side padding buys about 48px and keeps them off the
+   wordmark. The tap target is unchanged: these are desktop widths. */
+@media (max-width: 1400px) {
+  .nav a:not(.btn) { padding-inline: var(--sp-2); }
+  .nav a:not(.btn)::after { left: var(--sp-2); right: var(--sp-2); }
+}
 .nav a:not(.btn):hover::after { transform: scaleX(1); }
 .nav > .btn { display: none; }
 .nav > .btn::after { display: none; }
@@ -344,7 +417,7 @@ p:last-child { margin-bottom: 0; }
   align-items: center; justify-content: center;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1260px) {
   .nav, .hdr > .wrap > .btn { display: none; }
   .burger { display: flex; }
   .nav.is-open {
@@ -382,47 +455,198 @@ p:last-child { margin-bottom: 0; }
 .facts div { display: flex; align-items: center; gap: var(--sp-2); font-size: 13.2px; color: var(--body); }
 .facts .ico { color: var(--clay); }
 
-/* Hero visual: hairline-framed browser shot with a second project tucked under. */
-.collage { position: relative; padding: 0 0 var(--sp-10) var(--sp-8); }
-.collage__main { box-shadow: var(--shadow-soft); }
-.collage__sub {
-  position: absolute; left: 0; bottom: 0; width: 46%; z-index: 2;
-  border: 6px solid var(--paper); box-shadow: var(--shadow-lift);
+/* Hero visual: the ask-box ------------------------------------------------
+   Replaced the two-screenshot collage on 17 August 2026.
+
+   Modelled on the "what will you build" boxes those AI app builders put at
+   the top of their sites, but drawn in this site's own hand: near-square
+   corners (--r-xs / --r-sm), hairline borders, Newsreader for the typed
+   line. Those sites use big soft pills. A pill next to Newsreader italic
+   would look borrowed, so it is a square panel instead.
+
+   The panel is an <a>, not an <input>. See the note in index.html. */
+.askbox { position: relative; }
+
+@media (min-width: 941px) {
+  /* Matches the left padding the old collage used, so the hero keeps the
+     same balance between its two columns. */
+  .askbox { padding-left: var(--sp-8); }
 }
-.collage img { width: 100%; }
-.collage__cap {
-  position: absolute; right: 0; bottom: var(--sp-4); z-index: 3;
+
+/* Small caps label above the box, with the same brass rule the rest of the
+   page uses for a caption. */
+.askbox__kicker {
   display: flex; align-items: center; gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
   font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
   color: var(--muted);
 }
-.collage__cap::before { content: ""; width: 24px; height: 1px; background: var(--brass); }
+.askbox__kicker::before { content: ""; width: 24px; height: 1px; background: var(--brass); flex: none; }
+
+/* An anchor inherits neither colour nor underline behaviour from the page,
+   so both have to be set here. */
+.askbox__panel {
+  display: flex; align-items: center; gap: var(--sp-4);
+  min-height: 132px; padding: var(--sp-7) var(--sp-6);
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-sm);
+  box-shadow: var(--shadow-soft);
+  text-decoration: none; color: var(--ink);
+  transition: border-color .3s var(--ease), box-shadow .45s var(--ease), transform .45s var(--ease-out);
+}
+.askbox__panel:hover {
+  border-color: var(--clay); box-shadow: var(--shadow-lift); transform: translateY(-2px);
+}
+.askbox__panel:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+
+/* The typed sentence. Newsreader, not Inter — it is display copy, not UI
+   copy, and it has to hold its own against the h1 beside it.
+   min-height reserves both lines a phrase can reach, so the words wrapping
+   and unwrapping during typing — and the web font finishing load — never
+   push the note and chips below it up and down. nowrap keeps the caret on
+   the same flex line as the text instead of dropping to a third line on a
+   narrow phone. Together they stop the layout shift Web Analytics flagged
+   on .askbox__line. */
+.askbox__line {
+  flex: 1; min-width: 0; min-height: 2.8em;
+  display: flex; align-items: center; flex-wrap: nowrap;
+  font-family: var(--font-display);
+  font-size: clamp(1.14rem, 1.85vw, 1.56rem); line-height: 1.38;
+  letter-spacing: -.01em; color: var(--ink);
+}
+/* The text sizes to its own width so the caret stays beside it and cannot be
+   pushed onto a third line. */
+.askbox__line > span:first-child { width: fit-content; max-width: 100%; }
+
+/* The blinking cursor is a drawn bar, not a text character, so it is never
+   read aloud, copied with the text, or picked up by a translation tool. */
+.askbox__caret {
+  display: inline-block; width: 2px; height: 1.15em; margin-left: 3px;
+  background: var(--clay); vertical-align: -.16em; flex: none;
+  animation: caret-blink 1.05s steps(1, end) infinite;
+}
+@keyframes caret-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+.askbox__go {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: var(--r-xs);
+  background: var(--clay-btn); color: var(--ivory);
+  transition: background .3s var(--ease), transform .3s var(--ease);
+}
+.askbox__panel:hover .askbox__go { background: var(--clay-btn-lift); transform: translateX(3px); }
+
+/* Five things people actually ask for. Real links, not decoration.
+
+   NOT called `.chip`. Section 14 already owns that name for the industry
+   filter buttons under the website examples, and section 14 comes later in
+   this file, so a plain `.chip` here would be silently overruled — these
+   would lose their boxes and turn into bare text. Keep the askbox__ prefix. */
+.askbox__chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-4); }
+.askbox__chip {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+  background: var(--paper); text-decoration: none;
+  font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--body);
+  transition: border-color .25s var(--ease), color .25s var(--ease), background .25s var(--ease);
+}
+.askbox__chip .ico { color: var(--brass); transition: color .25s var(--ease); }
+.askbox__chip:hover { border-color: var(--clay); color: var(--clay-ink); background: var(--clay-wash); }
+.askbox__chip:hover .ico { color: var(--clay-ink); }
+.askbox__chip:focus-visible { outline: 2px solid var(--clay); outline-offset: 2px; }
+
+.askbox__note {
+  margin-top: var(--sp-4);
+  font-family: var(--font-display); font-style: italic;
+  font-size: 13.5px; color: var(--muted);
+}
 
 @media (max-width: 940px) {
   .hero__in { grid-template-columns: 1fr; }
-  .collage { margin-top: var(--sp-4); padding-left: var(--sp-6); padding-bottom: var(--sp-9); }
-  .collage__sub { width: 46%; }
+  .askbox { margin-top: var(--sp-7); }
+  .askbox__panel { min-height: 92px; padding: var(--sp-5); }
 }
 
-/* ---------- 9. Live-work ticker ----------------------------------------- */
+/* ---------- 9. Live-work ticker -----------------------------------------
+   A sliding strip of screenshots of the sites that are online right now.
+   It was a strip of website NAMES until 17 August 2026. Names are cheap;
+   a person deciding whether to hire a designer wants to see the designs.
+
+   The band is deliberately tall enough for the screenshots to be readable.
+   Shrink it and the whole section stops doing its job. */
 .ticker {
   border-block: 1px solid var(--line); background: var(--paper);
-  overflow: hidden; padding-block: var(--sp-5);
+  overflow: hidden; padding-block: var(--sp-6);
 }
-.ticker__track { display: flex; width: max-content; animation: slide 44s linear infinite; }
+.ticker__track { display: flex; width: max-content; animation: slide 34s linear infinite; }
 .ticker:hover .ticker__track, .ticker:focus-within .ticker__track { animation-play-state: paused; }
 .ticker__group { display: flex; align-items: center; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* Speed: SMALLER number above = faster. It works out at about 41 pixels a
+   second, which is the pace the old text strip ran at. */
+
+/* The row label, lined up with the page's left margin rather than with the
+   screenshots, which run off the edge by design. It carries the "live client
+   work" claim that the hero collage used to carry before the hero became the
+   ask-box. Without it the strip is pictures with nothing attached. */
+.ticker__label {
+  display: flex; align-items: center; gap: var(--sp-3);
+  margin: 0 0 var(--sp-5); padding-inline: var(--gut);
+  font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted);
+}
+.ticker__label::before { content: ""; width: 24px; height: 1px; background: var(--brass); flex: none; }
+
+/* Each item is a stacked card: screenshot on top, name underneath.
+   `flex: none` matters — without it the cards squash to fit the screen
+   instead of running off the edge, and the sliding loop breaks. */
 .ticker__item {
-  display: inline-flex; align-items: center; gap: var(--sp-3);
-  padding-inline: var(--sp-7); text-decoration: none;
-  font-family: var(--font-display); font-size: clamp(1.24rem, 2.2vw, 1.75rem);
-  font-weight: 400; color: var(--ink); letter-spacing: -.02em;
+  flex: none;
+  display: flex; flex-direction: column; align-items: stretch; gap: var(--sp-3);
+  width: clamp(200px, 21vw, 260px);
+  padding-inline: var(--sp-4);
+  text-decoration: none;   /* these are links — without this the names underline */
+}
+.ticker__item:focus-visible { outline: 2px solid var(--clay); outline-offset: 2px; }
+
+/* .frame (section 13) expects to sit on a <div>. These are <span>s, because
+   a <span> is the only thing allowed inside these links, and a span is
+   inline by default — so the layout has to be switched back on. */
+.tshot { display: block; border-radius: var(--r-sm); box-shadow: var(--shadow-soft); }
+.tshot .frame__shot { display: block; }
+.tshot .frame__dot { display: block; width: 5px; height: 5px; }
+
+/* NO WEB ADDRESS IN THIS BAR — see the note in index.html. With the address
+   gone the bar holds only three dots, so it drops to a slim strip. Left at
+   its old height it would be a wide empty band above every screenshot, which
+   reads as something failing to load rather than as a browser window. */
+.tshot .frame__bar { display: flex; padding: 7px var(--sp-3); gap: 5px; }
+
+/* Lift on hover. The strip stops moving on hover (above), so there is time
+   to actually look at the one under the pointer. */
+.ticker__item .tshot { transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out); }
+.ticker__item:hover .tshot { transform: translateY(-5px); box-shadow: var(--shadow-lift); }
+.ticker__item:hover .frame__shot img { transform: scale(1.05); }
+
+/* The name is a caption under the picture now, so it drops to caption size.
+   At the old 1.75rem serif it fought the screenshot for attention. */
+.ticker__name {
+  display: flex; align-items: center; justify-content: center; gap: var(--sp-2);
+  font-family: var(--font-body);
+  font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--muted); white-space: nowrap;
   transition: color .25s var(--ease);
 }
-.ticker__item:hover { color: var(--clay); }
-.ticker__item .ico { color: var(--brass); }
-.ticker__sep { color: var(--clay); font-size: 12px; }
-@keyframes slide { to { transform: translateX(-50%); } }
+.ticker__name .ico { color: var(--brass); transition: color .25s var(--ease); }
+.ticker__item:hover .ticker__name { color: var(--clay-ink); }
+.ticker__item:hover .ticker__name .ico { color: var(--clay-ink); }
+
+@media (max-width: 640px) {
+  .ticker__item { width: 190px; padding-inline: var(--sp-3); }
+  .ticker__name { font-size: 9.5px; letter-spacing: .12em; }
+  .ticker__label { font-size: 9px; letter-spacing: .16em; }
+}
 
 /* ---------- 10. Stats band ---------------------------------------------- */
 .stats {
@@ -701,6 +925,19 @@ p:last-child { margin-bottom: 0; }
 }
 .cap-list .ico { color: var(--clay); }
 
+/* Nine identical ticks became nine icons that each match the line they sit
+   beside, on 17 August 2026.
+
+   Ticks were all the same width, so every label started at the same place
+   without anyone having to think about it. Nine different shapes are not —
+   a calendar is wider than a lightning bolt — so the column of text would go
+   ragged. `flex: none` plus a fixed width pins them back into line.
+
+   The stroke is thinned a touch as well. A tick is two strokes; a calendar
+   or a chart is eight or nine. At the tick's weight, on a near-black
+   background, the busier shapes turn into small bright smudges. */
+.cap-list--themed .ico { flex: none; width: 18px; height: 18px; stroke-width: 1.55; }
+
 .saas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 3.4vw, 48px); }
 @media (max-width: 900px) { .saas { grid-template-columns: minmax(0, 1fr); } }
 .saas__card .frame { margin-bottom: var(--sp-6); }
@@ -953,6 +1190,10 @@ p:last-child { margin-bottom: 0; }
   .js .ln > span, .ln > span, .is-in > .ln > span { transform: none; transition: none; }
   .lo, .lo-img, .lo-lines > .ln > span { animation: none; }
   .ticker__track { animation: none; }
+  .ticker__item:hover .tshot { transform: none; }
+  .tshot { transition: none; }
+  .askbox__caret { animation: none; }
+  .askbox__panel, .askbox__go { transition: none; }
   .btn::after { display: none; }
   .btn:hover, .cbox:hover { transform: none; }
   .frame__shot img { transition: none; }
@@ -1255,7 +1496,8 @@ p:last-child { margin-bottom: 0; }
     0 0 0 1px rgba(140, 106, 59, .38),
     0 0 30px 8px rgba(216, 185, 120, .45),
     0 12px 28px rgba(27, 24, 21, .30);
-  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out),
+              opacity 0.3s var(--ease-out);
 }
 /* Soft halo that breathes outward, like the glow in the reference. */
 .float-widget::before {
@@ -1453,3 +1695,502 @@ p:last-child { margin-bottom: 0; }
 }
 .legal .legal__back:hover { border-bottom-color: var(--clay); }
 
+/* ---------- 21. Cookiebot consent banner --------------------------------
+   Cookiebot builds its own banner and drops it into the page, so the only
+   way to make it look like this website is to restyle it from here. Its
+   markup carries fixed IDs, which is what every selector below hooks onto.
+   `!important` is used throughout on purpose: Cookiebot loads its own
+   stylesheet after this one, so a plain rule would lose.
+
+   If Cookiebot ever renames an ID, the banner falls back to their blue and
+   white default. It still works — it just stops matching the site.
+
+   The floating cookie badge is hidden at the end of this block. The way
+   back in is the "Cookie settings" link in the footer of every page. */
+
+/* The dim layer behind the banner — warm ink, not grey. */
+#CybotCookiebotDialogBodyUnderlay {
+  background: rgba(27, 24, 21, .55) !important;
+  opacity: 1 !important;
+}
+
+/* ---- The panel itself ---- */
+#CybotCookiebotDialog {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+  font-family: var(--font-body) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r-sm) !important;
+  box-shadow: var(--shadow-lift) !important;
+  max-width: 1100px !important;
+}
+#CybotCookiebotDialog *,
+#CybotCookiebotDialog a,
+#CybotCookiebotDialog div,
+#CybotCookiebotDialog span,
+#CybotCookiebotDialog label {
+  font-family: var(--font-body) !important;
+}
+
+/* Cookiebot's own header strip holds their logo. It stays — the free plan
+   requires the credit — but it is quietened down so it reads as a footnote
+   rather than as the loudest thing in the box. */
+#CybotCookiebotDialogHeader {
+  border-bottom: 1px solid var(--line-soft) !important;
+  padding-bottom: var(--sp-3) !important;
+}
+#CybotCookiebotDialogPoweredbyCybot,
+#CybotCookiebotDialogPoweredByText,
+.CybotCookiebotDialogPoweredbyLink,
+#CybotCookiebotDialogPoweredbyImage {
+  opacity: .38 !important;
+  filter: grayscale(1) !important;
+  max-height: 16px !important;
+}
+
+/* ---- Headline and body copy ----
+   Note the `#CybotCookiebotDialog` in front of every selector below. It is
+   not decoration. Cookiebot's own stylesheet targets these elements with two
+   IDs and !important, so a rule naming only one ID loses the tie and the
+   default styling stays. Two IDs beats two IDs on source order, and this
+   stylesheet is not guaranteed to load last — so the prefix is what makes
+   these rules actually take effect. Do not remove it. */
+#CybotCookiebotDialog #CybotCookiebotDialogBodyContentTitle {
+  font-family: var(--font-display) !important;
+  font-weight: 500 !important;
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -.01em !important;
+  color: var(--ink) !important;
+  margin-bottom: var(--sp-3) !important;
+}
+#CybotCookiebotDialog #CybotCookiebotDialogBodyContentText,
+#CybotCookiebotDialog #CybotCookiebotDialogDetailBodyContentTextAbout {
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  color: var(--body) !important;
+}
+#CybotCookiebotDialog #CybotCookiebotDialogBodyContentText a,
+#CybotCookiebotDialog #CybotCookiebotDialogDetailBodyContentTextAbout a,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyEdgeMoreDetailsLink,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyLevelButtonIABHeaderViewPartnersLink {
+  color: var(--clay-ink) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+
+/* ---- The four category toggles ---- */
+#CybotCookiebotDialog #CybotCookiebotDialogBodyLevelButtonsSelectPane {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+#CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonDescription {
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: .04em !important;
+  color: var(--ink-2) !important;
+}
+/* The switch. Off is a warm hairline grey; on is the same clay used by every
+   filled button on the site. */
+#CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonSlider {
+  background-color: #CFC4B4 !important;
+}
+#CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonSlider:before {
+  background-color: var(--paper) !important;
+}
+#CybotCookiebotDialog input.CybotCookiebotDialogBodyLevelButton:checked + .CybotCookiebotDialogBodyLevelButtonSlider {
+  background-color: var(--clay-btn) !important;
+}
+/* "Necessary" cannot be turned off, so it is shown filled but faded — the
+   same shape as the others, visibly not a choice. */
+#CybotCookiebotDialog input.CybotCookiebotDialogBodyLevelButton:disabled + .CybotCookiebotDialogBodyLevelButtonSlider {
+  opacity: .45 !important;
+  cursor: default !important;
+}
+
+/* ---- Buttons ----
+   Same shape language as the site's own buttons: cut corners, small caps,
+   wide letter-spacing. "Allow all" is the filled clay one and the other two
+   are hairline outlines, so the eye is led to the primary choice. */
+#CybotCookiebotDialog #CybotCookiebotDialogBodyButtonsWrapper,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyButtons {
+  gap: var(--sp-2) !important;
+}
+#CybotCookiebotDialog .CybotCookiebotDialogBodyButton,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyButtonDecline,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyButtonAccept {
+  font-family: var(--font-body) !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: .16em !important;
+  text-transform: uppercase !important;
+  border-radius: var(--r-xs) !important;
+  padding: 13px 22px !important;
+  min-height: 46px !important;
+  transition: background-color .25s var(--ease), color .25s var(--ease),
+              border-color .25s var(--ease) !important;
+}
+/* Secondary — hairline outline on paper. */
+#CybotCookiebotDialog #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyButtonDecline {
+  background: transparent !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--ink) !important;
+}
+#CybotCookiebotDialog #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection:hover,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyButtonDecline:hover {
+  background: var(--ink) !important;
+  color: var(--ivory) !important;
+}
+/* Primary — filled clay. */
+#CybotCookiebotDialog #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyButtonAccept {
+  background: var(--clay-btn) !important;
+  color: var(--ivory) !important;
+  border: 1px solid var(--clay-btn) !important;
+}
+#CybotCookiebotDialog #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll:hover,
+#CybotCookiebotDialog #CybotCookiebotDialogBodyButtonAccept:hover {
+  background: var(--clay-btn-lift) !important;
+  border-color: var(--clay-btn-lift) !important;
+}
+#CybotCookiebotDialog a:focus-visible,
+#CybotCookiebotDialog button:focus-visible,
+#CybotCookiebotDialog .CybotCookiebotDialogBodyButton:focus-visible {
+  outline: 2px solid var(--clay) !important;
+  outline-offset: 2px !important;
+}
+
+/* ---- "Show details" and the tabs behind it ---- */
+#CybotCookiebotDialogBodyEdgeMoreDetails a,
+#CybotCookiebotDialogBodyEdgeMoreDetailsLink {
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  color: var(--clay-ink) !important;
+}
+#CybotCookiebotDialogNav {
+  border-bottom: 1px solid var(--line) !important;
+}
+#CybotCookiebotDialogNav .CybotCookiebotDialogNavItemLink {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  border-bottom: 2px solid transparent !important;
+}
+#CybotCookiebotDialogNav .CybotCookiebotDialogNavItemLink.CybotCookiebotDialogActive {
+  color: var(--ink) !important;
+  border-bottom-color: var(--clay) !important;
+}
+#CybotCookiebotDialogDetailBodyContentTextOverview,
+#CybotCookiebotDialogDetailBodyContentCookieContainerTypes {
+  font-size: 13px !important;
+  color: var(--body) !important;
+}
+#CybotCookiebotDialogDetailBodyContentCookieContainerTypes th {
+  color: var(--ink) !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+
+/* ---- Phones ----
+   Two problems are fixed here.
+
+   First, on a phone Cookiebot opens as a box floating in the middle that
+   fills almost the whole screen, so the website is hidden behind it before
+   a visitor has seen anything. It is pinned to the bottom of the screen
+   instead — a strip, not a wall — and the dim layer behind it is switched
+   off so the page stays visible and scrollable underneath.
+
+   Second, Cookiebot's default puts three buttons side by side, which
+   squeezes each one into an unreadable sliver. They are stacked full width
+   instead, and the strip is capped at 78% of the screen height so a long
+   banner can still be scrolled to reach the buttons.
+
+   `top: auto` and `transform: none` are the two that do the real work —
+   Cookiebot centres the box with a top offset and a translate, and both
+   have to be undone or it stays in the middle. */
+@media (max-width: 700px) {
+  #CybotCookiebotDialog {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: 66vh !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+  }
+  /* display is set only while the banner is open. Putting `display: flex` on
+     the plain #CybotCookiebotDialog would beat Cookiebot's own way of hiding
+     it, and the strip would stay stuck on screen after the visitor chose. */
+  #CybotCookiebotDialog.CybotCookiebotDialogActive {
+    display: flex !important;
+  }
+  /* Cookiebot puts everything inside one wrapper div, so capping the outer
+     box alone just clips the wrapper and pushes the buttons off the bottom of
+     the screen. The wrapper is the box that has to become the flex column. */
+  #CybotCookiebotDialog .CybotCookiebotDialogContentWrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    min-height: 0 !important;
+    width: 100% !important;
+  }
+  /* Header and buttons hold their size. */
+  #CybotCookiebotDialog #CybotCookiebotDialogHeader,
+  #CybotCookiebotDialog #CybotCookiebotDialogFooter {
+    flex: 0 0 auto !important;
+  }
+  #CybotCookiebotDialog #CybotCookiebotDialogFooter {
+    border-top: 1px solid var(--line-soft) !important;
+  }
+  /* The wording and the toggles are what scrolls, so the three buttons stay
+     on screen and a visitor never has to scroll before they can agree.
+     min-height: 0 is what actually lets a flex child shrink and scroll —
+     without it the child keeps its full content height and nothing moves. */
+  /* Only the middle panel is touched. Cookiebot lays out the wording and the
+     toggles inside it with its own scroll boxes — those are left alone on
+     purpose. Forcing them flat makes the toggles overlap the paragraph. */
+  #CybotCookiebotDialog #CybotCookiebotDialogTabContent {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  /* No dim wall behind the strip — the website stays visible and scrollable
+     while the visitor decides. */
+  #CybotCookiebotDialogBodyUnderlay {
+    display: none !important;
+  }
+  /* The Messenger circle would sit on top of the strip. It steps aside while
+     the banner is open, and comes back the moment a choice is made. */
+  :root:has(#CybotCookiebotDialog.CybotCookiebotDialogActive) .float-widget {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #CybotCookiebotDialogBodyContentTitle { font-size: 1.1rem !important; }
+  #CybotCookiebotDialogBodyContentText { font-size: 13.5px !important; }
+  #CybotCookiebotDialogBodyButtonsWrapper,
+  #CybotCookiebotDialogBodyButtons {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: var(--sp-2) !important;
+  }
+  #CybotCookiebotDialog .CybotCookiebotDialogBodyButton,
+  #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll,
+  #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection,
+  #CybotCookiebotDialogBodyButtonDecline {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  /* The toggles wrap onto their own rows rather than being crushed into one. */
+  #CybotCookiebotDialogBodyLevelButtonsSelectPane {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: var(--sp-3) var(--sp-5) !important;
+  }
+}
+
+/* ---- The floating cookie badge ----
+   Cookiebot adds a small round badge in a bottom corner so people can reopen
+   the banner. It landed on top of the footer and clashed with the Messenger
+   button on the other side, so it is off. The "Cookie settings" link in the
+   footer does the same job, in the place people look for it. Switching the
+   badge off in the Cookiebot dashboard as well is the belt-and-braces
+   version — this rule holds even if that setting is missed.
+
+   #CookiebotWidgetUnderlay is a full-screen fixed layer that belongs to the
+   badge. It is hidden too, so it can never sit invisibly over the page and
+   swallow taps. */
+#CookiebotWidget,
+#CookiebotWidget-widgetContent,
+#CookiebotWidgetUnderlay,
+.CookiebotWidget-logo,
+.CookiebotWidget-open,
+#CookiebotSessionWidget {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* ---------- 22. Footer cookie-settings link -----------------------------
+   A <button>, not a link, because it opens the consent banner rather than
+   going anywhere. It is dressed to look exactly like the Privacy and Terms
+   links beside it, so the bottom line reads as three matching items. */
+.ftr__cookies {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: var(--on-dark-2);
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  transition: color .25s var(--ease);
+}
+.ftr__cookies:hover { color: var(--brass-lite); }
+.ftr__cookies:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+
+/* ---------- 23. Pricing tiers -------------------------------------------
+   Layout follows the reference Chad supplied: name, one-line description,
+   a price that dominates, the button, then "What's included" and a tight
+   list of short lines.
+
+   Two things in that reference are deliberately NOT copied. The corners
+   stay square, because DESIGN-SYSTEM.md says corners are cut and not
+   rounded. And the tick icons are gone in favour of small dots, because
+   eight ticks in a column read as decoration rather than information.
+
+   The middle card is the one to sell: raised on paper, outlined in clay,
+   and lifted 12px on desktop only -- on a phone the cards stack, and a
+   lifted card there just looks like a mistake. */
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-5);
+  align-items: stretch;
+}
+@media (max-width: 1000px) { .tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px)  { .tiers { grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); } }
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: var(--sp-7) var(--sp-6) var(--sp-7);
+  position: relative;
+  transition: border-color .3s var(--ease);
+}
+.tier:hover { border-color: var(--brass); }
+
+.tier--pop { border-color: var(--clay); border-width: 2px; }
+@media (min-width: 1001px) { .tier--pop { transform: translateY(-12px); } }
+
+/* Tucked into the top-right corner, the way the reference sets it. */
+.tier__flag {
+  position: absolute;
+  top: -1px; right: -1px;
+  background: var(--ink);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: var(--sp-2) var(--sp-4);
+}
+
+.tier__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.32rem, 1.9vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  margin: 0 0 var(--sp-3);
+}
+
+/* A fixed minimum height keeps the three prices and the three buttons on
+   the same line, even though the sentences above them differ in length. */
+.tier__for {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--body);
+  margin: 0 0 var(--sp-6);
+  min-height: 3em;
+}
+
+/* The peso sign sits smaller and higher than the number, the way a price is
+   set in print. */
+.tier__price { display: flex; align-items: flex-start; gap: 2px; margin: 0 0 var(--sp-1); }
+.tier__cur {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.7vw, 1.5rem);
+  font-weight: 500;
+  color: var(--clay-ink);
+  line-height: 1.6;
+}
+.tier__num {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 4.4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: var(--ink);
+}
+.tier__once {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .04em;
+  margin: 0 0 var(--sp-6);
+}
+
+.tier__cta { margin: 0 0 var(--sp-3); }
+.tier__cta .btn { width: 100%; justify-content: center; }
+.tier__terms {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  margin: 0 0 var(--sp-6);
+  padding-bottom: var(--sp-6);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.tier__inc {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 var(--sp-4);
+}
+
+.tier__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }
+.tier__list li {
+  position: relative;
+  padding-left: var(--sp-5);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--body);
+}
+.tier__list li::before {
+  content: "";
+  position: absolute;
+  left: 2px; top: 9px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--clay);
+}
+.tier__list strong { color: var(--ink); font-weight: 600; }
+
+.tier-note {
+  margin-top: var(--sp-8);
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 68ch;
+}
+.tier-note strong { color: var(--ink); font-weight: 600; }

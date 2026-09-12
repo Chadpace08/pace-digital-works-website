@@ -202,7 +202,9 @@
     inset: 0;
     background: rgba(0,0,0,0.5);
     z-index: 90;
-    backdrop-filter: blur(2px);
+    /* No backdrop-filter: blurring the whole screen behind this overlay is a
+       heavy paint that ran on the menu tap and slowed the response (INP).
+       The 50% black already dims the page. */
   }
 
   /* Main Container Padding */

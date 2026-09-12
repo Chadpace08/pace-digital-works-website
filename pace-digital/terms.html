@@ -20,16 +20,20 @@
 <meta property="og:url" content="https://pacedigitalworks.com/terms">
 <meta property="og:image" content="https://pacedigitalworks.com/assets/img/og-cover.jpg">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Inter:wght@400;500;600;700&display=swap">
+<!-- Fonts are served from this site, not from Google. The two files the
+     first screen needs are preloaded so the headline does not flash in a
+     fallback typeface first. See section 0 of pace.css. -->
+<link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <!-- Paths here have no leading slash on purpose. A leading slash means "the top
      of the website", which is right on the live site but becomes the top of the
      drive when the file is opened straight from a folder — the stylesheet is
      then never found and the page renders as bare text. Relative paths work
      both ways. The favicons below are the deliberate exception: Google asks for
      them at the root address. See the longer note in index.html. -->
-<link rel="stylesheet" href="assets/css/pace.css">
+<!-- ?v= is a cache-buster — see the note in index.html. Keep the number the
+     same on every page, and change it on every page together. -->
+<link rel="stylesheet" href="assets/css/pace.css?v=20260831">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
@@ -69,10 +73,8 @@
 <header class="hdr hdr--legal">
   <div class="wrap hdr__in">
     <a class="brand" href="index.html" aria-label="Pace Digital Works — home">
-      <img class="brand__img" src="assets/img/logo-small.png" alt="Pace Digital Works logo" width="54" height="36">
+      <img class="brand__img" src="assets/img/logo-small.png" alt="Pace Digital Works logo" width="34" height="36">
       <span class="brand__name">Pace <span class="brand__accent">Digital</span> Works</span>
-      <span class="brand__rule" aria-hidden="true"></span>
-      <span class="brand__sub">Studio</span>
     </a>
 
     <a class="btn btn--ink btn--sm" href="index.html#start"><span class="btn__t">Start a project</span></a>
@@ -142,7 +144,7 @@
     <h2 id="quotes"><span class="legal__no">3</span>Quotes, prices &amp; payment</h2>
     <ul>
       <li><strong>Written quote first.</strong> Before you pay anything, we send you a written quote that says what is included, what it costs, and when payment is due. You accept it in writing — an email or a chat message is enough.</li>
-      <li><strong>Currency.</strong> Prices are in <strong>Philippine pesos (PHP, &#8369;)</strong> unless the quote says a different currency. Any prices shown on this website, including the &ldquo;from &#8369;1,000&rdquo; starting figure, are a guide only. They are not an offer, and the real price is the one in your quote.</li>
+      <li><strong>Currency.</strong> Prices are in <strong>Philippine pesos (PHP, &#8369;)</strong> unless the quote says a different currency. Any prices shown on this website, including the &ldquo;from &#8369;1,500&rdquo; starting figure, are a guide only. They are not an offer, and the real price is the one in your quote.</li>
       <li><strong>Deposit.</strong> Unless your quote says otherwise, work starts once you have paid the deposit stated in the quote. We are not obliged to begin before then.</li>
       <li><strong>Final payment.</strong> The balance is due when the work is finished and shown to you for approval, and before the website or software is published to your own address, unless your quote sets out a different schedule.</li>
       <li><strong>Late payment.</strong> If an invoice is more than <strong>fourteen (14) days</strong> overdue, we may pause the work and hold off publishing until it is paid.</li>
@@ -348,6 +350,9 @@
       <nav class="ftr__legal" aria-label="Legal">
         <a href="privacy.html">Privacy policy</a>
         <a href="terms.html">Terms of service</a>
+        <!-- Reopens the Cookiebot banner — see the matching note in index.html. -->
+        <button type="button" class="ftr__cookies"
+                onclick="if(window.Cookiebot){Cookiebot.renew();}">Cookie settings</button>
       </nav>
     </div>
   </div>

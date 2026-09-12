@@ -20,11 +20,15 @@
 <meta property="og:url" content="https://pacedigitalworks.com/privacy">
 <meta property="og:image" content="https://pacedigitalworks.com/assets/img/og-cover.jpg">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Inter:wght@400;500;600;700&display=swap">
+<!-- Fonts are served from this site, not from Google. The two files the
+     first screen needs are preloaded so the headline does not flash in a
+     fallback typeface first. See section 0 of pace.css. -->
+<link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <!-- Paths have no leading slash on purpose — see the note in terms.html. -->
-<link rel="stylesheet" href="assets/css/pace.css">
+<!-- ?v= is a cache-buster — see the note in index.html. Keep the number the
+     same on every page, and change it on every page together. -->
+<link rel="stylesheet" href="assets/css/pace.css?v=20260831">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
@@ -59,10 +63,8 @@
 <header class="hdr hdr--legal">
   <div class="wrap hdr__in">
     <a class="brand" href="index.html" aria-label="Pace Digital Works — home">
-      <img class="brand__img" src="assets/img/logo-small.png" alt="Pace Digital Works logo" width="54" height="36">
+      <img class="brand__img" src="assets/img/logo-small.png" alt="Pace Digital Works logo" width="34" height="36">
       <span class="brand__name">Pace <span class="brand__accent">Digital</span> Works</span>
-      <span class="brand__rule" aria-hidden="true"></span>
-      <span class="brand__sub">Studio</span>
     </a>
 
     <a class="btn btn--ink btn--sm" href="index.html#start"><span class="btn__t">Start a project</span></a>
@@ -170,11 +172,12 @@
       <li><strong>Strictly necessary.</strong> Cookiebot stores the cookie choice you made, so the banner does not appear again on every page. Cloudflare may set a security cookie to tell a real visitor from an attack.</li>
       <li><strong>Advertising and analytics.</strong> <strong>None.</strong> We do not place advertising cookies or third-party analytics on this website.</li>
     </ul>
-    <p><strong>How to change your mind:</strong> use the small cookie icon or link shown by the consent banner to reopen it and change your choice. You can also delete cookies at any time in your own browser settings.</p>
-    <p>Note that two things load from outside servers on every page, and those servers see your IP address and browser type as part of delivering the file:</p>
+    <p><strong>How to change your mind:</strong> select <strong>Cookie settings</strong> at the bottom of any page on this website. That reopens the banner so you can change your choice. You can also delete cookies at any time in your own browser settings.</p>
+    <p><strong>Fonts.</strong> The two typefaces on this website are stored on this website and sent from it. They used to be loaded from Google's servers, which meant Google saw your IP address on every page you opened. That stopped on 16 August 2026. Nothing on these pages is fetched from Google.</p>
+    <p>Two outside services are still involved in delivering a page, and each sees your IP address and browser type as part of doing so:</p>
     <ul>
-      <li><strong>Google Fonts</strong> &mdash; the two typefaces this site uses are served from <em>fonts.googleapis.com</em> and <em>fonts.gstatic.com</em>.</li>
       <li><strong>Cloudflare</strong> &mdash; the website itself is delivered from Cloudflare's network.</li>
+      <li><strong>Cookiebot (Usercentrics)</strong> &mdash; loads the cookie banner and records the choice you make on it.</li>
     </ul>
     <p>Neither is used by us to identify you or to follow you around the internet.</p>
 
@@ -194,7 +197,6 @@
       <li><strong>Cloudflare</strong> &mdash; hosting, content delivery and security for this website (Cloudflare Pages).</li>
       <li><strong>Formspree</strong> &mdash; receives the enquiry form and forwards it to our inbox.</li>
       <li><strong>Cookiebot (Usercentrics)</strong> &mdash; shows the cookie banner and records your choice.</li>
-      <li><strong>Google Fonts</strong> &mdash; delivers the two typefaces used on the site.</li>
       <li><strong>Email, WhatsApp and Facebook Messenger</strong> &mdash; carry the messages you choose to send us, under their own privacy policies.</li>
       <li><strong>Project-specific providers</strong> &mdash; where your own project needs a database, email service or hosting account, we tell you which one is used before we set it up.</li>
     </ul>
@@ -233,7 +235,7 @@
     <p>No website or storage method is completely secure, and we cannot promise absolute security. If a personal data breach happens that is likely to cause serious harm, we will notify the National Privacy Commission and the people affected, as the law requires.</p>
 
     <h2 id="transfers"><span class="legal__no">13</span>Information sent outside the Philippines</h2>
-    <p>Cloudflare, Formspree, Cookiebot and Google operate globally, so your information may be processed or stored in another country. Where that happens, we rely on the contractual and security commitments those providers make, so your information keeps a level of protection consistent with the Data Privacy Act.</p>
+    <p>Cloudflare, Formspree and Cookiebot operate globally, so your information may be processed or stored in another country. Where that happens, we rely on the contractual and security commitments those providers make, so your information keeps a level of protection consistent with the Data Privacy Act.</p>
 
     <h2 id="rights"><span class="legal__no">14</span>Your privacy rights</h2>
     <p>Under the Data Privacy Act you have the right to:</p>
@@ -330,6 +332,9 @@
       <nav class="ftr__legal" aria-label="Legal">
         <a href="privacy.html">Privacy policy</a>
         <a href="terms.html">Terms of service</a>
+        <!-- Reopens the Cookiebot banner — see the matching note in index.html. -->
+        <button type="button" class="ftr__cookies"
+                onclick="if(window.Cookiebot){Cookiebot.renew();}">Cookie settings</button>
       </nav>
     </div>
   </div>

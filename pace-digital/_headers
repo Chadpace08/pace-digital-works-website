@@ -1,6 +1,23 @@
 # Pictures and video never change once uploaded, so browsers may keep them for
-# a year. The stylesheet and script DO change, so browsers must ask first --
-# otherwise a visitor stays stuck on an old layout long after you update it.
+# a year.
+#
+# IMPORTANT -- how Cloudflare Pages actually treats these rules. Measured on
+# the live site on 16 August 2026, right after a deploy:
+#
+#   /assets/fonts/*  asking for a YEAR  -> honoured. The live response really
+#                                          does say max-age=31536000.
+#   /assets/css/*    asking for no-cache -> IGNORED. The live response says
+#                                          max-age=14400 regardless.
+#
+# So Pages lets you ask for LONGER browser caching, but refuses to let you ask
+# for less than its own four-hour default. A browser therefore keeps the old
+# stylesheet for up to four hours and the visitor stays stuck on an old layout.
+# The no-cache rules are left below because they cost nothing and would take
+# effect if Cloudflare ever changes this.
+#
+# What actually forces a fresh copy is the ?v=NUMBER on the stylesheet and
+# script links in the HTML. Change that number every time pace.css or pace.js
+# changes -- on all four pages at once. See the note in index.html.
 
 # Warning: this rule applies to the address, not to the file. If a picture is
 # missing, whatever the server sends back for that address is kept for a year.
@@ -9,6 +26,11 @@
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/video/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Font files never change once uploaded -- to update a typeface you replace the
+# file, and the file name stays the same, so a year is safe here.
+/assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/css/*

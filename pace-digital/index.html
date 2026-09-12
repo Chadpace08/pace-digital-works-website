@@ -69,7 +69,8 @@
           "availableLanguage": ["English"]
         }
       ],
-      "hasOfferCatalog": {
+      "hasOfferCatalog": [
+      {
         "@type": "OfferCatalog",
         "name": "Services",
         "itemListElement": [
@@ -82,6 +83,7 @@
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI-powered tools", "description": "Practical features such as drafted replies, sorted documents, and answers pulled from a business's own information." } }
         ]
       }
+      ]
     },
     {
       "@type": "Person",
@@ -140,15 +142,7 @@
       "name": "How much does a website cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A simple website starts from ₱1,000. More pages, booking forms, or software behind the site cost more than that. Tell me what you need and I send you a written price before you spend anything."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does Pace Digital Works do?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Pace Digital Works is a one-person web design studio in the Philippines. It builds websites for small businesses, sets them up to be found on Google, adds enquiry and booking forms, automates repeat tasks, and builds custom business software."
+        "text": "Websites start at ₱1,500. The final price depends on how many pages you need and what the site has to do. A booking form, online payments or an online shop cost more. You always get the full price in writing before anything starts."
       }
     },
     {
@@ -161,42 +155,10 @@
     },
     {
       "@type": "Question",
-      "name": "Where is Pace Digital Works based?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The studio is based in the Philippines and works with clients anywhere, by email, WhatsApp and Facebook Messenger. You do not need to meet in person to start or finish a project."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long does a project take?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It depends on the size of the site and how quickly you can send your photos and text. You see a working version early and tell me what to change. Nothing goes live until you are happy with it."
-      }
-    },
-    {
-      "@type": "Question",
       "name": "Do you only build websites, or software too?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Both. Websites are one part of the work. I also build custom business systems — bookings, dashboards, reporting — and my own SaaS products, meaning software other businesses use on a monthly plan. Pace Lodgix is one of mine."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What do I need to have ready?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Photos, your logo if you have one, what you sell, and where enquiries should go. Nothing technical. If you have no photos and no logo, I can use professional stock photos and make you a logo."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I start?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Send one message on WhatsApp, or one email, saying what your business does. I usually reply the same day with what I would build and what it would cost."
       }
     }
   ]
@@ -231,10 +193,17 @@
 <meta name="twitter:image" content="https://pacedigitalworks.com/assets/img/og-cover.jpg">
 <meta name="twitter:image:alt" content="The Pace Digital Works home page: Getting found is where business begins.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/css/pace.css">
+<!-- Fonts are served from this site, not from Google. The two files the
+     first screen needs are preloaded so the headline does not flash in a
+     fallback typeface first. See section 0 of pace.css. -->
+<link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- The ?v= number is a cache-buster. Cloudflare Pages ignores the
+     Cache-Control line in _headers and tells browsers to keep this file for
+     four hours, so an edit can sit invisible on people's screens. Changing
+     the number makes it a new address, which every browser fetches fresh.
+     Bump it (use the date) whenever pace.css or pace.js changes. -->
+<link rel="stylesheet" href="assets/css/pace.css?v=20260831">
 <!-- Google asks for /favicon.ico at the root and for square icons whose size
      is a multiple of 48px. Without the .ico file the server answered that
      address with the whole home page, so no icon could be read.
@@ -312,13 +281,11 @@
 <header class="hdr" data-hdr>
   <div class="wrap hdr__in">
     <a class="brand" href="index.html" aria-label="Pace Digital Works — home">
-      <!-- logo-small.png is the same picture as logo.png, saved smaller: 12KB
-           instead of 1.2MB. The header shows it at 54x36, so 162x108 stays
+      <!-- logo-small.png is the same picture as logo.png, saved smaller: ~28KB
+           instead of ~1MB. The header shows it at 34x36, so 141x150 stays
            sharp on high-resolution screens. logo.png is kept as the master. -->
-      <img class="brand__img" src="assets/img/logo-small.png" alt="Pace Digital Works logo" width="54" height="36">
+      <img class="brand__img" src="assets/img/logo-small.png" alt="Pace Digital Works logo" width="34" height="36">
       <span class="brand__name">Pace <span class="brand__accent">Digital</span> Works</span>
-      <span class="brand__rule" aria-hidden="true"></span>
-      <span class="brand__sub">Studio</span>
     </a>
 
     <nav class="nav" data-nav aria-label="Main">
@@ -371,48 +338,132 @@
       </div>
     </div>
 
-    <div class="collage">
-      <div class="collage__main frame lo-img" data-par="-14" style="--d:260ms">
-        <div class="frame__bar" aria-hidden="true">
-          <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
-          <span class="frame__url">jdnlambugbeach.pages.dev</span>
-        </div>
-        <div class="frame__shot">
-          <img src="assets/img/live/jdn.webp" width="1280" height="800" alt="The JDN Beachfront Resort website, showing a beach and room links." fetchpriority="high">
-        </div>
+    <!-- Ask-box. Replaced the two-screenshot collage on 17 August 2026. The
+         proof the collage carried did not disappear — it moved into the
+         screenshot ticker directly below this hero, which is bigger and shows
+         five sites instead of two.
+
+         IMPORTANT — this is a LINK, not a real text box.
+         It looks like something you type into, so it has to do something when
+         it is clicked, or people will click it, type nothing, and leave
+         annoyed. The whole panel is one anchor pointing at the enquiry form
+         at #start. The typing line is decorative and hidden from screen
+         readers; the anchor carries its own plain label instead.
+
+         The sentences it types are in the PHRASES list at the top of
+         pace.js. That is the only place to edit them. -->
+    <div class="askbox lo-img" style="--d:260ms">
+      <p class="askbox__kicker">Tell us what you need</p>
+
+      <a class="askbox__panel" href="#start" aria-label="Tell us what you need — go to the enquiry form">
+        <span class="askbox__line" aria-hidden="true">
+          <span data-type-out></span><span class="askbox__caret"></span>
+        </span>
+        <span class="askbox__go" aria-hidden="true">
+          <svg class="ico ico--sm"><use href="#i-arrow"></use></svg>
+        </span>
+      </a>
+
+      <!-- Five things people actually ask this studio for. Each one jumps to
+           the part of the page that answers it, so the row is navigation,
+           not decoration. -->
+      <div class="askbox__chips">
+        <a class="askbox__chip" href="#services"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-globe"></use></svg> Website</a>
+        <a class="askbox__chip" href="#services"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-calendar"></use></svg> Bookings</a>
+        <a class="askbox__chip" href="#services"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-bag"></use></svg> Online shop</a>
+        <a class="askbox__chip" href="#software"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-chart"></use></svg> Dashboard</a>
+        <a class="askbox__chip" href="#software"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-zap"></use></svg> Automation</a>
       </div>
-      <div class="collage__sub lo-img" data-par="26" style="--d:560ms">
-        <img src="assets/img/live/luckykoi.webp" width="1280" height="800" alt="The Lucky Koi holiday rental website, showing the pool at night and a booking button." loading="lazy">
-      </div>
-      <p class="collage__cap">Live client work</p>
+
+      <!-- This line is not decoration. The panel above it looks like AI does
+           the work; this says plainly that a person does. Do not delete it
+           without replacing the same promise somewhere else in the hero. -->
+      <p class="askbox__note">Built by a person, not a robot — you talk to the owner directly.</p>
     </div>
   </div>
 </section>
 
 <!-- ===================== Live work ticker ===================== -->
+<!-- The row of website names is now a row of screenshots.
+
+     Live client work only. A second row of the sample designs was tried here
+     and taken out again: two rows of screenshots turned the top of the page
+     into wallpaper, and the samples already have their own section further
+     down with room to breathe.
+
+     NO WEB ADDRESS IN THE BAR. The browser bar keeps its three dots and
+     nothing else. Several of these sites are still on their free host
+     addresses — luckykoi-stay.pages.dev, ypgallery.netlify.app — and a free
+     host address printed under a paid-for design undersells the work. The
+     name underneath each shot says whose site it is, which is the part that
+     matters. If a site later moves to its own proper domain, its address can
+     be put back in on its own.
+
+     Write ONE .ticker__group here. pace.js copies it as many times as the
+     screen turns out to need, so the sliding loop never shows a gap. See
+     section 6 of pace.js for why the number of copies is not always two. -->
 <section class="ticker" aria-label="Websites that are live right now">
+
+  <p class="ticker__label">Live and online now</p>
   <div class="ticker__track" data-ticker>
     <div class="ticker__group">
       <a class="ticker__item" href="https://luckykoi-stay.pages.dev/" target="_blank" rel="noopener">
-        <svg class="ico ico--sm" aria-hidden="true"><use href="#i-bed"></use></svg> Lucky Koi
-        <svg class="ico ico--sm ticker__sep" aria-hidden="true"><use href="#i-diamond"></use></svg></a>
+        <span class="tshot frame">
+          <span class="frame__bar" aria-hidden="true">
+            <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+          </span>
+          <span class="frame__shot"><img src="assets/img/live/luckykoi.webp" width="1280" height="800" loading="lazy" decoding="async" alt="The Lucky Koi holiday rental website, showing the pool at night and a booking button."></span>
+        </span>
+        <span class="ticker__name"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-bed"></use></svg> Lucky Koi</span>
+      </a>
       <a class="ticker__item" href="https://jdnlambugbeach.pages.dev/" target="_blank" rel="noopener">
-        <svg class="ico ico--sm" aria-hidden="true"><use href="#i-bed"></use></svg> JDN Beachfront
-        <svg class="ico ico--sm ticker__sep" aria-hidden="true"><use href="#i-diamond"></use></svg></a>
+        <span class="tshot frame">
+          <span class="frame__bar" aria-hidden="true">
+            <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+          </span>
+          <span class="frame__shot"><img src="assets/img/live/jdn.webp" width="1280" height="800" loading="lazy" decoding="async" alt="The JDN Beachfront Resort website, showing a beach and room links."></span>
+        </span>
+        <span class="ticker__name"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-bed"></use></svg> JDN Beachfront</span>
+      </a>
       <a class="ticker__item" href="https://pacelodgix.com/" target="_blank" rel="noopener">
-        <svg class="ico ico--sm" aria-hidden="true"><use href="#i-layers"></use></svg> Pace Lodgix
-        <svg class="ico ico--sm ticker__sep" aria-hidden="true"><use href="#i-diamond"></use></svg></a>
+        <span class="tshot frame">
+          <span class="frame__bar" aria-hidden="true">
+            <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+          </span>
+          <span class="frame__shot"><img src="assets/img/live/pacelodgix.webp" width="1280" height="800" loading="lazy" alt="The Pace Lodgix property management website home page."></span>
+        </span>
+        <span class="ticker__name"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-layers"></use></svg> Pace Lodgix</span>
+      </a>
       <a class="ticker__item" href="https://ypgallery.netlify.app/" target="_blank" rel="noopener">
-        <svg class="ico ico--sm" aria-hidden="true"><use href="#i-palette"></use></svg> Yenpace Art Gallery
-        <svg class="ico ico--sm ticker__sep" aria-hidden="true"><use href="#i-diamond"></use></svg></a>
+        <span class="tshot frame">
+          <span class="frame__bar" aria-hidden="true">
+            <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+          </span>
+          <span class="frame__shot"><img src="assets/img/live/ypgallery.webp" width="1280" height="800" loading="lazy" alt="Yenpace Art Gallery website home page."></span>
+        </span>
+        <span class="ticker__name"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-palette"></use></svg> Yenpace Art Gallery</span>
+      </a>
       <a class="ticker__item" href="https://akimi-islands.pages.dev/" target="_blank" rel="noopener">
-        <svg class="ico ico--sm" aria-hidden="true"><use href="#i-gamepad"></use></svg> Akimi Islands
-        <svg class="ico ico--sm ticker__sep" aria-hidden="true"><use href="#i-diamond"></use></svg></a>
-      <a class="ticker__item" href="demos/social-media-portfolio/index.html">
-        <svg class="ico ico--sm" aria-hidden="true"><use href="#i-users"></use></svg> Freelancer Portfolio
-        <svg class="ico ico--sm ticker__sep" aria-hidden="true"><use href="#i-diamond"></use></svg></a>
+        <span class="tshot frame">
+          <span class="frame__bar" aria-hidden="true">
+            <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+          </span>
+          <span class="frame__shot"><img src="assets/img/live/akimi.webp" width="1280" height="800" loading="lazy" alt="Akimi Islands browser game title screen."></span>
+        </span>
+        <span class="ticker__name"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-gamepad"></use></svg> Akimi Islands</span>
+      </a>
+      <a class="ticker__item" href="https://pace-dental.pages.dev/" target="_blank" rel="noopener">
+        <span class="tshot frame">
+          <span class="frame__bar" aria-hidden="true">
+            <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+          </span>
+          <span class="frame__shot"><img src="assets/img/live/pace-dental.webp" width="1280" height="800" loading="lazy" alt="The PACE Dental Clinic website home page, showing a treatment room and an appointment button."></span>
+        </span>
+        <span class="ticker__name"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-sparkle"></use></svg> PACE Dental Clinic</span>
+      </a>
     </div>
   </div>
+
 </section>
 
 <!-- ===================== What clients say =====================
@@ -738,24 +789,24 @@
         </div>
       </article>
 
-      <!-- Accounting — demo -->
+      <!-- Dental clinic — real -->
       <article class="ex rv" data-cat="business">
         <div class="frame">
-          <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">meridian-advisory.example</span></div>
-          <div class="frame__shot"><img src="assets/img/previews/meridian.webp" width="1280" height="800" loading="lazy" alt="Meridian Advisory sample accounting website."></div>
+          <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">pace-dental.pages.dev</span></div>
+          <div class="frame__shot"><img src="assets/img/live/pace-dental.webp" width="1280" height="800" loading="lazy" alt="PACE Dental Clinic website home page."></div>
         </div>
         <div class="ex__body">
           <div class="ex__top">
-            <svg class="ico ico--sm ex__ico" aria-hidden="true"><use href="#i-calculator"></use></svg>
-            <span class="ex__cat">Accounting &amp; professional</span>
+            <svg class="ico ico--sm ex__ico" aria-hidden="true"><use href="#i-sparkle"></use></svg>
+            <span class="ex__cat">Dental clinic</span>
           </div>
-          <h3>Meridian Advisory</h3>
-          <p>Services, prices and a free consultation booking. Calm and trustworthy, because that is
-             what people are buying.</p>
+          <h3>PACE Dental Clinic</h3>
+          <p>A digital dentistry clinic across BGC, Makati and Cebu. Treatments, dentist profiles,
+             smile transformations and online booking.</p>
           <div class="ex__foot">
-            <span class="tag tag--demo">Sample website</span>
-            <a class="tlink" href="demos/meridian/index.html">Open the demo
-              <svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+            <span class="tag tag--live">Real live site</span>
+            <a class="tlink" href="https://pace-dental.pages.dev/" target="_blank" rel="noopener">Open the site
+              <svg class="ico ico--sm" aria-hidden="true"><use href="#i-ext"></use></svg></a>
           </div>
         </div>
       </article>
@@ -1009,16 +1060,25 @@
         <em class="acc">systems behind them.</em></p>
     </div>
 
-    <ul class="cap-list">
-      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> SaaS applications</li>
-      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Custom business web applications</li>
-      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Business management systems</li>
-      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Booking and reservation systems</li>
-      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Customer and lead management</li>
-      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Property management systems</li>
-      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Dashboards and reporting</li>
-      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> Workflow and business automation</li>
-      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-check"></use></svg> AI-powered tools and assistants</li>
+    <!-- Nine identical ticks became nine icons that each match
+         the line they sit beside. Every one of them is already in the sprite
+         at the bottom of this page, so nothing new is downloaded.
+
+         The list is a "here is what I can build" list, not a "here is what
+         is included in your package" list, so a tick was never carrying real
+         meaning here — it was just a bullet. The one tick left on the page is
+         the reassuring note under the enquiry form, where it still reads as
+         "that's fine, don't worry". That one stays. -->
+    <ul class="cap-list cap-list--themed">
+      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-layers"></use></svg> SaaS applications</li>
+      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-code"></use></svg> Custom business web applications</li>
+      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-layout"></use></svg> Business management systems</li>
+      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-calendar"></use></svg> Booking and reservation systems</li>
+      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-users"></use></svg> Customer and lead management</li>
+      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-home"></use></svg> Property management systems</li>
+      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-chart"></use></svg> Dashboards and reporting</li>
+      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-zap"></use></svg> Workflow and business automation</li>
+      <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-sparkle"></use></svg> AI-powered tools and assistants</li>
     </ul>
 
     <div class="saas">
@@ -1028,10 +1088,12 @@
           <div class="frame__shot">
             <!-- Silent screen recording of the real dashboard. It only starts
                  downloading once it reaches the screen, so it costs nothing
-                 to visitors who never scroll this far. -->
+                 to visitors who never scroll this far. The poster still is held
+                 in data-poster and attached by pace.js as the card nears the
+                 screen, so it does not download during the first page paint. -->
             <video data-vid muted loop playsinline preload="none"
                    width="1280" height="720"
-                   poster="assets/img/previews/pacelodgix-pms.webp"
+                   data-poster="assets/img/previews/pacelodgix-pms.webp"
                    aria-label="A short silent recording of the Pace Lodgix dashboard being used.">
               <source src="assets/video/pacelodgix-pms.mp4" type="video/mp4">
             </video>
@@ -1051,10 +1113,10 @@
           <div class="frame__bar" aria-hidden="true"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__url">my-workspace.app</span></div>
           <div class="frame__shot">
             <!-- Same lazy treatment as the card above: nothing downloads until
-                 the video reaches the screen. -->
+                 the video reaches the screen, poster still included. -->
             <video data-vid muted loop playsinline preload="none"
                    width="1280" height="720"
-                   poster="assets/img/previews/my-workspace-video.webp"
+                   data-poster="assets/img/previews/my-workspace-video.webp"
                    aria-label="A short silent recording of the My Workspace app being used.">
               <source src="assets/video/my-workspace.mp4" type="video/mp4">
             </video>
@@ -1183,6 +1245,7 @@
   </div>
 </section>
 
+
 <!-- ===================== Common questions =====================
      Short, self-contained answers. These are the passages search engines and
      AI assistants quote, so each one has to make sense on its own. -->
@@ -1204,23 +1267,13 @@
           <h3 class="fold__t">How much does a website cost?</h3>
           <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </summary>
-        <p class="fold__body">A simple website starts from <strong>&#8369;1,000</strong>. More pages, booking
-          forms, or software behind the site cost more than that. Tell me what you need and I send you a
-          written price before you spend anything.</p>
+        <p class="fold__body">Websites start at <strong>&#8369;1,500</strong>. The final price depends on
+          how many pages you need and what the site has to do. A booking form, online payments or an
+          online shop cost more. You always get the full price in writing before anything starts.</p>
       </details>
       <details class="fold__item rv">
         <summary class="fold__q">
           <span class="fold__no">02</span>
-          <h3 class="fold__t">What does Pace Digital Works do?</h3>
-          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
-        </summary>
-        <p class="fold__body">Pace Digital Works is a one-person web design studio in the Philippines. It
-          builds websites for small businesses, sets them up to be found on Google, adds enquiry and
-          booking forms, automates repeat tasks, and builds custom business software.</p>
-      </details>
-      <details class="fold__item rv">
-        <summary class="fold__q">
-          <span class="fold__no">03</span>
           <h3 class="fold__t">Who runs Pace Digital Works?</h3>
           <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </summary>
@@ -1231,52 +1284,13 @@
       </details>
       <details class="fold__item rv">
         <summary class="fold__q">
-          <span class="fold__no">04</span>
-          <h3 class="fold__t">Where is Pace Digital Works based?</h3>
-          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
-        </summary>
-        <p class="fold__body">The studio is based in the Philippines and works with clients anywhere, by
-          email, WhatsApp and Facebook Messenger. You do not need to meet in person to start or finish
-          a project.</p>
-      </details>
-      <details class="fold__item rv">
-        <summary class="fold__q">
-          <span class="fold__no">05</span>
-          <h3 class="fold__t">How long does a project take?</h3>
-          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
-        </summary>
-        <p class="fold__body">It depends on the size of the site and how quickly you can send your photos
-          and text. You see a working version early and tell me what to change. Nothing goes live until
-          you are happy with it.</p>
-      </details>
-      <details class="fold__item rv">
-        <summary class="fold__q">
-          <span class="fold__no">06</span>
+          <span class="fold__no">03</span>
           <h3 class="fold__t">Do you only build websites, or software too?</h3>
           <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
         </summary>
         <p class="fold__body">Both. Websites are one part of the work. I also build custom business
           systems — bookings, dashboards, reporting — and my own SaaS products, meaning software other
           businesses use on a monthly plan. Pace Lodgix is one of mine.</p>
-      </details>
-      <details class="fold__item rv">
-        <summary class="fold__q">
-          <span class="fold__no">07</span>
-          <h3 class="fold__t">What do I need to have ready?</h3>
-          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
-        </summary>
-        <p class="fold__body">Photos, your logo if you have one, what you sell, and where enquiries should
-          go. Nothing technical. If you have no photos and no logo, I can use professional stock photos
-          and make you a logo.</p>
-      </details>
-      <details class="fold__item rv">
-        <summary class="fold__q">
-          <span class="fold__no">08</span>
-          <h3 class="fold__t">How do I start?</h3>
-          <svg class="ico ico--sm fold__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
-        </summary>
-        <p class="fold__body">Send one message on WhatsApp, or one email, saying what your business does.
-          I usually reply the same day with what I would build and what it would cost.</p>
       </details>
     </div>
   </div>
@@ -1524,12 +1538,18 @@
       <nav class="ftr__legal" aria-label="Legal">
         <a href="privacy.html">Privacy policy</a>
         <a href="terms.html">Terms of service</a>
+        <!-- Reopens the Cookiebot banner. This replaces Cookiebot's floating
+             badge, which is hidden in pace.css. The guard matters: if the
+             Cookiebot script is blocked by an ad blocker, the click does
+             nothing instead of throwing an error. -->
+        <button type="button" class="ftr__cookies"
+                onclick="if(window.Cookiebot){Cookiebot.renew();}">Cookie settings</button>
       </nav>
     </div>
   </div>
 </footer>
 
-<script src="assets/js/pace.js" defer></script>
+<script src="assets/js/pace.js?v=20260831" defer></script>
 
 <!-- Floating Messenger Widget -->
 <a class="float-widget" href="https://m.me/pacedigitalworks" target="_blank" rel="noopener" aria-label="Chat with us on Facebook Messenger">
