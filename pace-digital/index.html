@@ -209,12 +209,19 @@
      address with the whole home page, so no icon could be read.
      The 48 and 96 icons sit at the root on purpose: the /assets/img/ rule in
      _headers marks files there as unchangeable for a year, and those two
-     addresses already hold a cached copy of the home page. -->
-<link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+     addresses already hold a cached copy of the home page.
+     The ?v= here is the same cache-buster as pace.css above — every picture
+     under /assets/img/ is told to keep for a year, so swapping the logo or
+     an icon without changing this number leaves old browsers and Cloudflare's
+     own edge cache showing the old picture at the same address indefinitely.
+     Bump it (use the date) whenever logo-small.png or a favicon file changes,
+     everywhere it appears: this file, terms.html, privacy.html, 404.html,
+     and pacevisit/index.html. -->
+<link rel="icon" href="/favicon.ico?v=20260913" sizes="48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=20260913">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png?v=20260913">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png?v=20260913">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png?v=20260913">
 
 <!-- Marks the page as "JavaScript is on", so the animations only hide content
      when there is something able to bring it back. -->
@@ -284,7 +291,7 @@
       <!-- logo-small.png is the same picture as logo.png, saved smaller: ~28KB
            instead of ~1MB. The header shows it at 34x36, so 141x150 stays
            sharp on high-resolution screens. logo.png is kept as the master. -->
-      <img class="brand__img" src="assets/img/logo-small.png" alt="Pace Digital Works logo" width="34" height="36">
+      <img class="brand__img" src="assets/img/logo-small.png?v=20260913" alt="Pace Digital Works logo" width="34" height="36">
       <span class="brand__name">Pace <span class="brand__accent">Digital</span> Works</span>
     </a>
 
